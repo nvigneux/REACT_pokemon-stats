@@ -38,13 +38,36 @@ function App() {
       {POKEMON_MOCK.map(pokemon => {
         const statsPokemon = pokemonStats(CP_MULTIPLIER, pokemon);
         return (
-          <div key={pokemon.id}>
-            <h1>{pokemon.name}</h1>
-            <h2>{`Combat Point : ${statsPokemon.cp}`}</h2>
-            <h3>{`Attack : ${statsPokemon.attack}`}</h3>
-            <h3>{`Defense : ${statsPokemon.defense}`}</h3>
-            <h3>{`Stamina : ${statsPokemon.stamina}`}</h3>
-            <hr />
+          <div
+            className="max-w-md flex items-start bg-gray-300 rounded m-2 mb-4"
+            key={pokemon.id}
+          >
+            <div className="flex-shrink-0 p-2">
+              <img
+                className="center justify-center"
+                src={pokemon.img}
+                alt="Woman paying for a purchase"
+              />
+            </div>
+            <div className="flex-auto py-3 pr-3">
+              <div className="flex row items-baseline justify-between pb-2">
+                <h1 className="text-xl text-gray-900 font-medium">{pokemon.name}</h1>
+                <h2 className="text-base text-gray-800 font-medium">{`Combat Point : ${
+                  statsPokemon.cp
+                }`}</h2>
+              </div>
+              <ul className="list-none">
+                <li className="text-base text-gray-800">{`Attack : ${
+                  statsPokemon.attack
+                }`}</li>
+                <li className="text-base text-gray-800">{`Defense : ${
+                  statsPokemon.defense
+                }`}</li>
+                <li className="text-base text-gray-800">{`Stamina : ${
+                  statsPokemon.stamina
+                }`}</li>
+              </ul>
+            </div>
           </div>
         );
       })}

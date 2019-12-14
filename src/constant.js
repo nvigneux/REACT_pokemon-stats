@@ -2,6 +2,8 @@ export const POKEMON_MOCK = [
   {
     id: 1,
     name: "Dracolosse",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
     level: 29,
     baseAttack: 263,
     baseDefense: 198,
@@ -13,6 +15,8 @@ export const POKEMON_MOCK = [
   {
     id: 2,
     name: "Aquali",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",
     level: 28,
     baseAttack: 205,
     baseDefense: 161,
@@ -24,6 +28,8 @@ export const POKEMON_MOCK = [
   {
     id: 3,
     name: "Aligateur",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/160.png",
     level: 32,
     baseAttack: 205,
     baseDefense: 188,
