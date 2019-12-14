@@ -1,6 +1,22 @@
 export const POKEMON_MOCK = [
   {
+    id: 1,
+    name: "Dracolosse",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
+    level: 29,
+    baseAttack: 263,
+    baseDefense: 198,
+    baseStamina: 209,
+    individualAttack: 15,
+    individualDefense: 12,
+    individualStamina: 11
+  },
+  {
+    id: 2,
     name: "Aquali",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",
     level: 28,
     baseAttack: 205,
     baseDefense: 161,
@@ -8,6 +24,19 @@ export const POKEMON_MOCK = [
     individualAttack: 14,
     individualDefense: 11,
     individualStamina: 9
+  },
+  {
+    id: 3,
+    name: "Aligateur",
+    img:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/160.png",
+    level: 32,
+    baseAttack: 205,
+    baseDefense: 188,
+    baseStamina: 198,
+    individualAttack: 15,
+    individualDefense: 10,
+    individualStamina: 15
   }
 ];
 
