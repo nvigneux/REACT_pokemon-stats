@@ -33,16 +33,21 @@ function App() {
     return { cp, attack, defense, stamina };
   };
 
-  const activePokemon = POKEMON_MOCK[0];
-  const statsPokemon = pokemonStats(CP_MULTIPLIER, activePokemon);
-
   return (
     <div className="App">
-      <h1>{activePokemon.name}</h1>
-      <h2>{`Combat Point : ${statsPokemon.cp}`}</h2>
-      <h3>{`Attack : ${statsPokemon.attack}`}</h3>
-      <h3>{`Defense : ${statsPokemon.defense}`}</h3>
-      <h3>{`Stamina : ${statsPokemon.stamina}`}</h3>
+      {POKEMON_MOCK.map(pokemon => {
+        const statsPokemon = pokemonStats(CP_MULTIPLIER, pokemon);
+        return (
+          <div key={pokemon.id}>
+            <h1>{pokemon.name}</h1>
+            <h2>{`Combat Point : ${statsPokemon.cp}`}</h2>
+            <h3>{`Attack : ${statsPokemon.attack}`}</h3>
+            <h3>{`Defense : ${statsPokemon.defense}`}</h3>
+            <h3>{`Stamina : ${statsPokemon.stamina}`}</h3>
+            <hr />
+          </div>
+        );
+      })}
     </div>
   );
 }
