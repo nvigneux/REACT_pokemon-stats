@@ -6,9 +6,11 @@ import { POKEMON_MOCK, CP_MULTIPLIER } from "./constant";
 import "./styles.css";
 
 function App() {
+  // Formula to calculate attack ,defense and stamina by the pokemon's base stats
   const calculateStat = (base, individual, cpMultiplier) =>
     (base + individual) * cpMultiplier;
 
+  // Formula to calculate combat point by the pokemon's bases stats
   const calculateCombatPoint = (attack, defense, stamina) =>
     Math.floor(Math.sqrt(attack * attack * defense * stamina) / 10);
 
@@ -51,7 +53,9 @@ function App() {
             </div>
             <div className="flex-auto py-3 pr-3">
               <div className="flex row items-baseline justify-between pb-2">
-                <h1 className="text-xl text-gray-900 font-medium">{pokemon.name}</h1>
+                <h1 className="text-xl text-gray-900 font-medium">
+                  {pokemon.name}
+                </h1>
                 <h2 className="text-base text-gray-800 font-medium">{`Combat Point : ${
                   statsPokemon.cp
                 }`}</h2>
