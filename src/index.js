@@ -12,7 +12,7 @@ function App() {
   const calculateCombatPoint = (attack, defense, stamina) =>
     Math.floor(Math.sqrt(attack * attack * defense * stamina) / 10);
 
-  const calculateStats = (cpMultiplier, pokemon) => {
+  const pokemonStats = (cpMultiplier, pokemon) => {
     const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1];
     const attack = calculateStat(
       pokemon.baseAttack,
@@ -34,7 +34,7 @@ function App() {
   };
 
   const activePokemon = POKEMON_MOCK[0];
-  const statsPokemon = calculateStats(CP_MULTIPLIER, activePokemon);
+  const statsPokemon = pokemonStats(CP_MULTIPLIER, activePokemon);
 
   return (
     <div className="App">
