@@ -1,0 +1,35 @@
+// Formula to calculate attack ,defense and stamina by the pokemon's base stats
+const calculateStat = (base, individual, cpMultiplier) =>
+  Math.floor((base + individual) * cpMultiplier);
+
+// Formula to calculate combat point by the pokemon's bases stats
+const calculateCombatPoint = (attack, defense, stamina) =>
+  Math.floor(Math.sqrt(attack * attack * defense * stamina) / 10);
+
+export const pokemonStats = (cpMultiplier, pokemon) => {
+  const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1];
+  const attack = calculateStat(
+    pokemon.baseAttack,
+    pokemon.individualAttack,
+    pokemonCpMultiplier
+  );
+  const defense = calculateStat(
+    pokemon.baseDefense,
+    pokemon.individualDefense,
+    pokemonCpMultiplier
+  );
+  const stamina = calculateStat(
+    pokemon.baseStamina,
+    pokemon.individualStamina,
+    pokemonCpMultiplier
+  );
+  const cp = calculateCombatPoint(attack, defense, stamina);
+  const iv = Math.floor(
+    ((pokemon.individualAttack +
+      pokemon.individualDefense +
+      pokemon.individualStamina) *
+      100) /
+      45
+  );
+  return { cp, iv, attack, defense, stamina };
+};
