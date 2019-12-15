@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { POKEMON_MOCK, CP_MULTIPLIER } from "./constant";
+import PokemonStatCard from "./PokemonStatCard";
+
+import { CP_MULTIPLIER, BOSS_MOCK, POKEMON_MOCK } from "./constant";
 
 import "./styles.css";
 
@@ -32,49 +34,40 @@ function App() {
       pokemonCpMultiplier
     );
     const cp = calculateCombatPoint(attack, defense, stamina);
-    return { cp, attack, defense, stamina };
+    const iv = Math.floor(
+      ((pokemon.individualAttack +
+        pokemon.individualDefense +
+        pokemon.individualStamina) *
+        100) /
+        45
+    );
+    return { cp, iv, attack, defense, stamina };
   };
 
   return (
     <div className="App">
-      {POKEMON_MOCK.map(pokemon => {
-        const statsPokemon = pokemonStats(CP_MULTIPLIER, pokemon);
-        return (
-          <div
-            className="max-w-md flex items-start bg-gray-300 rounded m-2 mb-4"
-            key={pokemon.id}
-          >
-            <div className="flex-shrink-0 p-2">
-              <img
-                className="center justify-center"
-                src={pokemon.img}
-                alt="Woman paying for a purchase"
-              />
-            </div>
-            <div className="flex-auto py-3 pr-3">
-              <div className="flex row items-baseline justify-between pb-2">
-                <h1 className="text-xl text-gray-900 font-medium">
-                  {pokemon.name}
-                </h1>
-                <h2 className="text-base text-gray-800 font-medium">{`Combat Point : ${
-                  statsPokemon.cp
-                }`}</h2>
-              </div>
-              <ul className="list-none">
-                <li className="text-base text-gray-800">{`Attack : ${
-                  statsPokemon.attack
-                }`}</li>
-                <li className="text-base text-gray-800">{`Defense : ${
-                  statsPokemon.defense
-                }`}</li>
-                <li className="text-base text-gray-800">{`Stamina : ${
-                  statsPokemon.stamina
-                }`}</li>
-              </ul>
-            </div>
-          </div>
-        );
-      })}
+      <h3 className="text-lg font-semibold tracking-wider pl-2">Pokemons</h3>
+      <div className="mb-5">
+        {POKEMON_MOCK.map(pokemon => {
+          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+          return (
+            <PokemonStatCard key={pokemon.id} pokemon={{ stats, ...pokemon }} />
+          );
+        })}
+      </div>
+      <h3 className="text-lg font-semibold tracking-wider pl-2">Boss</h3>
+      <div className="mb-5">
+        {BOSS_MOCK.map(pokemon => {
+          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+          return (
+            <PokemonStatCard
+              key={pokemon.id}
+              pokemon={{ stats, ...pokemon }}
+              className="bg-red-200"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
