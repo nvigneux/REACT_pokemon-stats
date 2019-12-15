@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { POKEMON_MOCK, CP_MULTIPLIER } from "./constant";
+import PokemonStatCard from "./PokemonStatCard";
+
+import { CP_MULTIPLIER, BOSS_MOCK, POKEMON_MOCK } from "./constant";
 
 import "./styles.css";
 
 function App() {
+  // Formula to calculate attack ,defense and stamina by the pokemon's base stats
   const calculateStat = (base, individual, cpMultiplier) =>
     (base + individual) * cpMultiplier;
 
+  // Formula to calculate combat point by the pokemon's bases stats
   const calculateCombatPoint = (attack, defense, stamina) =>
     Math.floor(Math.sqrt(attack * attack * defense * stamina) / 10);
 
@@ -30,19 +34,40 @@ function App() {
       pokemonCpMultiplier
     );
     const cp = calculateCombatPoint(attack, defense, stamina);
-    return { cp, attack, defense, stamina };
+    const iv = Math.floor(
+      ((pokemon.individualAttack +
+        pokemon.individualDefense +
+        pokemon.individualStamina) *
+        100) /
+        45
+    );
+    return { cp, iv, attack, defense, stamina };
   };
-
-  const activePokemon = POKEMON_MOCK[0];
-  const statsPokemon = pokemonStats(CP_MULTIPLIER, activePokemon);
 
   return (
     <div className="App">
-      <h1>{activePokemon.name}</h1>
-      <h2>{`Combat Point : ${statsPokemon.cp}`}</h2>
-      <h3>{`Attack : ${statsPokemon.attack}`}</h3>
-      <h3>{`Defense : ${statsPokemon.defense}`}</h3>
-      <h3>{`Stamina : ${statsPokemon.stamina}`}</h3>
+      <h3 className="text-lg font-semibold tracking-wider pl-2">Pokemons</h3>
+      <div className="mb-5">
+        {POKEMON_MOCK.map(pokemon => {
+          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+          return (
+            <PokemonStatCard key={pokemon.id} pokemon={{ stats, ...pokemon }} />
+          );
+        })}
+      </div>
+      <h3 className="text-lg font-semibold tracking-wider pl-2">Boss</h3>
+      <div className="mb-5">
+        {BOSS_MOCK.map(pokemon => {
+          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+          return (
+            <PokemonStatCard
+              key={pokemon.id}
+              pokemon={{ stats, ...pokemon }}
+              className="bg-red-200"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
