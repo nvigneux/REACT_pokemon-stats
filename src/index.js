@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import PokemonStatCard from "./PokemonStatCard";
+import PokemonStatCard from "./components/PokemonStatCard";
 
-import { CP_MULTIPLIER, BOSS_MOCK, POKEMON_MOCK } from "./constant";
+import { CP_MULTIPLIER } from "./constant";
+import { POKEMON_MOCK } from "./pokemons/pokedex";
+import { BOSS_MOCK } from "./pokemons/boss";
 
 import "./styles.css";
 
 function App() {
   // Formula to calculate attack ,defense and stamina by the pokemon's base stats
   const calculateStat = (base, individual, cpMultiplier) =>
-    (base + individual) * cpMultiplier;
+    Math.floor((base + individual) * cpMultiplier);
 
   // Formula to calculate combat point by the pokemon's bases stats
   const calculateCombatPoint = (attack, defense, stamina) =>
@@ -46,27 +48,38 @@ function App() {
 
   return (
     <div className="App">
-      <h3 className="text-lg font-semibold tracking-wider pl-2">Pokemons</h3>
-      <div className="mb-5">
-        {POKEMON_MOCK.map(pokemon => {
-          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
-          return (
-            <PokemonStatCard key={pokemon.id} pokemon={{ stats, ...pokemon }} />
-          );
-        })}
-      </div>
-      <h3 className="text-lg font-semibold tracking-wider pl-2">Boss</h3>
-      <div className="mb-5">
-        {BOSS_MOCK.map(pokemon => {
-          const stats = pokemonStats(CP_MULTIPLIER, pokemon);
-          return (
-            <PokemonStatCard
-              key={pokemon.id}
-              pokemon={{ stats, ...pokemon }}
-              className="bg-red-200"
-            />
-          );
-        })}
+      <div className="flex flex-row overflow-auto scroll">
+        <div className="flex flex-col">
+          <h3 className="text-lg font-semibold tracking-wider pl-2">
+            Pokemons
+          </h3>
+          <div className="flex flex-row flex-nowrap">
+            {POKEMON_MOCK.map(pokemon => {
+              const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+              return (
+                <PokemonStatCard
+                  key={pokemon.id}
+                  pokemon={{ stats, ...pokemon }}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-lg font-semibold tracking-wider pl-2">Boss</h3>
+          <div className="flex flex-row flex-nowrap">
+            {BOSS_MOCK.map(pokemon => {
+              const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+              return (
+                <PokemonStatCard
+                  key={pokemon.id}
+                  pokemon={{ stats, ...pokemon }}
+                  backgroundColor="bg-red-200 hover:bg-red-300"
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
