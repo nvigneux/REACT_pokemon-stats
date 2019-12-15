@@ -42,6 +42,18 @@ export const CP_MULTIPLIER = [
   1
 ];
 
+export const WEATHERS = {
+  sunny: ["fire", "ground", "grass"],
+  clear: ["fire", "ground", "grass"],
+  partly_cloudy: ["normal", "rock"],
+  cloudy: ["fairy", "fighting", "poison"],
+  rain: ["water", "electric", "bug"],
+  snow: ["ice", "steel"],
+  windy: ["dragon", "flying", "psychic"],
+  foggy: ["ghost", "dark"],
+  none: []
+};
+
 export const IMG_URL =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 

@@ -2,6 +2,7 @@ export const BOSS_MOCK = [
   {
     id: 129,
     name: "Magicarpe",
+    type: ["water"],
     level: 41,
     baseAttack: 29,
     baseDefense: 85,
@@ -13,6 +14,7 @@ export const BOSS_MOCK = [
   {
     id: 73,
     name: "Tentacruel",
+    type: ["water", "poison"],
     level: 41,
     baseAttack: 166,
     baseDefense: 209,
@@ -24,6 +26,7 @@ export const BOSS_MOCK = [
   {
     id: 196,
     name: "Mentali",
+    type: ["psychic"],
     level: 41,
     baseAttack: 261,
     baseDefense: 175,
@@ -35,6 +38,7 @@ export const BOSS_MOCK = [
   {
     id: 248,
     name: "Tyranocif",
+    type: ["dark", "rock"],
     level: 41,
     baseAttack: 251,
     baseDefense: 207,
@@ -46,6 +50,7 @@ export const BOSS_MOCK = [
   {
     id: 384,
     name: "Rayquaza",
+    type: ["dragon", "flying"],
     level: 41,
     baseAttack: 284,
     baseDefense: 170,
@@ -57,6 +62,7 @@ export const BOSS_MOCK = [
   {
     id: 150,
     name: "MewTwo",
+    type: ["psychic"],
     level: 41,
     baseAttack: 300,
     baseDefense: 182,
