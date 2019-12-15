@@ -1,4 +1,14 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.scroll::-webkit-scrollbar{
+  height: 6px;
+  background: gray;
+}
+
+.scroll::-webkit-scrollbar-thumb:horizontal{
+  background: #aaa;
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 10px;
 }
