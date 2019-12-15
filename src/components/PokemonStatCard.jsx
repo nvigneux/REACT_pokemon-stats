@@ -41,6 +41,7 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
   </button>
 );
 
+PokemonsStatCard.propsTypes = {
   pokemon: PropTypes.shape({}).isRequired,
   click: PropTypes.func,
   theme: PropTypes.string
