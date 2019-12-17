@@ -1,16 +1,3 @@
-export const POKEMON_MOCK = [
-  {
-    name: "Aquali",
-    level: 28,
-    baseAttack: 205,
-    baseDefense: 161,
-    baseStamina: 277,
-    individualAttack: 14,
-    individualDefense: 11,
-    individualStamina: 9
-  }
-];
-
 export const CP_MULTIPLIER = [
   0.094,
   0.16639787,
@@ -51,5 +38,23 @@ export const CP_MULTIPLIER = [
   0.7731865,
   0.77893275,
   0.78463697,
-  0.79030001
+  0.79030001,
+  1
 ];
+
+export const WEATHERS = {
+  sunny: ["fire", "ground", "grass"],
+  clear: ["fire", "ground", "grass"],
+  partly_cloudy: ["normal", "rock"],
+  cloudy: ["fairy", "fighting", "poison"],
+  rain: ["water", "electric", "bug"],
+  snow: ["ice", "steel"],
+  windy: ["dragon", "flying", "psychic"],
+  foggy: ["ghost", "dark"],
+  none: []
+};
+
+export const IMG_URL =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+export const IMG_FORMAT = ".png";
