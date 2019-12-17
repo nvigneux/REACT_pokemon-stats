@@ -4,7 +4,7 @@ import { getMoveEffectivenessType } from "./et";
 const getDpsMove = (move, pokemon, opponent, weather) => {
   const stab = pokemon.type.includes(move.type) ? 1.2 : 1;
   const bonusWeather = getWeatherBonus(weather, move.type);
-  const effectiveness = getMoveEffectivenessType(move.type, opponent.type); // find method to calculate it
+  const effectiveness = getMoveEffectivenessType(move.type, opponent.type);
 
   return (
     Math.floor(

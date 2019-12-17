@@ -1,8 +1,10 @@
+import * as TYPES from "../types"
+
 export const POKEMON_MOCK = [
   {
     id: 149,
     name: "Dracolosse",
-    type: ["dragon", "flying"],
+    type: [TYPES.DRAGON, TYPES.FLYING],
     level: 29,
     baseAttack: 263,
     baseDefense: 198,
@@ -11,14 +13,14 @@ export const POKEMON_MOCK = [
     individualDefense: 12,
     individualStamina: 11,
     moves: {
-      quick: { type: "dragon", name: "Dracosouffle", power: 6 },
-      charged: { type: "dragon", name: "Dracogriffe", power: 50 }
+      quick: { type: TYPES.DRAGON, name: "Dracosouffle", power: 6 },
+      charged: { type: TYPES.DRAGON, name: "Dracogriffe", power: 50 }
     }
   },
   {
     id: 134,
     name: "Aquali",
-    type: ["water"],
+    type: [TYPES.WATER],
     level: 28,
     baseAttack: 205,
     baseDefense: 161,
@@ -27,8 +29,8 @@ export const POKEMON_MOCK = [
     individualDefense: 11,
     individualStamina: 9,
     moves: {
-      quick: { type: "water", name: "Pistolet à O", power: 5 },
-      charged: { type: "water", name: "Hydracanon", power: 130 }
+      quick: { type: TYPES.WATER, name: "Pistolet à O", power: 5 },
+      charged: { type: TYPES.WATER, name: "Hydracanon", power: 130 }
     }
   }
 ];
