@@ -1,4 +1,4 @@
-import * as TYPES from "../types"
+import * as TYPES from "../types";
 
 export const BOSS_MOCK = [
   {
@@ -11,7 +11,11 @@ export const BOSS_MOCK = [
     baseStamina: 700,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.WATER, name: "Trempette", power: 0 },
+      charged: { type: TYPES.NORMAL, name: "Lutte", power: 35 }
+    }
   },
   {
     id: 73,
@@ -23,7 +27,11 @@ export const BOSS_MOCK = [
     baseStamina: 2025,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.POISON, name: "Direct Toxik", power: 10 },
+      charged: { type: TYPES.POISON, name: "Hydrocanon", power: 130 }
+    }
   },
   {
     id: 196,
@@ -35,7 +43,11 @@ export const BOSS_MOCK = [
     baseStamina: 3000,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.PSYCHIC, name: "Choc Mental", power: 20 },
+      charged: { type: TYPES.PSYCHIC, name: "Psyko", power: 90 }
+    }
   },
   {
     id: 248,
@@ -47,7 +59,11 @@ export const BOSS_MOCK = [
     baseStamina: 7500,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.ROCK, name: "Anti-Air", power: 16 },
+      charged: { type: TYPES.ROCK, name: "Lame de Roc", power: 100 }
+    }
   },
   {
     id: 384,
@@ -59,7 +75,11 @@ export const BOSS_MOCK = [
     baseStamina: 12500,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.DRAGON, name: "Draco-Queue", power: 15 },
+      charged: { type: TYPES.DRAGON, name: "Colère", power: 110 }
+    }
   },
   {
     id: 150,
@@ -71,6 +91,10 @@ export const BOSS_MOCK = [
     baseStamina: 22500,
     individualAttack: 15,
     individualDefense: 15,
-    individualStamina: 0
+    individualStamina: 0,
+    moves: {
+      quick: { type: TYPES.PSYCHIC, name: "Choc Mental", power: 20 },
+      charged: { type: TYPES.PSYCHIC, name: "Frappe Psy", power: 90 }
+    }
   }
 ];

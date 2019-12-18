@@ -37,6 +37,32 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
           pokemon.stats.stamina
         }`}</li>
       </ul>
+      <div className="flex flex-row items-center justify-between text-left px-5 pt-2">
+        <div className="flex flex-col">
+          <span className="text-xs text-gray-800">
+            {pokemon.moves.quick.name}
+          </span>
+          <span className="text-xs italic text-gray-800">
+            {pokemon.moves.quick.type}
+          </span>
+        </div>
+        <span className="text-sm text-gray-800">
+          {pokemon.moves.quick.power}
+        </span>
+      </div>
+      <div className="flex flex-row items-center justify-between text-left px-5 pt-1">
+        <div className="flex flex-col">
+          <span className="text-xs text-gray-800">
+            {pokemon.moves.charged.name}
+          </span>
+          <span className="text-xs italic text-gray-800">
+            {pokemon.moves.charged.type}
+          </span>
+        </div>
+        <span className="text-sm text-gray-800">
+          {pokemon.moves.charged.power}
+        </span>
+      </div>
     </div>
   </button>
 );
