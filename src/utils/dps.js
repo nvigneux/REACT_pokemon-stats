@@ -6,30 +6,39 @@ const getDpsMove = (move, pokemon, opponent, weather) => {
   const bonusWeather = getWeatherBonus(weather, move.type);
   const effectiveness = getMoveEffectivenessType(move.type, opponent.type);
 
+  console.log(pokemon.stats, opponent.stats);
   return (
     Math.floor(
-      ((0.5 * pokemon.stats.attack) / opponent.stats.defense) *
+      0.5 *
         move.power *
         stab *
         effectiveness *
-        bonusWeather
+        bonusWeather *
+        (pokemon.stats.attack / opponent.stats.defense)
     ) + 1
   );
 };
 
-export const getDps = (pokemon, opponent, weather) => {
-  const dpsQuickAttack = getDpsMove(
+export const getRealDps = (pokemon, opponent, weather) => {
+  const moveDpsQuick = getDpsMove(
     pokemon.moves.quick,
     pokemon,
     opponent,
     weather
   );
-  const dpsChargedAttack = getDpsMove(
+  const moveDpsCharged = getDpsMove(
     pokemon.moves.charged,
     pokemon,
     opponent,
     weather
   );
-  console.log(pokemon.name, dpsQuickAttack, opponent.name);
-  console.log(pokemon.name, dpsChargedAttack, opponent.name);
+  const numberAttackRequired = Math.ceil(
+    pokemon.moves.charged.energyReq / pokemon.moves.quick.energyGen
+  );
+  const calculRealDps =
+    (moveDpsQuick * numberAttackRequired + moveDpsCharged) /
+    (pokemon.moves.quick.execTime * numberAttackRequired +
+      pokemon.moves.charged.execTime);
+
+  return calculRealDps;
 };

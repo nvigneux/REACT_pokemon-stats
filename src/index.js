@@ -5,7 +5,7 @@ import PokemonStatCard from "./components/PokemonStatCard";
 import WeatherSelect from "./components/WeatherSelect";
 
 import { pokemonStats } from "./utils/stats";
-import { getDps } from "./utils/dps";
+import { getRealDps } from "./utils/dps";
 
 import { CP_MULTIPLIER } from "./constant";
 import { POKEMON_MOCK } from "./pokemons/pokedex";
@@ -28,7 +28,8 @@ function App() {
 
   useEffect(() => {
     if (activePokemon && activeOpponent) {
-      getDps(activePokemon, activeOpponent, activeWeather);
+      const dps = getRealDps(activePokemon, activeOpponent, activeWeather);
+      console.log(dps);
     }
   }, [activePokemon, activeOpponent, activeWeather]);
 
