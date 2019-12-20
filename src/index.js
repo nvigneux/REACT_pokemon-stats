@@ -1,48 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-import { POKEMON_MOCK, CP_MULTIPLIER } from "./constant";
+import PokemonStatCard from "./components/PokemonStatCard";
+import WeatherSelect from "./components/WeatherSelect";
+
+import { pokemonStats } from "./utils/stats";
+import { getRealDps } from "./utils/dps";
+
+import { CP_MULTIPLIER } from "./constant";
+import { POKEMON_MOCK } from "./pokemons/pokedex";
+import { BOSS_MOCK } from "./pokemons/boss";
 
 import "./styles.css";
 
+const PokemonCategory = ({ title, children }) => (
+  <div className="flex flex-col">
+    <h3 className="text-base font-semibold tracking-wider pl-2">{title}</h3>
+    <div className="flex flex-row flex-nowrap">{children}</div>
+  </div>
+);
+
 function App() {
-  const calculateStat = (base, individual, cpMultiplier) =>
-    (base + individual) * cpMultiplier;
+  const [activePokemon, setActivePokemon] = useState(null);
+  const [activeOpponent, setActiveOpponent] = useState(null);
 
-  const calculateCombatPoint = (attack, defense, stamina) =>
-    Math.floor(Math.sqrt(attack * attack * defense * stamina) / 10);
+  const [activeWeather, setActiveWeather] = useState("sunny");
 
-  const pokemonStats = (cpMultiplier, pokemon) => {
-    const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1];
-    const attack = calculateStat(
-      pokemon.baseAttack,
-      pokemon.individualAttack,
-      pokemonCpMultiplier
-    );
-    const defense = calculateStat(
-      pokemon.baseDefense,
-      pokemon.individualDefense,
-      pokemonCpMultiplier
-    );
-    const stamina = calculateStat(
-      pokemon.baseStamina,
-      pokemon.individualStamina,
-      pokemonCpMultiplier
-    );
-    const cp = calculateCombatPoint(attack, defense, stamina);
-    return { cp, attack, defense, stamina };
-  };
+  useEffect(() => {
+    if (activePokemon && activeOpponent) {
+      const dps = getRealDps(activePokemon, activeOpponent, activeWeather);
+      console.log(dps);
+    }
+  }, [activePokemon, activeOpponent, activeWeather]);
 
-  const activePokemon = POKEMON_MOCK[0];
-  const statsPokemon = pokemonStats(CP_MULTIPLIER, activePokemon);
-
+  // TODO watch if memo can be useful on WeatherSelect
   return (
     <div className="App">
-      <h1>{activePokemon.name}</h1>
-      <h2>{`Combat Point : ${statsPokemon.cp}`}</h2>
-      <h3>{`Attack : ${statsPokemon.attack}`}</h3>
-      <h3>{`Defense : ${statsPokemon.defense}`}</h3>
-      <h3>{`Stamina : ${statsPokemon.stamina}`}</h3>
+      <WeatherSelect default={activeWeather} select={setActiveWeather} />
+      <div className="flex flex-row overflow-auto scroll">
+        <div className="flex flex-col pr-4">
+          <PokemonCategory title="Pokedex">
+            {POKEMON_MOCK.map(pokemon => {
+              const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+              return (
+                <PokemonStatCard
+                  key={pokemon.id}
+                  pokemon={{ stats, ...pokemon }}
+                  click={setActivePokemon}
+                />
+              );
+            })}
+          </PokemonCategory>
+        </div>
+        <div className="flex flex-col">
+          <PokemonCategory title="Boss">
+            {BOSS_MOCK.map(pokemon => {
+              const stats = pokemonStats(CP_MULTIPLIER, pokemon);
+              return (
+                <PokemonStatCard
+                  key={pokemon.id}
+                  pokemon={{ stats, ...pokemon }}
+                  click={setActiveOpponent}
+                  theme="red"
+                />
+              );
+            })}
+          </PokemonCategory>
+        </div>
+      </div>
     </div>
   );
 }
