@@ -8,7 +8,7 @@ const getDpsMove = (move, pokemon, opponent, weather) => {
 
   return (
     Math.floor(
-      ((0.5 * pokemon.stats.attack) / pokemon.stats.defense) *
+      ((0.5 * pokemon.stats.attack) / opponent.stats.defense) *
         move.power *
         stab *
         effectiveness *

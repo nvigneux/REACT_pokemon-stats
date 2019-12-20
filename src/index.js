@@ -32,6 +32,7 @@ function App() {
     }
   }, [activePokemon, activeOpponent, activeWeather]);
 
+  // TODO watch if memo can be useful on WeatherSelect
   return (
     <div className="App">
       <WeatherSelect default={activeWeather} select={setActiveWeather} />
