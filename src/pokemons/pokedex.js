@@ -43,8 +43,22 @@ export const POKEMON_MOCK = [
     individualDefense: 12,
     individualStamina: 11,
     moves: {
-      quick: { type: TYPES.DRAGON, name: "Dracosouffle", power: 6 },
-      charged: { type: TYPES.DRAGON, name: "Dracogriffe", power: 50 }
+      quick: {
+        type: TYPES.DRAGON,
+        name: "Dracosouffle",
+        power: 6,
+        execTime: 0.5,
+        energyGen: 4,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.DRAGON,
+        name: "Dracogriffe",
+        power: 50,
+        execTime: 1.7,
+        energyGen: null,
+        energyReq: 33
+      }
     }
   },
   {
@@ -59,8 +73,22 @@ export const POKEMON_MOCK = [
     individualDefense: 11,
     individualStamina: 9,
     moves: {
-      quick: { type: TYPES.WATER, name: "Pistolet à O", power: 5 },
-      charged: { type: TYPES.WATER, name: "Hydracanon", power: 130 }
+      quick: {
+        type: TYPES.WATER,
+        name: "Pistolet à O",
+        power: 5,
+        execTime: 0.5,
+        energyGen: 5,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.WATER,
+        name: "Hydracanon",
+        power: 130,
+        execTime: 3.3,
+        energyGen: null,
+        energyReq: 100
+      }
     }
   }
 ];

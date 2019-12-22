@@ -13,8 +13,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.WATER, name: "Trempette", power: 0 },
-      charged: { type: TYPES.NORMAL, name: "Lutte", power: 35 }
+      quick: {
+        type: TYPES.WATER,
+        name: "Trempette",
+        power: 0,
+        execTime: 1.73,
+        energyGen: 20,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.NORMAL,
+        name: "Lutte",
+        power: 35,
+        execTime: 2.7,
+        energyGen: null,
+        energyReq: 0
+      }
     }
   },
   {
@@ -29,8 +43,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.POISON, name: "Direct Toxik", power: 10 },
-      charged: { type: TYPES.POISON, name: "Hydrocanon", power: 130 }
+      quick: {
+        type: TYPES.POISON,
+        name: "Direct Toxik",
+        power: 10,
+        execTime: 0.8,
+        energyGen: 7,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.WATER,
+        name: "Hydrocanon",
+        power: 130,
+        execTime: 3.3,
+        energyGen: null,
+        energyReq: 100
+      }
     }
   },
   {
@@ -45,8 +73,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.PSYCHIC, name: "Choc Mental", power: 20 },
-      charged: { type: TYPES.PSYCHIC, name: "Psyko", power: 90 }
+      quick: {
+        type: TYPES.PSYCHIC,
+        name: "Choc Mental",
+        power: 20,
+        execTime: 1.6,
+        energyGen: 15,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.PSYCHIC,
+        name: "Psyko",
+        power: 90,
+        execTime: 2.8,
+        energyGen: null,
+        energyReq: 50
+      }
     }
   },
   {
@@ -61,8 +103,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.ROCK, name: "Anti-Air", power: 16 },
-      charged: { type: TYPES.ROCK, name: "Lame de Roc", power: 100 }
+      quick: {
+        type: TYPES.ROCK,
+        name: "Anti-Air",
+        power: 16,
+        execTime: 1.2,
+        energyGen: 8,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.ROCK,
+        name: "Lame de Roc",
+        power: 100,
+        execTime: 2.3,
+        energyGen: null,
+        energyReq: 100
+      }
     }
   },
   {
@@ -77,8 +133,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.DRAGON, name: "Draco-Queue", power: 15 },
-      charged: { type: TYPES.DRAGON, name: "Colère", power: 110 }
+      quick: {
+        type: TYPES.DRAGON,
+        name: "Draco-Queue",
+        power: 15,
+        execTime: 1.1,
+        energyGen: 9,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.DRAGON,
+        name: "Colère",
+        power: 110,
+        execTime: 3.9,
+        energyGen: null,
+        energyReq: 50
+      }
     }
   },
   {
@@ -93,8 +163,22 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: { type: TYPES.PSYCHIC, name: "Choc Mental", power: 20 },
-      charged: { type: TYPES.PSYCHIC, name: "Frappe Psy", power: 90 }
+      quick: {
+        type: TYPES.PSYCHIC,
+        name: "Choc Mental",
+        power: 20,
+        execTime: 1.6,
+        energyGen: 15,
+        energyReq: null
+      },
+      charged: {
+        type: TYPES.PSYCHIC,
+        name: "Frappe Psy",
+        power: 90,
+        execTime: 2.3,
+        energyGen: null,
+        energyReq: 50
+      }
     }
   }
 ];
