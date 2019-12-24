@@ -21,6 +21,13 @@ const PokemonCategory = ({ title, children }) => (
   </div>
 );
 
+const PokemonCategory = ({ title, children }) => (
+  <div className="flex flex-col">
+    <h3 className="text-base font-semibold tracking-wider pl-2">{title}</h3>
+    <div className="flex flex-row flex-nowrap">{children}</div>
+  </div>
+);
+
 function App() {
   const [activePokemon, setActivePokemon] = useState(null);
   const [activeOpponent, setActiveOpponent] = useState(null);
