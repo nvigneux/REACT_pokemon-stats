@@ -98,7 +98,7 @@ export const BOSS_MOCK = [
     level: 30,
     baseAttack: 251,
     baseDefense: 207,
-    baseStamina: 225,
+    baseStamina: 9000,
     individualAttack: 15,
     individualDefense: 15,
     individualStamina: 0,

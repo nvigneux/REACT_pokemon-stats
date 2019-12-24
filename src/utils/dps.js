@@ -6,7 +6,6 @@ const getDpsMove = (move, pokemon, opponent, weather) => {
   const bonusWeather = getWeatherBonus(weather, move.type);
   const effectiveness = getMoveEffectivenessType(move.type, opponent.type);
 
-  console.log(pokemon.stats, opponent.stats);
   return (
     Math.floor(
       0.5 *
@@ -40,5 +39,5 @@ export const getRealDps = (pokemon, opponent, weather) => {
     (pokemon.moves.quick.execTime * numberAttackRequired +
       pokemon.moves.charged.execTime);
 
-  return calculRealDps;
+  return Math.round(calculRealDps * 100) / 100;
 };

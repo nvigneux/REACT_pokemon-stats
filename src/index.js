@@ -12,6 +12,14 @@ import { POKEMON_MOCK } from "./pokemons/pokedex";
 import { BOSS_MOCK } from "./pokemons/boss";
 
 import "./styles.css";
+import { simulateBattle } from "./utils/battle";
+
+const PokemonCategory = ({ title, children }) => (
+  <div className="flex flex-col">
+    <h3 className="text-base font-semibold tracking-wider pl-2">{title}</h3>
+    <div className="flex flex-row flex-nowrap">{children}</div>
+  </div>
+);
 
 const PokemonCategory = ({ title, children }) => (
   <div className="flex flex-col">
@@ -29,6 +37,7 @@ function App() {
   useEffect(() => {
     if (activePokemon && activeOpponent) {
       const dps = getRealDps(activePokemon, activeOpponent, activeWeather);
+      const battle = simulateBattle(activePokemon, activeOpponent);
       console.log(dps);
     }
   }, [activePokemon, activeOpponent, activeWeather]);
