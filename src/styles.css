@@ -1,9 +1,9 @@
-.scroll::-webkit-scrollbar{
+.scroll::-webkit-scrollbar {
   height: 6px;
   background: gray;
 }
 
-.scroll::-webkit-scrollbar-thumb:horizontal{
+.scroll::-webkit-scrollbar-thumb:horizontal {
   background: #aaa;
   border-radius: 10px;
 }
