@@ -1,5 +1,5 @@
-import { WEATHERS } from "../constant";
+import { WEATHERS } from "../constant"
 
 export const getWeatherBonus = (name, type) => {
-  return WEATHERS[name].includes(type) ? 1.2 : 1;
-};
+  return WEATHERS[name].includes(type) ? 1.2 : 1
+}

@@ -1,10 +1,10 @@
-import { getWeatherBonus } from "./weather";
-import { getMoveEffectivenessType } from "./et";
+import { getWeatherBonus } from "./weather"
+import { getMoveEffectivenessType } from "./et"
 
 const getDpsMove = (move, pokemon, opponent, weather) => {
-  const stab = pokemon.type.includes(move.type) ? 1.2 : 1;
-  const bonusWeather = getWeatherBonus(weather, move.type);
-  const effectiveness = getMoveEffectivenessType(move.type, opponent.type);
+  const stab = pokemon.type.includes(move.type) ? 1.2 : 1
+  const bonusWeather = getWeatherBonus(weather, move.type)
+  const effectiveness = getMoveEffectivenessType(move.type, opponent.type)
 
   return (
     Math.floor(
@@ -15,8 +15,8 @@ const getDpsMove = (move, pokemon, opponent, weather) => {
         bonusWeather *
         (pokemon.stats.attack / opponent.stats.defense)
     ) + 1
-  );
-};
+  )
+}
 
 export const getRealDps = (pokemon, opponent, weather) => {
   const moveDpsQuick = getDpsMove(
@@ -24,20 +24,20 @@ export const getRealDps = (pokemon, opponent, weather) => {
     pokemon,
     opponent,
     weather
-  );
+  )
   const moveDpsCharged = getDpsMove(
     pokemon.moves.charged,
     pokemon,
     opponent,
     weather
-  );
+  )
   const numberAttackRequired = Math.ceil(
     pokemon.moves.charged.energyReq / pokemon.moves.quick.energyGen
-  );
+  )
   const calculRealDps =
     (moveDpsQuick * numberAttackRequired + moveDpsCharged) /
     (pokemon.moves.quick.execTime * numberAttackRequired +
-      pokemon.moves.charged.execTime);
+      pokemon.moves.charged.execTime)
 
-  return Math.round(calculRealDps * 100) / 100;
-};
+  return Math.round(calculRealDps * 100) / 100
+}

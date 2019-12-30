@@ -1,4 +1,4 @@
-import * as TYPES from "../types";
+import * as TYPES from "../types"
 
 export const POKEMON_MOCK = [
   {
@@ -19,7 +19,7 @@ export const POKEMON_MOCK = [
         power: 12,
         execTime: 0.9,
         energyGen: 8,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.FIGHTING,
@@ -27,9 +27,9 @@ export const POKEMON_MOCK = [
         power: 90,
         execTime: 2.7,
         energyGen: null,
-        energyReq: 50
-      }
-    }
+        energyReq: 50,
+      },
+    },
   },
   {
     id: 149,
@@ -49,7 +49,7 @@ export const POKEMON_MOCK = [
         power: 6,
         execTime: 0.5,
         energyGen: 4,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.DRAGON,
@@ -57,9 +57,9 @@ export const POKEMON_MOCK = [
         power: 50,
         execTime: 1.7,
         energyGen: null,
-        energyReq: 33
-      }
-    }
+        energyReq: 33,
+      },
+    },
   },
   {
     id: 134,
@@ -79,7 +79,7 @@ export const POKEMON_MOCK = [
         power: 5,
         execTime: 0.5,
         energyGen: 5,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.WATER,
@@ -87,8 +87,8 @@ export const POKEMON_MOCK = [
         power: 130,
         execTime: 3.3,
         energyGen: null,
-        energyReq: 100
-      }
-    }
-  }
-];
+        energyReq: 100,
+      },
+    },
+  },
+]

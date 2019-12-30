@@ -39,8 +39,8 @@ export const CP_MULTIPLIER = [
   0.77893275,
   0.78463697,
   0.79030001,
-  1
-];
+  1,
+]
 
 export const WEATHERS = {
   sunny: ["fire", "ground", "grass"],
@@ -51,10 +51,10 @@ export const WEATHERS = {
   snow: ["ice", "steel"],
   windy: ["dragon", "flying", "psychic"],
   foggy: ["ghost", "dark"],
-  none: []
-};
+  none: [],
+}
 
 export const IMG_URL =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
 
-export const IMG_FORMAT = ".png";
+export const IMG_FORMAT = ".png"

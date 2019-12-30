@@ -1,4 +1,4 @@
-import * as TYPES from "../types";
+import * as TYPES from "../types"
 
 export const BOSS_MOCK = [
   {
@@ -19,7 +19,7 @@ export const BOSS_MOCK = [
         power: 0,
         execTime: 1.73,
         energyGen: 20,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.NORMAL,
@@ -27,9 +27,9 @@ export const BOSS_MOCK = [
         power: 35,
         execTime: 2.7,
         energyGen: null,
-        energyReq: 0
-      }
-    }
+        energyReq: 0,
+      },
+    },
   },
   {
     id: 73,
@@ -49,7 +49,7 @@ export const BOSS_MOCK = [
         power: 10,
         execTime: 0.8,
         energyGen: 7,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.WATER,
@@ -57,9 +57,9 @@ export const BOSS_MOCK = [
         power: 130,
         execTime: 3.3,
         energyGen: null,
-        energyReq: 100
-      }
-    }
+        energyReq: 100,
+      },
+    },
   },
   {
     id: 196,
@@ -79,7 +79,7 @@ export const BOSS_MOCK = [
         power: 20,
         execTime: 1.6,
         energyGen: 15,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.PSYCHIC,
@@ -87,9 +87,9 @@ export const BOSS_MOCK = [
         power: 90,
         execTime: 2.8,
         energyGen: null,
-        energyReq: 50
-      }
-    }
+        energyReq: 50,
+      },
+    },
   },
   {
     id: 248,
@@ -109,7 +109,7 @@ export const BOSS_MOCK = [
         power: 16,
         execTime: 1.2,
         energyGen: 8,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.ROCK,
@@ -117,9 +117,9 @@ export const BOSS_MOCK = [
         power: 100,
         execTime: 2.3,
         energyGen: null,
-        energyReq: 100
-      }
-    }
+        energyReq: 100,
+      },
+    },
   },
   {
     id: 384,
@@ -139,7 +139,7 @@ export const BOSS_MOCK = [
         power: 15,
         execTime: 1.1,
         energyGen: 9,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.DRAGON,
@@ -147,9 +147,9 @@ export const BOSS_MOCK = [
         power: 110,
         execTime: 3.9,
         energyGen: null,
-        energyReq: 50
-      }
-    }
+        energyReq: 50,
+      },
+    },
   },
   {
     id: 150,
@@ -169,7 +169,7 @@ export const BOSS_MOCK = [
         power: 20,
         execTime: 1.6,
         energyGen: 15,
-        energyReq: null
+        energyReq: null,
       },
       charged: {
         type: TYPES.PSYCHIC,
@@ -177,8 +177,8 @@ export const BOSS_MOCK = [
         power: 90,
         execTime: 2.3,
         energyGen: null,
-        energyReq: 50
-      }
-    }
-  }
-];
+        energyReq: 50,
+      },
+    },
+  },
+]
