@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import { IMG_URL, IMG_FORMAT } from "./constant";
+import { IMG_URL, IMG_FORMAT } from "./constant"
 
 const PokemonsStatCard = ({ pokemon: { name, id, stats }, className }) => (
   <div
@@ -20,23 +20,15 @@ const PokemonsStatCard = ({ pokemon: { name, id, stats }, className }) => (
           {`${name} `}
           <span className="text-sm font-normal">{stats.iv}%</span>
         </h1>
-        <h2 className="text-base text-gray-800 font-medium">{`Combat Point : ${
-          stats.cp
-        }`}</h2>
+        <h2 className="text-base text-gray-800 font-medium">{`Combat Point : ${stats.cp}`}</h2>
       </div>
       <ul className="list-none italic">
-        <li className="text-base text-gray-800">{`Attack : ${
-          stats.attack
-        }`}</li>
-        <li className="text-base text-gray-800">{`Defense : ${
-          stats.defense
-        }`}</li>
-        <li className="text-base text-gray-800">{`Stamina : ${
-          stats.stamina
-        }`}</li>
+        <li className="text-base text-gray-800">{`Attack : ${stats.attack}`}</li>
+        <li className="text-base text-gray-800">{`Defense : ${stats.defense}`}</li>
+        <li className="text-base text-gray-800">{`Stamina : ${stats.stamina}`}</li>
       </ul>
     </div>
   </div>
-);
+)
 
-export default PokemonsStatCard;
+export default PokemonsStatCard

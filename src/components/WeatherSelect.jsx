@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import { WEATHERS } from "../constant";
+import { WEATHERS } from "../constant"
 
 const WeatherSelect = ({ activeValue, select }) => (
   <div className="w-full md:w-1/3 px-2 mb-6">
@@ -32,6 +32,6 @@ const WeatherSelect = ({ activeValue, select }) => (
       </div>
     </div>
   </div>
-);
+)
 
-export default WeatherSelect;
+export default WeatherSelect
