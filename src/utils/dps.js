@@ -39,5 +39,9 @@ export const getRealDps = (pokemon, opponent, weather) => {
     (pokemon.moves.quick.execTime * numberAttackRequired +
       pokemon.moves.charged.execTime)
 
-  return Math.round(calculRealDps * 100) / 100
+  return {
+    realDps: Math.round(calculRealDps * 100) / 100,
+    quick: moveDpsQuick,
+    charged: moveDpsCharged,
+  }
 }

@@ -28,9 +28,21 @@ const App = () => {
 
   useEffect(() => {
     if (activePokemon && activeOpponent) {
-      const dps = getRealDps(activePokemon, activeOpponent, activeWeather)
-      const battle = simulateBattle(activePokemon, activeOpponent)
-      console.log(dps, battle)
+      const dpsAttacker = getRealDps(
+        activePokemon,
+        activeOpponent,
+        activeWeather
+      )
+      const activeAttacker = {
+        ...activePokemon,
+        moves: {
+          ...activePokemon.moves,
+          quick: { dmg: dpsAttacker.quick, ...activePokemon.moves.quick },
+          charged: { dmg: dpsAttacker.charged, ...activePokemon.moves.charged },
+        },
+      }
+      const battle = simulateBattle(activeAttacker, activeOpponent)
+      console.log(battle)
     }
   }, [activePokemon, activeOpponent, activeWeather])
 
