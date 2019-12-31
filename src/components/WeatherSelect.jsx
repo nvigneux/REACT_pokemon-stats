@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react"
 
 import { WEATHERS } from "../constant"
@@ -6,16 +7,16 @@ const WeatherSelect = ({ activeValue, select }) => (
   <div className="w-full md:w-1/3 px-2 mb-6">
     <label
       className="block uppercase tracking-wide font-semibold text-xs my-2"
-      htmlFor="grid-state"
+      htmlFor="weather"
     >
       Méteo
     </label>
     <div className="relative">
       <select
-        id="grid-state"
         className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         value={activeValue}
         onChange={e => select(e.target.value)}
+        id="weather"
       >
         {Object.keys(WEATHERS).map(item => (
           <option key={item}>{item}</option>

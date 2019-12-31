@@ -29,7 +29,8 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
         ${pokemon.stats.cp}`}</h2>
       </div>
       <ul className="list-none italic">
-        <li className="text-xs text-gray-800">{`Attack : ${pokemon.stats.attack}`}</li> <li className="text-xs text-gray-800">{`Defense : ${pokemon.stats.defense}`}</li>
+        <li className="text-xs text-gray-800">{`Attack : ${pokemon.stats.attack}`}</li>
+        <li className="text-xs text-gray-800">{`Defense : ${pokemon.stats.defense}`}</li>
         <li className="text-xs text-gray-800">
           {`Stamina : ${pokemon.stats.stamina}
         `}
