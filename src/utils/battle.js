@@ -16,27 +16,48 @@ export const simulateBattle = (pokemon, opponent) => {
   }
 
   for (timerRemaining; timerRemaining > 0; timerRemaining -= 100) {
-    console.log("toto", pokemon, timerRemaining, stateBattle)
-    // Attacker can begin
+    console.log("time", timerRemaining / 1000)
+
+    // Attacker can begin launch quick attack
     if (timerRemaining === timerBattle - ATK_DELAY) {
-      console.log("att")
       stateBattle.oppHp -= pokemon.moves.quick.dmg
       stateBattle.oppEnergy += pokemon.moves.quick.dmg / 2
-      stateBattle.attEnergy =
-        timerRemaining - pokemon.moves.quick.execTime * 1000
+      stateBattle.attEnergy = pokemon.moves.quick.energyGen
       stateBattle.attTime = timerRemaining - pokemon.moves.quick.execTime * 1000
     }
 
     if (timerRemaining === stateBattle.attTime) {
-      stateBattle.oppHp -= pokemon.moves.quick.dmg
-      stateBattle.oppEnergy += pokemon.moves.quick.dmg / 2
-      stateBattle.attEnergy =
-        timerRemaining - pokemon.moves.quick.execTime * 1000
-      stateBattle.attTime = timerRemaining - pokemon.moves.quick.execTime * 1000
+      // if Attacker can launch a charged attack
+      if (pokemon.moves.charged.energyReq <= stateBattle.attEnergy) {
+        stateBattle.oppHp -= pokemon.moves.charged.dmg
+        stateBattle.oppEnergy += pokemon.moves.charged.dmg / 2
+        stateBattle.attEnergy -= pokemon.moves.charged.energyReq
+        stateBattle.attTime =
+          timerRemaining - pokemon.moves.charged.execTime * 1000
+      }
+
+      // Attacker launch quick attack
+      if (pokemon.moves.charged.energyReq > stateBattle.attEnergy) {
+        stateBattle.oppHp -= pokemon.moves.quick.dmg
+        stateBattle.oppEnergy += pokemon.moves.quick.dmg / 2
+        stateBattle.attEnergy += pokemon.moves.quick.energyGen
+        stateBattle.attTime =
+          timerRemaining - pokemon.moves.quick.execTime * 1000
+      }
     }
-    // IA can begin
+
+    // Defender can begin
     if (timerRemaining === timerBattle - DEF_DELAY) {
-      console.log("ia")
+      console.log("Defender first attack")
+    }
+
+    if (stateBattle.oppHp <= 0) {
+      console.log("Defender is KO")
+      break
+    }
+
+    if (timerRemaining === 0) {
+      console.log("Timer is over")
     }
   }
 }
