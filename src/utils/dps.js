@@ -1,10 +1,10 @@
 import { getWeatherBonus } from "./weather"
 import { getMoveEffectivenessType } from "./et"
 
-const getDpsMove = (move, pokemon, opponent, weather) => {
-  const stab = pokemon.type.includes(move.type) ? 1.2 : 1
+const getDpsMove = (move, attacker, defender, weather) => {
+  const stab = attacker.type.includes(move.type) ? 1.2 : 1
   const bonusWeather = getWeatherBonus(weather, move.type)
-  const effectiveness = getMoveEffectivenessType(move.type, opponent.type)
+  const effectiveness = getMoveEffectivenessType(move.type, defender.type)
 
   return (
     Math.floor(
@@ -13,35 +13,53 @@ const getDpsMove = (move, pokemon, opponent, weather) => {
         stab *
         effectiveness *
         bonusWeather *
-        (pokemon.stats.attack / opponent.stats.defense)
+        (attacker.stats.attack / defender.stats.defense)
     ) + 1
   )
 }
 
-export const getRealDps = (pokemon, opponent, weather) => {
+const getRealDps = (attacker, defender, weather) => {
   const moveDpsQuick = getDpsMove(
-    pokemon.moves.quick,
-    pokemon,
-    opponent,
+    attacker.moves.quick,
+    attacker,
+    defender,
     weather
   )
   const moveDpsCharged = getDpsMove(
-    pokemon.moves.charged,
-    pokemon,
-    opponent,
+    attacker.moves.charged,
+    attacker,
+    defender,
     weather
   )
   const numberAttackRequired = Math.ceil(
-    pokemon.moves.charged.energyReq / pokemon.moves.quick.energyGen
+    attacker.moves.charged.energyReq / attacker.moves.quick.energyGen
   )
   const calculRealDps =
     (moveDpsQuick * numberAttackRequired + moveDpsCharged) /
-    (pokemon.moves.quick.execTime * numberAttackRequired +
-      pokemon.moves.charged.execTime)
+    (attacker.moves.quick.execTime * numberAttackRequired +
+      attacker.moves.charged.execTime)
 
   return {
     realDps: Math.round(calculRealDps * 100) / 100,
     quick: moveDpsQuick,
     charged: moveDpsCharged,
+  }
+}
+
+/**
+ *  Get the damage output for quick & charged moves of one pokemon against another
+ * @param {Pokemon} attacker
+ * @param {Pokemon} defender
+ * @param {*} weather
+ */
+export const getDmgMoves = (attacker, defender, weather) => {
+  const dmgAttacker = getRealDps(attacker, defender, weather)
+  return {
+    ...attacker,
+    moves: {
+      ...attacker.moves,
+      quick: { dmg: dmgAttacker.quick, ...attacker.moves.quick },
+      charged: { dmg: dmgAttacker.charged, ...attacker.moves.charged },
+    },
   }
 }

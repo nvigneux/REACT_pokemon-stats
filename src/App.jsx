@@ -4,7 +4,7 @@ import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
 
 import { pokemonStats } from "./utils/stats"
-import { getRealDps } from "./utils/dps"
+import { getDmgMoves } from "./utils/dps"
 
 import { CP_MULTIPLIER } from "./constant"
 import { POKEMON_MOCK } from "./pokemons/pokedex"
@@ -28,20 +28,18 @@ const App = () => {
 
   useEffect(() => {
     if (activePokemon && activeOpponent) {
-      const dpsAttacker = getRealDps(
+      const activeAttacker = getDmgMoves(
         activePokemon,
         activeOpponent,
         activeWeather
       )
-      const activeAttacker = {
-        ...activePokemon,
-        moves: {
-          ...activePokemon.moves,
-          quick: { dmg: dpsAttacker.quick, ...activePokemon.moves.quick },
-          charged: { dmg: dpsAttacker.charged, ...activePokemon.moves.charged },
-        },
-      }
-      simulateBattle(activeAttacker, activeOpponent)
+      const activeDefender = getDmgMoves(
+        activeOpponent,
+        activePokemon,
+        activeWeather
+      )
+      console.log(activeAttacker, activeDefender)
+      simulateBattle(activeAttacker, activeDefender)
     }
   }, [activePokemon, activeOpponent, activeWeather])
 
