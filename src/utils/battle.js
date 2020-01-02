@@ -33,8 +33,8 @@ const battleReducer = (state, { type, attacker, timer }) => {
 
 export const simulateBattle = (pokemon, opponent) => {
   const timerBattle = TIME_LIMIT * 1000 // fight duration : 180000ms
+
   let resumeBattle = { attacker: pokemon, defender: opponent, events: [] }
-  let timerRemaining = timerBattle // fight duration : 180000ms
   let stateBattle = {
     attHp: pokemon.stats.stamina,
     oppHp: opponent.stats.stamina,
@@ -44,7 +44,8 @@ export const simulateBattle = (pokemon, opponent) => {
     oppTimeNextAtt: 0,
   }
 
-  for (timerRemaining; timerRemaining > 0; timerRemaining -= 100) {
+  let timerRemaining = timerBattle
+  for (timerRemaining; timerRemaining >= 0; timerRemaining -= 100) {
     // console.log("time", timerRemaining / 1000, resumeBattle)
 
     if (stateBattle.oppHp <= 0) {
