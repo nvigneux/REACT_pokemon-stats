@@ -41,8 +41,7 @@ const App = () => {
           charged: { dmg: dpsAttacker.charged, ...activePokemon.moves.charged },
         },
       }
-      const battle = simulateBattle(activeAttacker, activeOpponent)
-      console.log(battle)
+      simulateBattle(activeAttacker, activeOpponent)
     }
   }, [activePokemon, activeOpponent, activeWeather])
 
