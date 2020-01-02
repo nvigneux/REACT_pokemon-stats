@@ -5,7 +5,7 @@ export const POKEMON_MOCK = [
     id: 68,
     name: "Mackogneur",
     type: [TYPES.FIGHTING],
-    level: 30,
+    level: 40,
     baseAttack: 234,
     baseDefense: 159,
     baseStamina: 207,

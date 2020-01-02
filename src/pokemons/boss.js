@@ -17,7 +17,7 @@ export const BOSS_MOCK = [
         type: TYPES.WATER,
         name: "Trempette",
         power: 0,
-        execTime: 1.73,
+        execTime: 1.7,
         energyGen: 20,
         energyReq: null,
       },
