@@ -15,8 +15,8 @@ const battleReducer = (state, { type, pokemon, timer }) => {
     case QUICK_ATK_ATTACKER: {
       return {
         ...state,
-        oppHp: state.oppHp - pokemon.moves.quick.dmg,
-        oppEnergy: state.oppEnergy + pokemon.moves.quick.dmg / 2,
+        defHp: state.defHp - pokemon.moves.quick.dmg,
+        defEnergy: state.defEnergy + pokemon.moves.quick.dmg / 2,
         attEnergy: state.attEnergy + pokemon.moves.quick.energyGen,
         attTimeNextAtk: timer - pokemon.moves.quick.execTime * 1000,
       }
@@ -24,8 +24,8 @@ const battleReducer = (state, { type, pokemon, timer }) => {
     case CHARGED_ATK_ATTACKER: {
       return {
         ...state,
-        oppHp: state.oppHp - pokemon.moves.charged.dmg,
-        oppEnergy: state.oppEnergy + pokemon.moves.charged.dmg / 2,
+        defHp: state.defHp - pokemon.moves.charged.dmg,
+        defEnergy: state.defEnergy + pokemon.moves.charged.dmg / 2,
         attEnergy: state.attEnergy - pokemon.moves.charged.energyReq,
         attTimeNextAtk: timer - pokemon.moves.charged.execTime * 1000,
       }
@@ -35,8 +35,8 @@ const battleReducer = (state, { type, pokemon, timer }) => {
         ...state,
         attHp: state.attHp - pokemon.moves.quick.dmg,
         attEnergy: state.attEnergy + pokemon.moves.quick.dmg / 2,
-        oppEnergy: state.oppEnergy + pokemon.moves.quick.energyGen,
-        oppTimeNextAtk:
+        defEnergy: state.defEnergy + pokemon.moves.quick.energyGen,
+        defTimeNextAtk:
           timer - pokemon.moves.quick.execTime * 1000 - DEF_DELAY_ATTACK,
       }
     }
@@ -45,8 +45,8 @@ const battleReducer = (state, { type, pokemon, timer }) => {
         ...state,
         attHp: state.attHp - pokemon.moves.charged.dmg,
         attEnergy: state.attEnergy + pokemon.moves.charged.dmg / 2,
-        oppEnergy: state.oppEnergy - pokemon.moves.charged.energyReq,
-        oppTimeNextAtk: timer - pokemon.moves.charged.execTime * 1000,
+        defEnergy: state.defEnergy - pokemon.moves.charged.energyReq,
+        defTimeNextAtk: timer - pokemon.moves.charged.execTime * 1000,
       }
     }
     default: {
@@ -55,17 +55,17 @@ const battleReducer = (state, { type, pokemon, timer }) => {
   }
 }
 
-export const simulateBattle = (attacker, opponent) => {
+export const simulateBattle = (attacker, defender) => {
   const timerBattle = TIME_LIMIT * 1000 // fight duration : 180000ms
 
   let historyBattle = { events: [] }
   let stateBattle = {
     attHp: attacker.stats.stamina,
-    oppHp: opponent.stats.stamina,
     attEnergy: 0,
-    oppEnergy: 0,
     attTimeNextAtk: 0,
-    oppTimeNextAtk: 0,
+    defHp: defender.stats.stamina,
+    defEnergy: 0,
+    defTimeNextAtk: 0,
   }
 
   let timerRemaining = timerBattle
@@ -77,7 +77,7 @@ export const simulateBattle = (attacker, opponent) => {
       console.log("Attacker is KO", historyBattle)
       break
     }
-    if (stateBattle.oppHp <= 0) {
+    if (stateBattle.defHp <= 0) {
       console.log("Defender is KO", historyBattle)
       break
     }
@@ -155,7 +155,7 @@ export const simulateBattle = (attacker, opponent) => {
     if (timerRemaining === timerBattle - DEF_DELAY) {
       stateBattle = battleReducer(stateBattle, {
         type: QUICK_ATK_DEFENDER,
-        pokemon: opponent,
+        pokemon: defender,
         timer: timerRemaining,
       })
       historyBattle = {
@@ -166,18 +166,18 @@ export const simulateBattle = (attacker, opponent) => {
             stateBattle,
             type: QUICK_ATK_DEFENDER,
             time: timerRemaining,
-            pokemon: opponent.id,
+            pokemon: defender.id,
           },
         ],
       }
     }
 
-    if (timerRemaining === stateBattle.oppTimeNextAtk) {
+    if (timerRemaining === stateBattle.defTimeNextAtk) {
       // if Defender can launch a charged attack
-      if (opponent.moves.charged.energyReq <= stateBattle.oppEnergy) {
+      if (defender.moves.charged.energyReq <= stateBattle.defEnergy) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_DEFENDER,
-          pokemon: opponent,
+          pokemon: defender,
           timer: timerRemaining,
         })
         historyBattle = {
@@ -188,14 +188,14 @@ export const simulateBattle = (attacker, opponent) => {
               stateBattle,
               type: CHARGED_ATK_DEFENDER,
               time: timerRemaining,
-              pokemon: opponent.id,
+              pokemon: defender.id,
             },
           ],
         }
       } else {
         stateBattle = battleReducer(stateBattle, {
           type: QUICK_ATK_DEFENDER,
-          pokemon: opponent,
+          pokemon: defender,
           timer: timerRemaining,
         })
         historyBattle = {
@@ -206,7 +206,7 @@ export const simulateBattle = (attacker, opponent) => {
               stateBattle,
               type: QUICK_ATK_DEFENDER,
               time: timerRemaining,
-              pokemon: opponent.id,
+              pokemon: defender.id,
             },
           ],
         }
