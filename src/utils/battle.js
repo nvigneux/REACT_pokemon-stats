@@ -10,43 +10,42 @@ const CHARGED_ATK_ATTACKER = "Attacker Charged"
 const QUICK_ATK_DEFENDER = "Defender Quick"
 const CHARGED_ATK_DEFENDER = "Defender Charged"
 
-const battleReducer = (state, { type, pokemon, timer }) => {
+const battleReducer = (state, { type, move, timer }) => {
   switch (type) {
     case QUICK_ATK_ATTACKER: {
       return {
         ...state,
-        defHp: state.defHp - pokemon.moves.quick.dmg,
-        defEnergy: state.defEnergy + pokemon.moves.quick.dmg / 2,
-        attEnergy: state.attEnergy + pokemon.moves.quick.energyGen,
-        attTimeNextAtk: timer - pokemon.moves.quick.execTime * 1000,
+        defHp: state.defHp - move.dmg,
+        defEnergy: state.defEnergy + move.dmg / 2,
+        attEnergy: state.attEnergy + move.energyGen,
+        attTimeNextAtk: timer - move.execTime * 1000,
       }
     }
     case CHARGED_ATK_ATTACKER: {
       return {
         ...state,
-        defHp: state.defHp - pokemon.moves.charged.dmg,
-        defEnergy: state.defEnergy + pokemon.moves.charged.dmg / 2,
-        attEnergy: state.attEnergy - pokemon.moves.charged.energyReq,
-        attTimeNextAtk: timer - pokemon.moves.charged.execTime * 1000,
+        defHp: state.defHp - move.dmg,
+        defEnergy: state.defEnergy + move.dmg / 2,
+        attEnergy: state.attEnergy - move.energyReq,
+        attTimeNextAtk: timer - move.execTime * 1000,
       }
     }
     case QUICK_ATK_DEFENDER: {
       return {
         ...state,
-        attHp: state.attHp - pokemon.moves.quick.dmg,
-        attEnergy: state.attEnergy + pokemon.moves.quick.dmg / 2,
-        defEnergy: state.defEnergy + pokemon.moves.quick.energyGen,
-        defTimeNextAtk:
-          timer - pokemon.moves.quick.execTime * 1000 - DEF_DELAY_ATTACK,
+        attHp: state.attHp - move.dmg,
+        attEnergy: state.attEnergy + move.dmg / 2,
+        defEnergy: state.defEnergy + move.energyGen,
+        defTimeNextAtk: timer - move.execTime * 1000 - DEF_DELAY_ATTACK,
       }
     }
     case CHARGED_ATK_DEFENDER: {
       return {
         ...state,
-        attHp: state.attHp - pokemon.moves.charged.dmg,
-        attEnergy: state.attEnergy + pokemon.moves.charged.dmg / 2,
-        defEnergy: state.defEnergy - pokemon.moves.charged.energyReq,
-        defTimeNextAtk: timer - pokemon.moves.charged.execTime * 1000,
+        attHp: state.attHp - move.dmg,
+        attEnergy: state.attEnergy + move.dmg / 2,
+        defEnergy: state.defEnergy - move.energyReq,
+        defTimeNextAtk: timer - move.execTime * 1000,
       }
     }
     default: {
@@ -55,10 +54,16 @@ const battleReducer = (state, { type, pokemon, timer }) => {
   }
 }
 
+/**
+ * Will simulate all the attacks during a raid fight between two pokemon
+ * Atta
+ * @param {Pokemon} attacker
+ * @param {Pokemon} defender
+ */
 export const simulateBattle = (attacker, defender) => {
+  const logBattle = []
   const timerBattle = TIME_LIMIT * 1000 // fight duration : 180000ms
 
-  let historyBattle = { events: [] }
   let stateBattle = {
     attHp: attacker.stats.stamina,
     attEnergy: 0,
@@ -74,145 +79,88 @@ export const simulateBattle = (attacker, defender) => {
      * Condition for the END of the fight
      */
     if (stateBattle.attHp <= 0) {
-      console.log("Attacker is KO", historyBattle)
+      console.log("Attacker is KO", attacker.id, logBattle)
       break
     }
     if (stateBattle.defHp <= 0) {
-      console.log("Defender is KO", historyBattle)
+      console.log("Defender is KO", defender.id, logBattle)
       break
     }
     if (timerRemaining === 0) {
-      console.log("Timer is over", historyBattle)
+      console.log("Timer is over", logBattle)
       break
     }
 
     /**
-     * Attacker can begin launch quick attack
+     * Attacker attacks
+     * Attacker can begin launch quick attack after his first attack delay
      */
-    // wait until the attacker's delay is reached
-    if (timerRemaining === timerBattle - ATT_DELAY) {
-      stateBattle = battleReducer(stateBattle, {
-        type: QUICK_ATK_ATTACKER,
-        pokemon: attacker,
-        timer: timerRemaining,
-      })
-      historyBattle = {
-        ...historyBattle,
-        events: [
-          ...historyBattle.events,
-          {
-            stateBattle,
-            type: QUICK_ATK_ATTACKER,
-            time: timerRemaining,
-            pokemon: attacker.id,
-          },
-        ],
-      }
-    }
-
-    if (timerRemaining === stateBattle.attTimeNextAtk) {
+    if (
+      timerRemaining === stateBattle.attTimeNextAtk ||
+      timerRemaining === timerBattle - ATT_DELAY
+    ) {
       // if Attacker can launch a charged attack
       if (attacker.moves.charged.energyReq <= stateBattle.attEnergy) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_ATTACKER,
-          pokemon: attacker,
+          move: attacker.moves.charged,
           timer: timerRemaining,
         })
-        historyBattle = {
-          ...historyBattle,
-          events: [
-            ...historyBattle.events,
-            {
-              stateBattle,
-              type: CHARGED_ATK_ATTACKER,
-              time: timerRemaining,
-              pokemon: attacker.id,
-            },
-          ],
-        }
+        logBattle.push({
+          time: timerRemaining,
+          type: CHARGED_ATK_ATTACKER,
+          pokemon: attacker.id,
+          stateBattle,
+        })
       } else {
         stateBattle = battleReducer(stateBattle, {
           type: QUICK_ATK_ATTACKER,
-          pokemon: attacker,
+          move: attacker.moves.quick,
           timer: timerRemaining,
         })
-        historyBattle = {
-          ...historyBattle,
-          events: [
-            ...historyBattle.events,
-            {
-              stateBattle,
-              type: QUICK_ATK_ATTACKER,
-              time: timerRemaining,
-              pokemon: attacker.id,
-            },
-          ],
-        }
+        logBattle.push({
+          time: timerRemaining,
+          type: QUICK_ATK_ATTACKER,
+          pokemon: attacker.id,
+          stateBattle,
+        })
       }
     }
 
-    // Defender can begin launch quick attack
-    if (timerRemaining === timerBattle - DEF_DELAY) {
-      stateBattle = battleReducer(stateBattle, {
-        type: QUICK_ATK_DEFENDER,
-        pokemon: defender,
-        timer: timerRemaining,
-      })
-      historyBattle = {
-        ...historyBattle,
-        events: [
-          ...historyBattle.events,
-          {
-            stateBattle,
-            type: QUICK_ATK_DEFENDER,
-            time: timerRemaining,
-            pokemon: defender.id,
-          },
-        ],
-      }
-    }
-
-    if (timerRemaining === stateBattle.defTimeNextAtk) {
+    /**
+     * Defender attacks
+     * Defender can begin launch quick attack after his first attack delay
+     */
+    if (
+      timerRemaining === stateBattle.defTimeNextAtk ||
+      timerRemaining === timerBattle - DEF_DELAY
+    ) {
       // if Defender can launch a charged attack
       if (defender.moves.charged.energyReq <= stateBattle.defEnergy) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_DEFENDER,
-          pokemon: defender,
+          move: defender.moves.charged,
           timer: timerRemaining,
         })
-        historyBattle = {
-          ...historyBattle,
-          events: [
-            ...historyBattle.events,
-            {
-              stateBattle,
-              type: CHARGED_ATK_DEFENDER,
-              time: timerRemaining,
-              pokemon: defender.id,
-            },
-          ],
-        }
+        logBattle.push({
+          time: timerRemaining,
+          type: CHARGED_ATK_DEFENDER,
+          pokemon: defender.id,
+          stateBattle,
+        })
       } else {
         stateBattle = battleReducer(stateBattle, {
           type: QUICK_ATK_DEFENDER,
-          pokemon: defender,
+          move: defender.moves.quick,
           timer: timerRemaining,
         })
-        historyBattle = {
-          ...historyBattle,
-          events: [
-            ...historyBattle.events,
-            {
-              stateBattle,
-              type: QUICK_ATK_DEFENDER,
-              time: timerRemaining,
-              pokemon: defender.id,
-            },
-          ],
-        }
+        logBattle.push({
+          time: timerRemaining,
+          type: QUICK_ATK_DEFENDER,
+          pokemon: defender.id,
+          stateBattle,
+        })
       }
     }
   }
 }
-
-// TODO refactoring of events
