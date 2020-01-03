@@ -1,12 +1,12 @@
 const TIME_LIMIT = 180
 const ATT_DELAY = 700
 const DEF_DELAY = 1600
-
 const DEF_DELAY_ATTACK = 2000
+
+const TIMER_BATTLE = TIME_LIMIT * 1000 // fight duration : 180000ms
 
 const QUICK_ATK_ATTACKER = "Attacker Quick"
 const CHARGED_ATK_ATTACKER = "Attacker Charged"
-
 const QUICK_ATK_DEFENDER = "Defender Quick"
 const CHARGED_ATK_DEFENDER = "Defender Charged"
 
@@ -62,7 +62,6 @@ const battleReducer = (state, { type, move, timer }) => {
  */
 export const simulateBattle = (attacker, defender) => {
   const logBattle = []
-  const timerBattle = TIME_LIMIT * 1000 // fight duration : 180000ms
 
   let stateBattle = {
     attHp: attacker.stats.stamina,
@@ -73,7 +72,7 @@ export const simulateBattle = (attacker, defender) => {
     defTimeNextAtk: 0,
   }
 
-  let timerRemaining = timerBattle
+  let timerRemaining = TIMER_BATTLE
   for (timerRemaining; timerRemaining >= 0; timerRemaining -= 100) {
     /**
      * Condition for the END of the fight
@@ -97,7 +96,7 @@ export const simulateBattle = (attacker, defender) => {
      */
     if (
       timerRemaining === stateBattle.attTimeNextAtk ||
-      timerRemaining === timerBattle - ATT_DELAY
+      timerRemaining === TIMER_BATTLE - ATT_DELAY
     ) {
       // if Attacker can launch a charged attack
       if (attacker.moves.charged.energyReq <= stateBattle.attEnergy) {
@@ -133,7 +132,7 @@ export const simulateBattle = (attacker, defender) => {
      */
     if (
       timerRemaining === stateBattle.defTimeNextAtk ||
-      timerRemaining === timerBattle - DEF_DELAY
+      timerRemaining === TIMER_BATTLE - DEF_DELAY
     ) {
       // if Defender can launch a charged attack
       if (defender.moves.charged.energyReq <= stateBattle.defEnergy) {
