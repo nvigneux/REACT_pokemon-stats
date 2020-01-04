@@ -95,7 +95,7 @@ export const BOSS_MOCK = [
     id: 248,
     name: "Tyranocif",
     type: [TYPES.DARK, TYPES.ROCK],
-    level: 30,
+    level: 41,
     baseAttack: 251,
     baseDefense: 207,
     baseStamina: 9000,
