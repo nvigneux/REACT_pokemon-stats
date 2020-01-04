@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react"
 import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
 
-import { pokemonStats } from "./utils/stats"
+import { simulateBattle } from "./utils/battle"
+import { pokemonStats, battleStats } from "./utils/stats"
 import { getDmgMoves } from "./utils/dps"
 
-import { CP_MULTIPLIER } from "./constant"
+import { CP_MULTIPLIER, WEATHERS } from "./constant"
 import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
 
 import "./styles.css"
-import { simulateBattle } from "./utils/battle"
 
 const PokemonCategory = ({ title, children }) => (
   <div className="flex flex-col">
@@ -38,15 +38,29 @@ const App = () => {
         activePokemon,
         activeWeather
       )
+      console.group(activeAttacker.name)
       console.log(activeAttacker, activeDefender)
-      simulateBattle(activeAttacker, activeDefender)
+      const battle = simulateBattle(activeAttacker, activeDefender)
+      console.log(battle)
+      const simulateBattleStats = battleStats(
+        battle,
+        activeAttacker,
+        activeDefender
+      )
+      console.log(simulateBattleStats)
+      console.groupEnd()
     }
   }, [activePokemon, activeOpponent, activeWeather])
 
-  // TODO watch if memo can be useful on WeatherSelect
+  // TODO watch if memo can be useful
   return (
     <div className="App">
-      <WeatherSelect default={activeWeather} select={setActiveWeather} />
+      <WeatherSelect
+        values={WEATHERS}
+        default={activeWeather}
+        select={setActiveWeather}
+      />
+
       <div className="flex flex-row overflow-auto scroll">
         <div className="flex flex-col pr-4">
           <PokemonCategory title="Pokedex">
