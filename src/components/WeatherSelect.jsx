@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react"
 
-import { WEATHERS } from "../constant"
-
-const WeatherSelect = ({ activeValue, select }) => (
+const WeatherSelect = ({ values, activeValue, select }) => (
   <div className="w-full md:w-1/3 px-2 mb-6">
     <label
       className="block uppercase tracking-wide font-semibold text-xs my-2"
@@ -18,7 +16,7 @@ const WeatherSelect = ({ activeValue, select }) => (
         onChange={e => select(e.target.value)}
         id="weather"
       >
-        {Object.keys(WEATHERS).map(item => (
+        {Object.keys(values).map(item => (
           <option key={item}>{item}</option>
         ))}
       </select>
