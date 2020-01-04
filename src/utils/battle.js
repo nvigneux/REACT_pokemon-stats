@@ -1,14 +1,14 @@
-const TIME_LIMIT = 180
+import {
+  TIMER_BATTLE,
+  QUICK_ATK_ATTACKER,
+  CHARGED_ATK_ATTACKER,
+  QUICK_ATK_DEFENDER,
+  CHARGED_ATK_DEFENDER,
+} from "../constant"
+
 const ATT_DELAY = 700
 const DEF_DELAY = 1600
 const DEF_DELAY_ATTACK = 2000
-
-const TIMER_BATTLE = TIME_LIMIT * 1000 // fight duration : 180000ms
-
-const QUICK_ATK_ATTACKER = "Attacker Quick"
-const CHARGED_ATK_ATTACKER = "Attacker Charged"
-const QUICK_ATK_DEFENDER = "Defender Quick"
-const CHARGED_ATK_DEFENDER = "Defender Charged"
 
 const battleReducer = (state, { type, move, timer }) => {
   switch (type) {
@@ -77,16 +77,11 @@ export const simulateBattle = (attacker, defender) => {
     /**
      * Condition for the END of the fight
      */
-    if (stateBattle.attHp <= 0) {
-      console.log("Attacker is KO", attacker.id, logBattle)
-      break
-    }
-    if (stateBattle.defHp <= 0) {
-      console.log("Defender is KO", defender.id, logBattle)
-      break
-    }
-    if (timerRemaining === 0) {
-      console.log("Timer is over", logBattle)
+    if (
+      stateBattle.attHp <= 0 ||
+      stateBattle.defHp <= 0 ||
+      timerRemaining === 0
+    ) {
       break
     }
 
@@ -162,4 +157,5 @@ export const simulateBattle = (attacker, defender) => {
       }
     }
   }
+  return logBattle
 }
