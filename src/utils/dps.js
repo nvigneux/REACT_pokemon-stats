@@ -18,14 +18,29 @@ const getDpsMove = (move, attacker, defender, weather) => {
   )
 }
 
+const calculateRealDps = (
+  quickMoveDps,
+  chargedMoveDps,
+  numberAttackRequired,
+  quickMoveExecTime,
+  chargedMoveExecTime
+) =>
+  (quickMoveDps * numberAttackRequired + chargedMoveDps) /
+  (quickMoveExecTime * numberAttackRequired + chargedMoveExecTime)
+
+/**
+ * @param {Pokemon} attacker
+ * @param {Pokemon} defender
+ * @param {string} weather
+ */
 const getRealDps = (attacker, defender, weather) => {
-  const moveDpsQuick = getDpsMove(
+  const quickMoveDps = getDpsMove(
     attacker.moves.quick,
     attacker,
     defender,
     weather
   )
-  const moveDpsCharged = getDpsMove(
+  const chargedMoveDps = getDpsMove(
     attacker.moves.charged,
     attacker,
     defender,
@@ -34,15 +49,18 @@ const getRealDps = (attacker, defender, weather) => {
   const numberAttackRequired = Math.ceil(
     attacker.moves.charged.energyReq / attacker.moves.quick.energyGen
   )
-  const calculRealDps =
-    (moveDpsQuick * numberAttackRequired + moveDpsCharged) /
-    (attacker.moves.quick.execTime * numberAttackRequired +
-      attacker.moves.charged.execTime)
+  const realDps = calculateRealDps(
+    quickMoveDps,
+    chargedMoveDps,
+    numberAttackRequired,
+    attacker.moves.quick.execTime,
+    attacker.moves.charged.execTime
+  )
 
   return {
-    realDps: Math.round(calculRealDps * 100) / 100,
-    quick: moveDpsQuick,
-    charged: moveDpsCharged,
+    realDps: Math.round(realDps * 100) / 100,
+    quick: quickMoveDps,
+    charged: chargedMoveDps,
   }
 }
 
@@ -50,7 +68,7 @@ const getRealDps = (attacker, defender, weather) => {
  *  Get the damage output for quick & charged moves of one pokemon against another
  * @param {Pokemon} attacker
  * @param {Pokemon} defender
- * @param {*} weather
+ * @param {string} weather
  */
 export const getDmgMoves = (attacker, defender, weather) => {
   const dmgAttacker = getRealDps(attacker, defender, weather)
