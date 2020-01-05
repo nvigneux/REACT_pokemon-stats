@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react"
+import { orderBy } from "lodash"
 
 import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
 
-import { simulateBattle } from "./utils/battle"
-import { pokemonStats, battleStats } from "./utils/stats"
+import { simulateBattle, simulateBattleStats } from "./utils/battle"
+import { pokemonStats } from "./utils/stats"
 import { getDmgMoves } from "./utils/dps"
 
-import { CP_MULTIPLIER, WEATHERS } from "./constant"
 import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
+import { CP_MULTIPLIER, WEATHERS, POKEMON } from "./constant"
 
 import "./styles.css"
 
@@ -21,36 +22,54 @@ const PokemonCategory = ({ title, children }) => (
 )
 
 const App = () => {
-  const [activePokemon, setActivePokemon] = useState(null)
-  const [activeOpponent, setActiveOpponent] = useState(null)
+  const [pokemons, setPokemons] = useState([])
+  const [bosses, setBosses] = useState([])
 
+  const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
+  // Add stats to each pokemons & bosses
   useEffect(() => {
-    if (activePokemon && activeOpponent) {
-      const activeAttacker = getDmgMoves(
-        activePokemon,
-        activeOpponent,
-        activeWeather
+    const pokemonsWithStats = POKEMON_MOCK.map(pokemon => {
+      const stats = pokemonStats(CP_MULTIPLIER, pokemon)
+      return { stats, ...pokemon }
+    })
+    const bossesWithStats = BOSS_MOCK.map(boss => {
+      const stats = pokemonStats(CP_MULTIPLIER, boss)
+      return { stats, ...boss }
+    })
+    setPokemons(pokemonsWithStats)
+    setBosses(bossesWithStats)
+  }, [])
+
+  useEffect(() => {
+    if (activeBoss) {
+      const resultBattle = pokemons.map(attacker => {
+        const activeAttacker = getDmgMoves(attacker, activeBoss, activeWeather)
+        const activeDefender = getDmgMoves(activeBoss, attacker, activeWeather)
+
+        const battle = simulateBattle(activeAttacker, activeDefender)
+        const pokemonBattleStats = simulateBattleStats(
+          POKEMON,
+          activeAttacker.id,
+          battle,
+          activeDefender
+        )
+
+        console.group(activeAttacker.name)
+        console.log("Attacker :", activeAttacker, "Defender :", activeDefender)
+        console.log("Log battle :", battle)
+        console.log("Stats :", pokemonBattleStats)
+        console.groupEnd()
+
+        return pokemonBattleStats
+      })
+      console.log(
+        `Best pokemons against ${activeBoss.name}`,
+        orderBy(resultBattle, ["dps"], ["desc"])
       )
-      const activeDefender = getDmgMoves(
-        activeOpponent,
-        activePokemon,
-        activeWeather
-      )
-      console.group(activeAttacker.name)
-      console.log(activeAttacker, activeDefender)
-      const battle = simulateBattle(activeAttacker, activeDefender)
-      console.log(battle)
-      const simulateBattleStats = battleStats(
-        battle,
-        activeAttacker,
-        activeDefender
-      )
-      console.log(simulateBattleStats)
-      console.groupEnd()
     }
-  }, [activePokemon, activeOpponent, activeWeather])
+  }, [activeBoss, activeWeather])
 
   // TODO watch if memo can be useful
   return (
@@ -64,28 +83,22 @@ const App = () => {
       <div className="flex flex-row overflow-auto scroll">
         <div className="flex flex-col pr-4">
           <PokemonCategory title="Pokedex">
-            {POKEMON_MOCK.map(pokemon => {
-              const stats = pokemonStats(CP_MULTIPLIER, pokemon)
-              return (
-                <PokemonStatCard
-                  key={pokemon.id}
-                  pokemon={{ stats, ...pokemon }}
-                  click={setActivePokemon}
-                />
-              )
+            {pokemons.map(pokemon => {
+              return <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
             })}
           </PokemonCategory>
         </div>
+
         <div className="flex flex-col">
           <PokemonCategory title="Boss">
-            {BOSS_MOCK.map(pokemon => {
-              const stats = pokemonStats(CP_MULTIPLIER, pokemon)
+            {bosses.map(boss => {
               return (
                 <PokemonStatCard
-                  key={pokemon.id}
-                  pokemon={{ stats, ...pokemon }}
-                  click={setActiveOpponent}
+                  key={boss.id}
+                  pokemon={boss}
+                  click={setActiveBoss}
                   theme="red"
+                  className="cursor-pointer"
                 />
               )
             })}
