@@ -1,5 +1,7 @@
 import {
   TIMER_BATTLE,
+  POKEMON,
+  BOSS,
   QUICK_ATK_ATTACKER,
   CHARGED_ATK_ATTACKER,
   QUICK_ATK_DEFENDER,
@@ -158,4 +160,54 @@ export const simulateBattle = (attacker, defender) => {
     }
   }
   return logBattle
+}
+
+const getNumberAtk = (battle, type) =>
+  battle.reduce(
+    (accumulator, event) =>
+      event.type === type ? accumulator + 1 : accumulator,
+    0
+  )
+
+/**
+ * Get stats : Total Dmg, LifeTime, Number Atk, Dps Atk
+ * @param {*} battle
+ * @param {number} opponent
+ */
+export const simulateBattleStats = (
+  type = POKEMON,
+  pokemonId,
+  battle,
+  opponent
+) => {
+  let totalDmg
+  const lastLog = battle[battle.length - 1]
+  const battleDuration = (TIMER_BATTLE - lastLog.time) / 1000
+  const lifeTime = battleDuration
+
+  switch (type) {
+    case POKEMON:
+      totalDmg = opponent.stats.stamina - lastLog.stateBattle.defHp
+      return {
+        pokemonId,
+        totalDmg,
+        lifeTime,
+        nbQuickAtk: getNumberAtk(battle, QUICK_ATK_ATTACKER),
+        nbChargedAtk: getNumberAtk(battle, CHARGED_ATK_ATTACKER),
+        dps: totalDmg / lifeTime,
+      }
+    case BOSS:
+      totalDmg = opponent.stats.stamina - lastLog.stateBattle.attHp
+      return {
+        pokemonId,
+        totalDmg,
+        lifeTime,
+        nbQuickAtk: getNumberAtk(battle, QUICK_ATK_DEFENDER),
+        nbChargedAtk: getNumberAtk(battle, CHARGED_ATK_DEFENDER),
+        dps: totalDmg / lifeTime,
+      }
+    default: {
+      throw new Error(`Unhandled type: ${type}`)
+    }
+  }
 }
