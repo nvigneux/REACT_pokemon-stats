@@ -54,10 +54,8 @@ export const WEATHERS = {
   none: [],
 }
 
-export const IMG_URL =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-
-export const IMG_FORMAT = ".png"
+export const POKEMON = "pokemon"
+export const BOSS = "boss"
 
 const TIME_LIMIT = 180
 export const TIMER_BATTLE = TIME_LIMIT * 1000 // fight duration : 180000ms
@@ -65,3 +63,7 @@ export const QUICK_ATK_ATTACKER = "Attacker Quick"
 export const CHARGED_ATK_ATTACKER = "Attacker Charged"
 export const QUICK_ATK_DEFENDER = "Defender Quick"
 export const CHARGED_ATK_DEFENDER = "Defender Charged"
+
+export const IMG_FORMAT = ".png"
+export const IMG_URL =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
