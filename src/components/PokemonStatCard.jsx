@@ -8,7 +8,7 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
   <button
     type="button"
     key={pokemon.id}
-    className={`max-w-xs flex flex-col items-center text-center rounded m-2 mb-4 cursor-pointer py-2 bg-${theme}-300 hover:bg-${theme}-400 `}
+    className={`max-w-xs flex flex-col items-center text-center rounded m-2 mb-4 py-2 bg-${theme}-300 hover:bg-${theme}-400 `}
     onClick={() => click(pokemon)}
   >
     <div className="flex-shrink-0">
