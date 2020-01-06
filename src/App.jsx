@@ -10,7 +10,7 @@ import { getDmgMoves } from "./utils/dps"
 
 import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
-import { MOVES } from "./moves"
+import { QUICK_MOVES, CHARGED_MOVES } from "./moves"
 import { CP_MULTIPLIER, WEATHERS, POKEMON } from "./constant"
 
 import "./styles.css"
@@ -31,8 +31,12 @@ const App = () => {
 
   const buildPokemons = sourcePokemons =>
     sourcePokemons.map(pokemon => {
-      const moveQuick = MOVES.find(item => item.id === pokemon.moves.quick)
-      const moveCharged = MOVES.find(item => item.id === pokemon.moves.charged)
+      const moveQuick = QUICK_MOVES.find(
+        item => item.id === pokemon.moves.quick
+      )
+      const moveCharged = CHARGED_MOVES.find(
+        item => item.id === pokemon.moves.charged
+      )
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
       return {
         ...pokemon,

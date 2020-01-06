@@ -70,12 +70,12 @@ PokemonsStatCard.propTypes = {
         name: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         power: PropTypes.number.isRequired,
-      }).isRequired,
+      }),
       charged: PropTypes.shape({
         name: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         power: PropTypes.number.isRequired,
-      }).isRequired,
+      }),
     }).isRequired,
     stats: PropTypes.shape({
       cp: PropTypes.number.isRequired,
