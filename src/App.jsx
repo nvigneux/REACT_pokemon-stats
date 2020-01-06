@@ -31,28 +31,29 @@ const App = () => {
 
   // Add stats to each pokemons & bosses
   useEffect(() => {
-    const pokemonsWithMoves = POKEMON_MOCK.map(pokemon => {
+    const pokemonsWithStatsAndMoves = POKEMON_MOCK.map(pokemon => {
       const moveQuick = MOVES.find(item => item.id === pokemon.moves.quick)
       const moveCharged = MOVES.find(item => item.id === pokemon.moves.charged)
-      return { ...pokemon, moves: { quick: moveQuick, charged: moveCharged } }
+      const stats = pokemonStats(CP_MULTIPLIER, pokemon)
+      return {
+        ...pokemon,
+        stats,
+        moves: { quick: moveQuick, charged: moveCharged },
+      }
     })
-    const bossesWithMoves = BOSS_MOCK.map(boss => {
+    const bossesWithStatsAndMoves = BOSS_MOCK.map(boss => {
       const moveQuick = MOVES.find(item => item.id === boss.moves.quick)
       const moveCharged = MOVES.find(item => item.id === boss.moves.charged)
-      return { ...boss, moves: { quick: moveQuick, charged: moveCharged } }
-    })
-
-    const pokemonsWithStats = pokemonsWithMoves.map(pokemon => {
-      const stats = pokemonStats(CP_MULTIPLIER, pokemon)
-      return { stats, ...pokemon }
-    })
-    const bossesWithStats = bossesWithMoves.map(boss => {
       const stats = pokemonStats(CP_MULTIPLIER, boss)
-      return { stats, ...boss }
+      return {
+        ...boss,
+        stats,
+        moves: { quick: moveQuick, charged: moveCharged },
+      }
     })
 
-    setPokemons(pokemonsWithStats)
-    setBosses(bossesWithStats)
+    setPokemons(pokemonsWithStatsAndMoves)
+    setBosses(bossesWithStatsAndMoves)
   }, [])
 
   useEffect(() => {
