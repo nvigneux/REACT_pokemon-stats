@@ -57,6 +57,9 @@ export const WEATHERS = {
 export const POKEMON = "pokemon"
 export const BOSS = "boss"
 
+export const QUICK = "quick"
+export const CHARGED = "charged"
+
 const TIME_LIMIT = 180
 export const TIMER_BATTLE = TIME_LIMIT * 1000 // fight duration : 180000ms
 export const QUICK_ATK_ATTACKER = "Attacker Quick"
