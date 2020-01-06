@@ -8,7 +8,6 @@ export const QUICK_MOVES = [
     power: 12,
     execTime: 0.9,
     energyGen: 8,
-    energyReq: null,
   },
   {
     id: 3,
@@ -17,7 +16,6 @@ export const QUICK_MOVES = [
     power: 6,
     execTime: 0.5,
     energyGen: 4,
-    energyReq: null,
   },
   {
     id: 5,
@@ -26,7 +24,6 @@ export const QUICK_MOVES = [
     power: 5,
     execTime: 0.5,
     energyGen: 5,
-    energyReq: null,
   },
   {
     id: 7,
@@ -35,7 +32,6 @@ export const QUICK_MOVES = [
     power: 10,
     execTime: 0.8,
     energyGen: 7,
-    energyReq: null,
   },
   {
     id: 8,
@@ -44,7 +40,6 @@ export const QUICK_MOVES = [
     power: 20,
     execTime: 1.6,
     energyGen: 15,
-    energyReq: null,
   },
   {
     id: 10,
@@ -53,7 +48,6 @@ export const QUICK_MOVES = [
     power: 16,
     execTime: 1.2,
     energyGen: 8,
-    energyReq: null,
   },
   {
     id: 12,
@@ -62,7 +56,6 @@ export const QUICK_MOVES = [
     power: 15,
     execTime: 1.1,
     energyGen: 9,
-    energyReq: null,
   },
 ]
 
@@ -73,7 +66,6 @@ export const CHARGED_MOVES = [
     name: "Dynamopoing",
     power: 90,
     execTime: 2.7,
-    energyGen: null,
     energyReq: 50,
   },
   {
@@ -82,7 +74,6 @@ export const CHARGED_MOVES = [
     name: "Dracogriffe",
     power: 50,
     execTime: 1.7,
-    energyGen: null,
     energyReq: 33,
   },
   {
@@ -91,7 +82,6 @@ export const CHARGED_MOVES = [
     name: "Hydracanon",
     power: 130,
     execTime: 3.3,
-    energyGen: null,
     energyReq: 100,
   },
   {
@@ -100,7 +90,6 @@ export const CHARGED_MOVES = [
     name: "Colère",
     power: 110,
     execTime: 3.9,
-    energyGen: null,
     energyReq: 50,
   },
   {
@@ -109,7 +98,6 @@ export const CHARGED_MOVES = [
     name: "Frappe Psy",
     power: 90,
     execTime: 2.3,
-    energyGen: null,
     energyReq: 50,
   },
   {
@@ -118,7 +106,6 @@ export const CHARGED_MOVES = [
     name: "Lame de Roc",
     power: 100,
     execTime: 2.3,
-    energyGen: null,
     energyReq: 100,
   },
   {
@@ -127,7 +114,6 @@ export const CHARGED_MOVES = [
     name: "Psyko",
     power: 90,
     execTime: 2.8,
-    energyGen: null,
     energyReq: 50,
   },
 ]
