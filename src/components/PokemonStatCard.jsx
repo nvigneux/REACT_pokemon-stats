@@ -4,6 +4,18 @@ import PropTypes from "prop-types"
 
 import { IMG_URL, IMG_FORMAT } from "../constant"
 
+const PokemonMove = ({ move }) => {
+  return move ? (
+    <div className="flex flex-row items-center justify-between text-left px-5 pt-2">
+      <div className="flex flex-col">
+        <span className="text-xs text-gray-800">{move.name}</span>
+        <span className="text-xs italic text-gray-800">{move.type}</span>
+      </div>
+      <span className="text-sm text-gray-800">{move.power}</span>
+    </div>
+  ) : null
+}
+
 const PokemonsStatCard = ({ pokemon, click, theme }) => (
   <button
     type="button"
@@ -36,32 +48,8 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
         `}
         </li>
       </ul>
-      <div className="flex flex-row items-center justify-between text-left px-5 pt-2">
-        <div className="flex flex-col">
-          <span className="text-xs text-gray-800">
-            {pokemon.moves.quick.name}
-          </span>
-          <span className="text-xs italic text-gray-800">
-            {pokemon.moves.quick.type}
-          </span>
-        </div>
-        <span className="text-sm text-gray-800">
-          {pokemon.moves.quick.power}
-        </span>
-      </div>
-      <div className="flex flex-row items-center justify-between text-left px-5 pt-1">
-        <div className="flex flex-col">
-          <span className="text-xs text-gray-800">
-            {pokemon.moves.charged.name}
-          </span>
-          <span className="text-xs italic text-gray-800">
-            {pokemon.moves.charged.type}
-          </span>
-        </div>
-        <span className="text-sm text-gray-800">
-          {pokemon.moves.charged.power}
-        </span>
-      </div>
+      <PokemonMove move={pokemon.moves.quick} />
+      <PokemonMove move={pokemon.moves.charged} />
     </div>
   </button>
 )
