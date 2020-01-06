@@ -10,6 +10,7 @@ import { getDmgMoves } from "./utils/dps"
 
 import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
+import { MOVES } from "./moves"
 import { CP_MULTIPLIER, WEATHERS, POKEMON } from "./constant"
 
 import "./styles.css"
@@ -30,14 +31,26 @@ const App = () => {
 
   // Add stats to each pokemons & bosses
   useEffect(() => {
-    const pokemonsWithStats = POKEMON_MOCK.map(pokemon => {
+    const pokemonsWithMoves = POKEMON_MOCK.map(pokemon => {
+      const moveQuick = MOVES.find(item => item.id === pokemon.moves.quick)
+      const moveCharged = MOVES.find(item => item.id === pokemon.moves.charged)
+      return { ...pokemon, moves: { quick: moveQuick, charged: moveCharged } }
+    })
+    const bossesWithMoves = BOSS_MOCK.map(boss => {
+      const moveQuick = MOVES.find(item => item.id === boss.moves.quick)
+      const moveCharged = MOVES.find(item => item.id === boss.moves.charged)
+      return { ...boss, moves: { quick: moveQuick, charged: moveCharged } }
+    })
+
+    const pokemonsWithStats = pokemonsWithMoves.map(pokemon => {
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
       return { stats, ...pokemon }
     })
-    const bossesWithStats = BOSS_MOCK.map(boss => {
+    const bossesWithStats = bossesWithMoves.map(boss => {
       const stats = pokemonStats(CP_MULTIPLIER, boss)
       return { stats, ...boss }
     })
+
     setPokemons(pokemonsWithStats)
     setBosses(bossesWithStats)
   }, [])
