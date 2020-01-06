@@ -13,22 +13,8 @@ export const POKEMON_MOCK = [
     individualDefense: 15,
     individualStamina: 15,
     moves: {
-      quick: {
-        type: TYPES.FIGHTING,
-        name: "Riposte",
-        power: 12,
-        execTime: 0.9,
-        energyGen: 8,
-        energyReq: null,
-      },
-      charged: {
-        type: TYPES.FIGHTING,
-        name: "Dynamopoing",
-        power: 90,
-        execTime: 2.7,
-        energyGen: null,
-        energyReq: 50,
-      },
+      quick: 1,
+      charged: 2,
     },
   },
   {
@@ -43,22 +29,8 @@ export const POKEMON_MOCK = [
     individualDefense: 15,
     individualStamina: 15,
     moves: {
-      quick: {
-        type: TYPES.FIGHTING,
-        name: "Riposte",
-        power: 12,
-        execTime: 0.9,
-        energyGen: 8,
-        energyReq: null,
-      },
-      charged: {
-        type: TYPES.FIGHTING,
-        name: "Dynamopoing",
-        power: 90,
-        execTime: 2.7,
-        energyGen: null,
-        energyReq: 50,
-      },
+      quick: 1,
+      charged: 2,
     },
   },
   {
@@ -73,22 +45,8 @@ export const POKEMON_MOCK = [
     individualDefense: 12,
     individualStamina: 11,
     moves: {
-      quick: {
-        type: TYPES.DRAGON,
-        name: "Dracosouffle",
-        power: 6,
-        execTime: 0.5,
-        energyGen: 4,
-        energyReq: null,
-      },
-      charged: {
-        type: TYPES.DRAGON,
-        name: "Dracogriffe",
-        power: 50,
-        execTime: 1.7,
-        energyGen: null,
-        energyReq: 33,
-      },
+      quick: 3,
+      charged: 4,
     },
   },
   {
@@ -103,22 +61,8 @@ export const POKEMON_MOCK = [
     individualDefense: 11,
     individualStamina: 9,
     moves: {
-      quick: {
-        type: TYPES.WATER,
-        name: "Pistolet à O",
-        power: 5,
-        execTime: 0.5,
-        energyGen: 5,
-        energyReq: null,
-      },
-      charged: {
-        type: TYPES.WATER,
-        name: "Hydracanon",
-        power: 130,
-        execTime: 3.3,
-        energyGen: null,
-        energyReq: 100,
-      },
+      quick: 5,
+      charged: 6,
     },
   },
 ]
