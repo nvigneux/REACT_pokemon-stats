@@ -3,6 +3,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { IMG_URL, IMG_FORMAT } from "../constant"
+import { Pokemon } from "../types/pokemon"
 
 const PokemonMove = ({ move }) => {
   return move ? (
@@ -55,36 +56,7 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
 )
 
 PokemonsStatCard.propTypes = {
-  pokemon: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    level: PropTypes.number.isRequired,
-    baseAttack: PropTypes.number.isRequired,
-    baseDefense: PropTypes.number.isRequired,
-    baseStamina: PropTypes.number.isRequired,
-    individualAttack: PropTypes.number.isRequired,
-    individualDefense: PropTypes.number.isRequired,
-    individualStamina: PropTypes.number.isRequired,
-    moves: PropTypes.shape({
-      quick: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        power: PropTypes.number.isRequired,
-      }),
-      charged: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        power: PropTypes.number.isRequired,
-      }),
-    }).isRequired,
-    stats: PropTypes.shape({
-      cp: PropTypes.number.isRequired,
-      iv: PropTypes.number.isRequired,
-      attack: PropTypes.number.isRequired,
-      defense: PropTypes.number.isRequired,
-      stamina: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
+  pokemon: Pokemon.isRequired,
   click: PropTypes.func,
   theme: PropTypes.string,
 }
