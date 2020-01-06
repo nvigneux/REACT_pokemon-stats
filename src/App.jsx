@@ -29,9 +29,8 @@ const App = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
-  // Add stats to each pokemons & bosses
-  useEffect(() => {
-    const pokemonsWithStatsAndMoves = POKEMON_MOCK.map(pokemon => {
+  const buildPokemons = sourcePokemons =>
+    sourcePokemons.map(pokemon => {
       const moveQuick = MOVES.find(item => item.id === pokemon.moves.quick)
       const moveCharged = MOVES.find(item => item.id === pokemon.moves.charged)
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
@@ -41,19 +40,11 @@ const App = () => {
         moves: { quick: moveQuick, charged: moveCharged },
       }
     })
-    const bossesWithStatsAndMoves = BOSS_MOCK.map(boss => {
-      const moveQuick = MOVES.find(item => item.id === boss.moves.quick)
-      const moveCharged = MOVES.find(item => item.id === boss.moves.charged)
-      const stats = pokemonStats(CP_MULTIPLIER, boss)
-      return {
-        ...boss,
-        stats,
-        moves: { quick: moveQuick, charged: moveCharged },
-      }
-    })
 
-    setPokemons(pokemonsWithStatsAndMoves)
-    setBosses(bossesWithStatsAndMoves)
+  // Add stats to each pokemons & bosses
+  useEffect(() => {
+    setPokemons(buildPokemons(POKEMON_MOCK))
+    setBosses(buildPokemons(BOSS_MOCK))
   }, [])
 
   useEffect(() => {
