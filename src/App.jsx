@@ -78,7 +78,7 @@ const App = () => {
         orderBy(resultBattle, ["dps"], ["desc"])
       )
     }
-  }, [activeBoss, activeWeather])
+  }, [pokemons, activeBoss, activeWeather])
 
   // TODO watch if memo can be useful
   return (
