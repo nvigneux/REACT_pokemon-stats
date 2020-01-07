@@ -29,13 +29,12 @@ const App = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
-  const fakeMovesQuick = keyBy(generateFakeMoves(100), "id")
-  const fakeMovesCharged = keyBy(generateFakeMoves(100), "id")
+  const fakeMovesQuick = keyBy(generateFakeMoves(200), "id")
 
   const buildPokemons = sourcePokemons =>
     sourcePokemons.map(pokemon => {
       const moveQuick = fakeMovesQuick[pokemon.moves.quick]
-      const moveCharged = fakeMovesCharged[pokemon.moves.charged]
+      const moveCharged = fakeMovesQuick[pokemon.moves.charged]
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
       return {
         ...pokemon,
