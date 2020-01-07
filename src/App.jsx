@@ -11,7 +11,8 @@ import { getDmgMoves } from "./utils/dps"
 import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
 import { QUICK_MOVES, CHARGED_MOVES } from "./moves"
-import { CP_MULTIPLIER, WEATHERS, POKEMON } from "./constant"
+import { CP_MULTIPLIER } from "./cpMultiplier"
+import { WEATHERS, POKEMON } from "./constant"
 
 import "./styles.css"
 
