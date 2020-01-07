@@ -91,8 +91,8 @@ export const generateFakePokemons = number => {
       individualDefense: getRandomInt(0, 15),
       individualStamina: getRandomInt(0, 15),
       moves: {
-        quick: getRandomInt(1, 199),
-        charged: getRandomInt(1, 199),
+        quick: getRandomInt(1, 99),
+        charged: getRandomInt(1, 99),
       },
     })
   }
