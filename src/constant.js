@@ -1,15 +1,3 @@
-export const WEATHERS = {
-  sunny: ["fire", "ground", "grass"],
-  clear: ["fire", "ground", "grass"],
-  partly_cloudy: ["normal", "rock"],
-  cloudy: ["fairy", "fighting", "poison"],
-  rain: ["water", "electric", "bug"],
-  snow: ["ice", "steel"],
-  windy: ["dragon", "flying", "psychic"],
-  foggy: ["ghost", "dark"],
-  none: [],
-}
-
 export const POKEMON = "pokemon"
 export const BOSS = "boss"
 

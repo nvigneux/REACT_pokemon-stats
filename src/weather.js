@@ -1,0 +1,32 @@
+import {
+  BUG,
+  DARK,
+  DRAGON,
+  ELECTRIC,
+  FAIRY,
+  FIGHTING,
+  FIRE,
+  FLYING,
+  GHOST,
+  GRASS,
+  GROUND,
+  ICE,
+  NORMAL,
+  POISON,
+  PSYCHIC,
+  ROCK,
+  STEEL,
+  WATER,
+} from "./types"
+
+export const WEATHERS = {
+  sunny: [FIRE, GROUND, GRASS],
+  clear: [FIRE, GROUND, GRASS],
+  partly_cloudy: [NORMAL, ROCK],
+  cloudy: [FAIRY, FIGHTING, POISON],
+  rain: [WATER, ELECTRIC, BUG],
+  snow: [ICE, STEEL],
+  windy: [DRAGON, FLYING, PSYCHIC],
+  foggy: [GHOST, DARK],
+  none: [],
+}

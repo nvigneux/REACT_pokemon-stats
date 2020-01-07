@@ -12,7 +12,8 @@ import { POKEMON_MOCK } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
 import { QUICK_MOVES, CHARGED_MOVES } from "./moves"
 import { CP_MULTIPLIER } from "./cpMultiplier"
-import { WEATHERS, POKEMON } from "./constant"
+import { WEATHERS } from "./weather"
+import { POKEMON } from "./constant"
 
 import "./styles.css"
 
