@@ -1,10 +1,29 @@
-import * as TYPES from "../types"
+import {
+  // BUG,
+  DARK,
+  DRAGON,
+  // ELECTRIC,
+  // FAIRY,
+  // FIGHTING,
+  // FIRE,
+  FLYING,
+  // GHOST,
+  // GRASS,
+  // GROUND,
+  // ICE,
+  // NORMAL,
+  POISON,
+  PSYCHIC,
+  ROCK,
+  // STEEL,
+  WATER,
+} from "../types"
 
 export const BOSS_MOCK = [
   {
     id: 73,
     name: "Tentacruel",
-    type: [TYPES.WATER, TYPES.POISON],
+    type: [WATER, POISON],
     level: 41,
     baseAttack: 166,
     baseDefense: 209,
@@ -20,7 +39,7 @@ export const BOSS_MOCK = [
   {
     id: 196,
     name: "Mentali",
-    type: [TYPES.PSYCHIC],
+    type: [PSYCHIC],
     level: 41,
     baseAttack: 261,
     baseDefense: 175,
@@ -36,7 +55,7 @@ export const BOSS_MOCK = [
   {
     id: 248,
     name: "Tyranocif",
-    type: [TYPES.DARK, TYPES.ROCK],
+    type: [DARK, ROCK],
     level: 41,
     baseAttack: 251,
     baseDefense: 207,
@@ -52,7 +71,7 @@ export const BOSS_MOCK = [
   {
     id: 384,
     name: "Rayquaza",
-    type: [TYPES.DRAGON, TYPES.FLYING],
+    type: [DRAGON, FLYING],
     level: 41,
     baseAttack: 284,
     baseDefense: 170,
@@ -68,7 +87,7 @@ export const BOSS_MOCK = [
   {
     id: 150,
     name: "MewTwo",
-    type: [TYPES.PSYCHIC],
+    type: [PSYCHIC],
     level: 41,
     baseAttack: 300,
     baseDefense: 182,

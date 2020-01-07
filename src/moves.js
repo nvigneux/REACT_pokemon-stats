@@ -1,9 +1,28 @@
-import * as TYPES from "./types"
+import {
+  // BUG,
+  // DARK,
+  DRAGON,
+  // ELECTRIC,
+  // FAIRY,
+  FIGHTING,
+  // FIRE,
+  // FLYING,
+  // GHOST,
+  // GRASS,
+  // GROUND,
+  // ICE,
+  // NORMAL,
+  POISON,
+  PSYCHIC,
+  ROCK,
+  // STEEL,
+  WATER,
+} from "./types"
 
 export const QUICK_MOVES = [
   {
     id: 1,
-    type: TYPES.FIGHTING,
+    type: FIGHTING,
     name: "Riposte",
     power: 12,
     execTime: 0.9,
@@ -11,7 +30,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 3,
-    type: TYPES.DRAGON,
+    type: DRAGON,
     name: "Dracosouffle",
     power: 6,
     execTime: 0.5,
@@ -19,7 +38,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 5,
-    type: TYPES.WATER,
+    type: WATER,
     name: "Pistolet à O",
     power: 5,
     execTime: 0.5,
@@ -27,7 +46,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 7,
-    type: TYPES.POISON,
+    type: POISON,
     name: "Direct Toxik",
     power: 10,
     execTime: 0.8,
@@ -35,7 +54,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 8,
-    type: TYPES.PSYCHIC,
+    type: PSYCHIC,
     name: "Choc Mental",
     power: 20,
     execTime: 1.6,
@@ -43,7 +62,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 10,
-    type: TYPES.ROCK,
+    type: ROCK,
     name: "Anti-Air",
     power: 16,
     execTime: 1.2,
@@ -51,7 +70,7 @@ export const QUICK_MOVES = [
   },
   {
     id: 12,
-    type: TYPES.DRAGON,
+    type: DRAGON,
     name: "Draco-Queue",
     power: 15,
     execTime: 1.1,
@@ -62,7 +81,7 @@ export const QUICK_MOVES = [
 export const CHARGED_MOVES = [
   {
     id: 2,
-    type: TYPES.FIGHTING,
+    type: FIGHTING,
     name: "Dynamopoing",
     power: 90,
     execTime: 2.7,
@@ -70,7 +89,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 4,
-    type: TYPES.DRAGON,
+    type: DRAGON,
     name: "Dracogriffe",
     power: 50,
     execTime: 1.7,
@@ -78,7 +97,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 6,
-    type: TYPES.WATER,
+    type: WATER,
     name: "Hydracanon",
     power: 130,
     execTime: 3.3,
@@ -86,7 +105,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 13,
-    type: TYPES.DRAGON,
+    type: DRAGON,
     name: "Colère",
     power: 110,
     execTime: 3.9,
@@ -94,7 +113,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 14,
-    type: TYPES.PSYCHIC,
+    type: PSYCHIC,
     name: "Frappe Psy",
     power: 90,
     execTime: 2.3,
@@ -102,7 +121,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 11,
-    type: TYPES.ROCK,
+    type: ROCK,
     name: "Lame de Roc",
     power: 100,
     execTime: 2.3,
@@ -110,7 +129,7 @@ export const CHARGED_MOVES = [
   },
   {
     id: 9,
-    type: TYPES.PSYCHIC,
+    type: PSYCHIC,
     name: "Psyko",
     power: 90,
     execTime: 2.8,

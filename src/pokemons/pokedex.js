@@ -1,10 +1,29 @@
-import * as TYPES from "../types"
+import {
+  // BUG,
+  // DARK,
+  DRAGON,
+  // ELECTRIC,
+  // FAIRY,
+  FIGHTING,
+  // FIRE,
+  FLYING,
+  // GHOST,
+  // GRASS,
+  // GROUND,
+  // ICE,
+  // NORMAL,
+  // POISON,
+  // PSYCHIC,
+  // ROCK,
+  // STEEL,
+  WATER,
+} from "../types"
 
 export const POKEMON_MOCK = [
   {
     id: 68,
     name: "Mackogneur",
-    type: [TYPES.FIGHTING],
+    type: [FIGHTING],
     level: 40,
     baseAttack: 234,
     baseDefense: 159,
@@ -20,7 +39,7 @@ export const POKEMON_MOCK = [
   {
     id: 297,
     name: "Hariyama",
-    type: [TYPES.FIGHTING],
+    type: [FIGHTING],
     level: 40,
     baseAttack: 209,
     baseDefense: 114,
@@ -36,7 +55,7 @@ export const POKEMON_MOCK = [
   {
     id: 149,
     name: "Dracolosse",
-    type: [TYPES.DRAGON, TYPES.FLYING],
+    type: [DRAGON, FLYING],
     level: 29,
     baseAttack: 263,
     baseDefense: 198,
@@ -52,7 +71,7 @@ export const POKEMON_MOCK = [
   {
     id: 134,
     name: "Aquali",
-    type: [TYPES.WATER],
+    type: [WATER],
     level: 28,
     baseAttack: 205,
     baseDefense: 161,
