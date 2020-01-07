@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { orderBy } from "lodash"
+import { orderBy, keyBy } from "lodash"
 
 import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
@@ -29,17 +29,13 @@ const App = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
-  const fakeMovesQuick = generateFakeMoves(100)
-  const fakeMovesCharged = generateFakeMoves(100)
+  const fakeMovesQuick = keyBy(generateFakeMoves(100), "id")
+  const fakeMovesCharged = keyBy(generateFakeMoves(100), "id")
 
   const buildPokemons = sourcePokemons =>
     sourcePokemons.map(pokemon => {
-      const moveQuick = fakeMovesQuick.find(
-        item => item.id === pokemon.moves.quick
-      )
-      const moveCharged = fakeMovesCharged.find(
-        item => item.id === pokemon.moves.charged
-      )
+      const moveQuick = fakeMovesQuick[pokemon.moves.quick]
+      const moveCharged = fakeMovesCharged[pokemon.moves.charged]
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
       return {
         ...pokemon,
