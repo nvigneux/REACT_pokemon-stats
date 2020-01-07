@@ -20,7 +20,6 @@ const PokemonMove = ({ move }) => {
 const PokemonsStatCard = ({ pokemon, click, theme }) => (
   <button
     type="button"
-    key={pokemon.id}
     className={`max-w-xs flex flex-col items-center text-center rounded m-2 mb-4 py-2 bg-${theme}-300 hover:bg-${theme}-400 `}
     onClick={() => click(pokemon)}
   >
@@ -33,7 +32,7 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
     </div>
     <div className="flex-auto">
       <div className="flex flex-col pb-1">
-        <h1 className="w-40 min-w-full text-base text-gray-900 font-medium">
+        <h1 className="w-40 min-w-full text-base text-gray-900 font-medium capitalize">
           {`${pokemon.name} `}
           <span className="text-xs font-normal">{pokemon.stats.iv}%</span>
         </h1>

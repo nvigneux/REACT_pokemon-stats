@@ -13,8 +13,8 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: 7,
-      charged: 6,
+      quick: 4,
+      charged: 10,
     },
   },
   {
@@ -29,8 +29,8 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: 8,
-      charged: 9,
+      quick: 5,
+      charged: 12,
     },
   },
   {
@@ -45,8 +45,8 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: 10,
-      charged: 11,
+      quick: 6,
+      charged: 13,
     },
   },
   {
@@ -61,8 +61,8 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: 12,
-      charged: 13,
+      quick: 7,
+      charged: 11,
     },
   },
   {
@@ -77,7 +77,7 @@ export const BOSS_MOCK = [
     individualDefense: 15,
     individualStamina: 0,
     moves: {
-      quick: 8,
+      quick: 5,
       charged: 14,
     },
   },

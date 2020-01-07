@@ -14,7 +14,7 @@ export const POKEMON_MOCK = [
     individualStamina: 15,
     moves: {
       quick: 1,
-      charged: 2,
+      charged: 8,
     },
   },
   {
@@ -30,7 +30,7 @@ export const POKEMON_MOCK = [
     individualStamina: 15,
     moves: {
       quick: 1,
-      charged: 2,
+      charged: 8,
     },
   },
   {
@@ -46,7 +46,7 @@ export const POKEMON_MOCK = [
     individualStamina: 11,
     moves: {
       quick: 3,
-      charged: 4,
+      charged: 9,
     },
   },
   {
@@ -61,8 +61,40 @@ export const POKEMON_MOCK = [
     individualDefense: 11,
     individualStamina: 9,
     moves: {
-      quick: 5,
-      charged: 6,
+      quick: 3,
+      charged: 10,
     },
   },
 ]
+
+const getRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min)
+
+const getRandomString = length => {
+  const chars = [..."abcdefghijklmnopqrstuvwxyz"]
+  return [...Array(length)].map(() => chars[getRandomInt(0, chars.length)])
+    .join``
+}
+
+export const generateFakePokemons = number => {
+  const arrayFakePokemons = []
+  for (let i = 0; i < number; i += 1) {
+    arrayFakePokemons.push({
+      id: getRandomInt(1, 450),
+      name: getRandomString(getRandomInt(5, 10)),
+      type: [TYPES.DRAGON, TYPES.FLYING],
+      level: getRandomInt(20, 40),
+      baseAttack: getRandomInt(150, 280),
+      baseDefense: getRandomInt(150, 280),
+      baseStamina: getRandomInt(150, 280),
+      individualAttack: getRandomInt(0, 15),
+      individualDefense: getRandomInt(0, 15),
+      individualStamina: getRandomInt(0, 15),
+      moves: {
+        quick: getRandomInt(1, 199),
+        charged: getRandomInt(1, 199),
+      },
+    })
+  }
+  return arrayFakePokemons
+}

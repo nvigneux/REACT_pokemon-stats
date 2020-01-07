@@ -8,9 +8,9 @@ import { simulateBattle, simulateBattleStats } from "./utils/battle"
 import { pokemonStats } from "./utils/stats"
 import { getDmgMoves } from "./utils/dps"
 
-import { POKEMON_MOCK } from "./pokemons/pokedex"
+import { POKEMON_MOCK, generateFakePokemons } from "./pokemons/pokedex"
 import { BOSS_MOCK } from "./pokemons/boss"
-import { QUICK_MOVES, CHARGED_MOVES } from "./moves"
+import { QUICK_MOVES, CHARGED_MOVES, generateFakeMoves } from "./moves"
 import { CP_MULTIPLIER, WEATHERS, POKEMON } from "./constant"
 
 import "./styles.css"
@@ -29,12 +29,12 @@ const App = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
+  const fakeMoves = generateFakeMoves(200)
+
   const buildPokemons = sourcePokemons =>
     sourcePokemons.map(pokemon => {
-      const moveQuick = QUICK_MOVES.find(
-        item => item.id === pokemon.moves.quick
-      )
-      const moveCharged = CHARGED_MOVES.find(
+      const moveQuick = fakeMoves.find(item => item.id === pokemon.moves.quick)
+      const moveCharged = fakeMoves.find(
         item => item.id === pokemon.moves.charged
       )
       const stats = pokemonStats(CP_MULTIPLIER, pokemon)
@@ -47,8 +47,12 @@ const App = () => {
 
   // Add stats to each pokemons & bosses
   useEffect(() => {
-    setPokemons(buildPokemons(POKEMON_MOCK))
-    setBosses(buildPokemons(BOSS_MOCK))
+    const number = 3000
+    const fakePokemons = generateFakePokemons(number)
+    const fakeBoss = generateFakePokemons(number)
+    console.log(fakePokemons)
+    setPokemons(buildPokemons(fakePokemons))
+    setBosses(buildPokemons(fakeBoss))
   }, [])
 
   useEffect(() => {
@@ -91,19 +95,24 @@ const App = () => {
 
       <div className="flex flex-row overflow-auto scroll">
         <div className="flex flex-col pr-4">
-          <PokemonCategory title="Pokedex">
+          {/* <PokemonCategory title="Pokedex">
             {pokemons.map(pokemon => {
-              return <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
+              return (
+                <PokemonStatCard
+                  key={`${pokemon.id + pokemon.name}`}
+                  pokemon={pokemon}
+                />
+              )
             })}
-          </PokemonCategory>
+          </PokemonCategory> */}
         </div>
 
         <div className="flex flex-col">
-          <PokemonCategory title="Boss">
+          {/* <PokemonCategory title="Boss">
             {bosses.map(boss => {
               return (
                 <PokemonStatCard
-                  key={boss.id}
+                  key={`${boss.id + boss.name}`}
                   pokemon={boss}
                   click={setActiveBoss}
                   theme="red"
@@ -111,7 +120,7 @@ const App = () => {
                 />
               )
             })}
-          </PokemonCategory>
+          </PokemonCategory> */}
         </div>
       </div>
     </div>
