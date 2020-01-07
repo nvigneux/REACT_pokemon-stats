@@ -1,4 +1,4 @@
-import { WEATHERS } from "../constant"
+import { WEATHERS } from "../constants/weather"
 
 /**
  * Defined the bonus given by the weather

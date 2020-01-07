@@ -1,4 +1,4 @@
-import { TYPES_EFFICIENT } from "../typesEt"
+import { TYPES_EFFICIENT } from "../constants/typesEt"
 
 /**
  * Defined the bonus STAB

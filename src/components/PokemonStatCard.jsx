@@ -2,7 +2,7 @@ import React from "react"
 
 import PropTypes from "prop-types"
 
-import { IMG_URL, IMG_FORMAT } from "../constant"
+import { IMG_URL, IMG_FORMAT } from "../constants/constant"
 import { Pokemon } from "../types/pokemon"
 
 const PokemonMove = ({ move }) => {

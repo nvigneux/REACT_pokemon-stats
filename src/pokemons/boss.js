@@ -17,7 +17,7 @@ import {
   ROCK,
   // STEEL,
   WATER,
-} from "../types"
+} from "../constants/types"
 
 export const BOSS_MOCK = [
   {

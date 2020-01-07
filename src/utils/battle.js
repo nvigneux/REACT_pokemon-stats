@@ -6,7 +6,7 @@ import {
   CHARGED_ATK_ATTACKER,
   QUICK_ATK_DEFENDER,
   CHARGED_ATK_DEFENDER,
-} from "../constant"
+} from "../constants/constant"
 
 const ATT_DELAY = 700
 const DEF_DELAY = 1600
