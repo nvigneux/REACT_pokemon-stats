@@ -1,12 +1,12 @@
-import {
-  TIMER_BATTLE,
-  POKEMON,
-  BOSS,
-  QUICK_ATK_ATTACKER,
-  CHARGED_ATK_ATTACKER,
-  QUICK_ATK_DEFENDER,
-  CHARGED_ATK_DEFENDER,
-} from "../constants/constant"
+const POKEMON = "pokemon"
+const BOSS = "boss"
+
+const TIME_LIMIT = 180
+const TIMER_BATTLE = TIME_LIMIT * 1000 // fight duration : 180000ms
+const QUICK_ATK_ATTACKER = "Attacker Quick"
+const CHARGED_ATK_ATTACKER = "Attacker Charged"
+const QUICK_ATK_DEFENDER = "Defender Quick"
+const CHARGED_ATK_DEFENDER = "Defender Charged"
 
 const ATT_DELAY = 700
 const DEF_DELAY = 1600
