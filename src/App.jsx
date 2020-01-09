@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { orderBy } from "lodash"
+import { orderBy, keyBy } from "lodash"
 
 import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
@@ -31,24 +31,23 @@ const App = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState("sunny")
 
-  const buildPokemons = sourcePokemons =>
-    sourcePokemons.map(pokemon => {
-      const moveQuick = QUICK_MOVES.find(
-        item => item.id === pokemon.moves.quick
-      )
-      const moveCharged = CHARGED_MOVES.find(
-        item => item.id === pokemon.moves.charged
-      )
-      const stats = pokemonStats(CP_MULTIPLIER, pokemon)
-      return {
-        ...pokemon,
-        stats,
-        moves: { quick: moveQuick, charged: moveCharged },
-      }
-    })
-
-  // Add stats to each pokemons & bosses
+  // Add stats & moves to each pokemons & bosses
   useEffect(() => {
+    const quickMoveHashArray = keyBy(QUICK_MOVES, "id")
+    const chargedMoveHashArray = keyBy(CHARGED_MOVES, "id")
+
+    const buildPokemons = sourcePokemons =>
+      sourcePokemons.map(pokemon => {
+        const moveQuick = quickMoveHashArray[pokemon.moves.quick]
+        const moveCharged = chargedMoveHashArray[pokemon.moves.charged]
+        const stats = pokemonStats(CP_MULTIPLIER, pokemon)
+        return {
+          ...pokemon,
+          stats,
+          moves: { quick: moveQuick, charged: moveCharged },
+        }
+      })
+
     setPokemons(buildPokemons(POKEMON_MOCK))
     setBosses(buildPokemons(BOSS_MOCK))
   }, [])
