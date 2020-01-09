@@ -36,7 +36,7 @@ const App = () => {
     const quickMoveHashArray = keyBy(QUICK_MOVES, "id")
     const chargedMoveHashArray = keyBy(CHARGED_MOVES, "id")
 
-    const buildPokemons = sourcePokemons =>
+    const addSupplementDataPokemon = sourcePokemons =>
       sourcePokemons.map(pokemon => {
         const moveQuick = quickMoveHashArray[pokemon.moves.quick]
         const moveCharged = chargedMoveHashArray[pokemon.moves.charged]
@@ -48,8 +48,8 @@ const App = () => {
         }
       })
 
-    setPokemons(buildPokemons(POKEMON_MOCK))
-    setBosses(buildPokemons(BOSS_MOCK))
+    setPokemons(addSupplementDataPokemon(POKEMON_MOCK))
+    setBosses(addSupplementDataPokemon(BOSS_MOCK))
   }, [])
 
   useEffect(() => {
