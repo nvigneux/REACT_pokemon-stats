@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { orderBy, keyBy } from "lodash"
+import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from "formik"
+import { orderBy, keyBy } from "lodash"
 
 import PokemonStatCard from "./components/PokemonStatCard"
 import WeatherSelect from "./components/WeatherSelect"
@@ -121,31 +122,80 @@ const App = () => {
       <div>
         <h1>Any place in your app!</h1>
         <Formik
-          initialValues={{ email: "", password: "" }}
-          validate={values => {
-            const errors = {}
-            if (!values.email) {
-              errors.email = "Required"
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address"
-            }
-            return errors
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
-              setSubmitting(false)
-            }, 400)
+          initialValues={{ id_base_pokemon: 0, name: "" }}
+          onSubmit={(values, actions) => {
+            const type = { type: ["fighting"] }
+            axios({
+              method: "POST",
+              url: "http://localhost:1337/pokemons",
+              data: { ...values, type },
+            })
+              .then(response => {
+                actions.setSubmitting(false)
+                actions.resetForm()
+              })
+              .catch(error => {
+                actions.setSubmitting(false)
+              })
           }}
         >
           {({ isSubmitting }) => (
-            <Form>
-              <Field type="email" name="email" />
-              <ErrorMessage name="email" component="div" />
-              <Field type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
+            <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="id_base_pokemon"
+              >
+                Id Pokemon
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="id_base_pokemon"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="name"
+              >
+                Name
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="name"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="attack"
+              >
+                Attack
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="attack"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="defense"
+              >
+                Defense
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="defense"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="stamina"
+              >
+                Stamina
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="stamina"
+              />
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>
