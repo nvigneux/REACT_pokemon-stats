@@ -122,7 +122,13 @@ const App = () => {
       <div>
         <h1>Any place in your app!</h1>
         <Formik
-          initialValues={{ id_base_pokemon: 0, name: "" }}
+          initialValues={{
+            id_base_pokemon: 0,
+            name: "",
+            attack: 0,
+            defense: 0,
+            stamina: 0,
+          }}
           onSubmit={(values, actions) => {
             const type = { type: ["fighting"] }
             axios({
@@ -195,6 +201,75 @@ const App = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 name="stamina"
+              />
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
+
+        <Formik
+          initialValues={{
+            iv_attack: 0,
+            iv_defense: 0,
+            iv_stamina: 0,
+          }}
+          onSubmit={(values, actions) => {
+            const references = {
+              pokemon: 1,
+              user: 1,
+              quick_move: 1,
+              charged_move: 1,
+            }
+            axios({
+              method: "POST",
+              url: "http://localhost:1337/pokedexes",
+              data: { ...values, ...references },
+            })
+              .then(response => {
+                actions.setSubmitting(false)
+                actions.resetForm()
+              })
+              .catch(error => {
+                actions.setSubmitting(false)
+              })
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="iv_attack"
+              >
+                Iv attack
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="iv_attack"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="iv_defense"
+              >
+                Iv defense
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="iv_defense"
+              />
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="iv_stamina"
+              >
+                Iv stamina
+              </label>
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number"
+                name="iv_stamina"
               />
               <button type="submit" disabled={isSubmitting}>
                 Submit
