@@ -1,6 +1,20 @@
 import React from "react"
 import axios from "axios"
-import { Formik, Form, Field } from "formik"
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+
+const numberValidation = Yup.number()
+  .required("Required")
+  .positive("A positive number !")
+  .integer("No decimal value !")
+
+const PokemonFormSchema = Yup.object().shape({
+  id_base_pokemon: numberValidation,
+  name: Yup.string().required("Required"),
+  attack: numberValidation,
+  defense: numberValidation,
+  stamina: numberValidation,
+})
 
 const PokemonForm = () => {
   return (
@@ -14,6 +28,7 @@ const PokemonForm = () => {
           defense: 0,
           stamina: 0,
         }}
+        validationSchema={PokemonFormSchema}
         onSubmit={(values, actions) => {
           const type = { type: ["fighting"] }
           axios({
@@ -30,7 +45,7 @@ const PokemonForm = () => {
             })
         }}
       >
-        {({ isSubmitting }) => (
+        {({ error, isSubmitting }) => (
           <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -43,6 +58,7 @@ const PokemonForm = () => {
               type="number"
               name="id_base_pokemon"
             />
+            <ErrorMessage name="id_base_pokemon" />
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="name"
@@ -54,6 +70,7 @@ const PokemonForm = () => {
               type="text"
               name="name"
             />
+            <ErrorMessage name="name" />
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="attack"
@@ -65,6 +82,7 @@ const PokemonForm = () => {
               type="number"
               name="attack"
             />
+            <ErrorMessage name="attack" />
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="defense"
@@ -76,6 +94,7 @@ const PokemonForm = () => {
               type="number"
               name="defense"
             />
+            <ErrorMessage name="defense" />
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="stamina"
@@ -87,6 +106,7 @@ const PokemonForm = () => {
               type="number"
               name="stamina"
             />
+            <ErrorMessage name="stamina" />
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
