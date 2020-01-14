@@ -3,6 +3,8 @@ import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
+import Layout from "../../../components/Layout"
+
 const numberValidation = Yup.number()
   .required("Required")
   .positive("A positive number !")
@@ -18,7 +20,7 @@ const PokemonFormSchema = Yup.object().shape({
 
 const PokemonForm = () => {
   return (
-    <>
+    <Layout>
       <h1>Any place in your app!</h1>
       <Formik
         initialValues={{
@@ -46,7 +48,7 @@ const PokemonForm = () => {
         }}
       >
         {({ error, isSubmitting }) => (
-          <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <Form className="bg-white">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="id_base_pokemon"
@@ -113,7 +115,7 @@ const PokemonForm = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </Layout>
   )
 }
 

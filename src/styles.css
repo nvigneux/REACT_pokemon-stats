@@ -20,23 +20,7 @@ body {
   border-radius: 10px;
 }
 
-.container-full {
-  display: flex;
-  height: 100%;
-  min-height: 100vh;
-}
-.container-full--center {
-  justify-content: center;
-  align-content: center;
-}
-
-.mobile-container {
+.mobile-size {
   height: 640px;
   width: 384px;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  border-radius: 4px;
-  overflow: hidden;
-  background: #fff;
 }

@@ -3,8 +3,10 @@ import PropTypes from "prop-types"
 
 const Layout = ({ children }) => {
   return (
-    <div className="container-full container-full--center">
-      <div className="mobile-container shadow-lg">{children}</div>
+    <div className="flex h-full min-h-screen justify-center items-center">
+      <div className="flex flex-col self-center mobile-size rounded overflow-hidden bg-white shadow-lg p-4">
+        {children}
+      </div>
     </div>
   )
 }
