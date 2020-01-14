@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { orderBy, keyBy } from "lodash"
 
+import Layout from "../components/Layout"
 import PokemonStatCard from "../components/PokemonStatCard"
 import WeatherSelect from "../components/WeatherSelect"
 
@@ -83,7 +84,7 @@ const RaidBattle = () => {
 
   // TODO watch if memo can be useful
   return (
-    <div>
+    <Layout>
       <WeatherSelect
         values={WEATHERS}
         default={activeWeather}
@@ -115,7 +116,7 @@ const RaidBattle = () => {
           </PokemonCategory>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 

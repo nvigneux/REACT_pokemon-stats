@@ -1,3 +1,10 @@
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  background: #f7fafc;
+}
+
 .scroll::-webkit-scrollbar {
   height: 6px;
   background: gray;
@@ -11,4 +18,25 @@
 .scroll::-webkit-scrollbar-track {
   background: #ddd;
   border-radius: 10px;
+}
+
+.container-full {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+}
+.container-full--center {
+  justify-content: center;
+  align-content: center;
+}
+
+.mobile-container {
+  height: 640px;
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
 }

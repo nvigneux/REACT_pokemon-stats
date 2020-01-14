@@ -2,7 +2,7 @@
 import React from "react"
 
 const WeatherSelect = ({ values, activeValue, select }) => (
-  <div className="w-full md:w-1/3 px-2 mb-6">
+  <div className="w-full px-2 mb-6">
     <label
       className="block uppercase tracking-wide font-semibold text-xs my-2"
       htmlFor="weather"
