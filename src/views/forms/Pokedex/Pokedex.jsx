@@ -1,16 +1,33 @@
 import React from "react"
 import axios from "axios"
-import { Formik, Form, Field } from "formik"
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+
+import Layout from "../../../components/Layout"
+
+const numberValidation = Yup.number()
+  .required("Required")
+  .integer("No decimal value !")
+
+const PokedexFormSchema = Yup.object().shape({
+  iv_attack: numberValidation,
+  iv_defense: numberValidation,
+  iv_stamina: numberValidation,
+})
 
 const PokedexForm = () => {
   return (
-    <div>
+    <Layout>
+      <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
+        Ajouter un pokémon
+      </h1>
       <Formik
         initialValues={{
           iv_attack: 0,
           iv_defense: 0,
           iv_stamina: 0,
         }}
+        validationSchema={PokedexFormSchema}
         onSubmit={(values, actions) => {
           const references = {
             pokemon: 1,
@@ -33,47 +50,74 @@ const PokedexForm = () => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="iv_attack"
+          <Form className="bg-white flex flex-col">
+            <div className="flex flex-wrap">
+              <div className="mb-3 px-1 w-1/3">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="iv_attack"
+                >
+                  IV Attaque
+                </label>
+                <Field
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="number"
+                  name="iv_attack"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="iv_attack"
+                />
+              </div>
+              <div className="mb-3 px-1 w-1/3">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="iv_defense"
+                >
+                  IV Défense
+                </label>
+                <Field
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="number"
+                  name="iv_defense"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="iv_defense"
+                />
+              </div>
+              <div className="mb-6 px-1 w-1/3">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="iv_stamina"
+                >
+                  IV Stamina
+                </label>
+                <Field
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="number"
+                  name="iv_stamina"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="iv_stamina"
+                />
+              </div>
+            </div>
+            <button
+              className="self-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              disabled={isSubmitting}
             >
-              Iv attack
-            </label>
-            <Field
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="number"
-              name="iv_attack"
-            />
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="iv_defense"
-            >
-              Iv defense
-            </label>
-            <Field
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="number"
-              name="iv_defense"
-            />
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="iv_stamina"
-            >
-              Iv stamina
-            </label>
-            <Field
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="number"
-              name="iv_stamina"
-            />
-            <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
           </Form>
         )}
       </Formik>
-    </div>
+    </Layout>
   )
 }
 
