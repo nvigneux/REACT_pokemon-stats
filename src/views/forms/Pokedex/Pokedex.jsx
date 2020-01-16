@@ -9,8 +9,12 @@ import CustomDropdown from "../../../components/CustomDropdown"
 const numberValidation = Yup.number()
   .required("Required")
   .integer("No decimal value !")
+  .min(0, "> 0")
 
 const PokedexFormSchema = Yup.object().shape({
+  pokemon: Yup.object()
+    .shape({})
+    .required("Required"),
   level: numberValidation,
   iv_attack: numberValidation,
   iv_defense: numberValidation,
@@ -19,7 +23,7 @@ const PokedexFormSchema = Yup.object().shape({
 
 const PokedexForm = () => {
   const [pokemons, setPokemons] = useState([])
-  const [selectedPokemons, setSelectedPokemons] = useState([])
+
   useEffect(() => {
     axios({
       method: "GET",
@@ -56,7 +60,7 @@ const PokedexForm = () => {
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
-            data: { ...values, ...references },
+            data: { ...values, ...references, pokemon: values.pokemon.id },
           })
             .then(() => {
               actions.setSubmitting(false)
