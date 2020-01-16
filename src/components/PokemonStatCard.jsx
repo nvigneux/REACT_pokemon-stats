@@ -33,13 +33,13 @@ const PokemonsStatCard = ({ pokemon, click, theme }) => (
     </div>
     <div className="flex-auto">
       <div className="flex flex-col pb-1">
-        <h1 className="w-40 min-w-full text-base text-gray-900 font-medium">
+        <div className="w-40 min-w-full text-base text-gray-900 font-medium">
           {`${pokemon.name} `}
           <span className="text-xs font-normal">{pokemon.stats.iv}%</span>
-        </h1>
-        <h2 className="text-xs text-gray-800 font-medium">{`CP :
-        
-        ${pokemon.stats.cp}`}</h2>
+        </div>
+        <div className="text-xs text-gray-800 font-medium">
+          {`CP : ${pokemon.stats.cp}`}
+        </div>
       </div>
       <ul className="list-none italic">
         <li className="text-xs text-gray-800">{`Attack : ${pokemon.stats.attack}`}</li>

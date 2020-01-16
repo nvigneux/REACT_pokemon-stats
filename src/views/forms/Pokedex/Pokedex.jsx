@@ -23,6 +23,12 @@ const PokedexFormSchema = Yup.object().shape({
 
 const PokedexForm = () => {
   const [pokemons, setPokemons] = useState([])
+  const [showPokemonForm, setShowPokemonForm] = useState("hidden")
+
+  const handleFormPokemon = () => {
+    console.log("show add pokemon form")
+    setShowPokemonForm("visible")
+  }
 
   useEffect(() => {
     axios({
@@ -56,7 +62,6 @@ const PokedexForm = () => {
             quick_move: 1,
             charged_move: 1,
           }
-          console.log(values)
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
@@ -73,15 +78,30 @@ const PokedexForm = () => {
       >
         {({ isSubmitting, errors, touched }) => (
           <Form className="bg-white flex flex-col">
-            {console.log(errors, touched)}
             <div className="mb-3 px-1">
-              <CustomDropdown
-                label="Pokemons"
-                id="pokemon"
-                name="pokemon"
-                options={pokemons}
-              />
+              <div className="flex flex-col">
+                <CustomDropdown
+                  label="Pokemons"
+                  id="pokemon"
+                  name="pokemon"
+                  options={pokemons}
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="pokemon"
+                />
+              </div>
+              <span
+                onClick={handleFormPokemon}
+                className="text-gray-600 active:text-gray-400 focus:text-gray-500 hover:text-gray-500 text-xs italic underline cursor-pointer"
+              >
+                Mon pokémon n'est pas dans la liste.
+              </span>
             </div>
+            {showPokemonForm === "visible" ? (
+              <div className="mb-3 px-1">pokemon form</div>
+            ) : null}
             <div className="flex flex-wrap">
               <div className="mb-3 px-1 w-1/4">
                 <label

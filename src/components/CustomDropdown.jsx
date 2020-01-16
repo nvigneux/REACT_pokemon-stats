@@ -1,20 +1,25 @@
 import React from "react"
 import Select from "react-select"
 import { useField, useFormikContext } from "formik"
-//levelup.gitconnected.com/getting-forms-right-in-react-3c0f15420d61
-// https: //https://codesandbox.io/embed/reactselect-formatoptionlabel-bde1q
-const formatOptionLabel = ({ name }) => {
+import { IMG_URL, IMG_FORMAT } from "../constants/constant"
+
+const formatOptionLabel = ({ id, name }) => {
   return (
-    <div style={{ display: "flex" }}>
-      <div>{name}</div>
-      <div style={{ marginLeft: "10px", color: "#ccc" }}>{name}</div>
+    <div className="flex items-center">
+      <img
+        className="h-8 mr-2"
+        src={IMG_URL + id + IMG_FORMAT}
+        alt={`${name}`}
+      />
+      <div className="text-base text-gray-900 font-medium">{name}</div>
     </div>
   )
 }
 
 const CustomDropdown = ({ options, label, name, ...props }) => {
   const { setFieldValue, setFieldTouched } = useFormikContext()
-  const [field, meta] = useField(name)
+  // const [field, meta] = useField(name)
+  const [field] = useField(name)
 
   const handleOptionChange = selection => {
     setFieldValue(name, selection)
@@ -27,7 +32,7 @@ const CustomDropdown = ({ options, label, name, ...props }) => {
   return (
     <>
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-gray-700 text-sm font-bold mb-3"
         htmlFor="iv_attack"
       >
         {label}
@@ -44,9 +49,6 @@ const CustomDropdown = ({ options, label, name, ...props }) => {
           field.value ? field.value.id === option.id : false
         }
       />
-      {meta.touched && meta.error ? (
-        <span className="custom-input-error">{meta.error}</span>
-      ) : null}
     </>
   )
 }
