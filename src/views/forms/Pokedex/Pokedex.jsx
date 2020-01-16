@@ -71,8 +71,9 @@ const PokedexForm = () => {
             })
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form className="bg-white flex flex-col">
+            {console.log(errors, touched)}
             <div className="mb-3 px-1">
               <CustomDropdown
                 label="Pokemons"
@@ -82,7 +83,7 @@ const PokedexForm = () => {
               />
             </div>
             <div className="flex flex-wrap">
-              <div className="mb-3 px-1 w-1/3">
+              <div className="mb-3 px-1 w-1/4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="iv_attack"
@@ -100,7 +101,7 @@ const PokedexForm = () => {
                   name="iv_attack"
                 />
               </div>
-              <div className="mb-3 px-1 w-1/3">
+              <div className="mb-3 px-1 w-1/4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="iv_defense"
@@ -118,7 +119,7 @@ const PokedexForm = () => {
                   name="iv_defense"
                 />
               </div>
-              <div className="mb-6 px-1 w-1/3">
+              <div className="mb-6 px-1 w-1/4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="iv_stamina"
@@ -134,6 +135,24 @@ const PokedexForm = () => {
                   className="text-red-500 text-xs italic"
                   component="span"
                   name="iv_stamina"
+                />
+              </div>
+              <div className="mb-6 px-1 w-1/4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="iv_stamina"
+                >
+                  Level
+                </label>
+                <Field
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="number"
+                  name="level"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="level"
                 />
               </div>
             </div>
