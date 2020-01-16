@@ -1,7 +1,8 @@
 import React from "react"
 import Select from "react-select"
 import { useField, useFormikContext } from "formik"
-
+//levelup.gitconnected.com/getting-forms-right-in-react-3c0f15420d61
+// https: //https://codesandbox.io/embed/reactselect-formatoptionlabel-bde1q
 const formatOptionLabel = ({ name }) => {
   return (
     <div style={{ display: "flex" }}>
