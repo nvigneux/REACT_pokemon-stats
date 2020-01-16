@@ -1,21 +1,38 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
 import Layout from "../../../components/Layout"
+import CustomDropdown from "../../../components/CustomDropdown"
 
 const numberValidation = Yup.number()
   .required("Required")
   .integer("No decimal value !")
 
 const PokedexFormSchema = Yup.object().shape({
+  level: numberValidation,
   iv_attack: numberValidation,
   iv_defense: numberValidation,
   iv_stamina: numberValidation,
 })
 
 const PokedexForm = () => {
+  const [pokemons, setPokemons] = useState([])
+  const [selectedPokemons, setSelectedPokemons] = useState([])
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:1337/pokemons",
+    })
+      .then(res => {
+        setPokemons(res.data)
+      })
+      .catch(() => {
+        console.log("erreur pokemon")
+      })
+  }, [])
+
   return (
     <Layout>
       <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
@@ -23,6 +40,7 @@ const PokedexForm = () => {
       </h1>
       <Formik
         initialValues={{
+          level: 0,
           iv_attack: 0,
           iv_defense: 0,
           iv_stamina: 0,
@@ -30,11 +48,11 @@ const PokedexForm = () => {
         validationSchema={PokedexFormSchema}
         onSubmit={(values, actions) => {
           const references = {
-            pokemon: 1,
             user: 1,
             quick_move: 1,
             charged_move: 1,
           }
+          console.log(values)
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
@@ -51,6 +69,14 @@ const PokedexForm = () => {
       >
         {({ isSubmitting }) => (
           <Form className="bg-white flex flex-col">
+            <div className="mb-3 px-1">
+              <CustomDropdown
+                label="Pokemons"
+                id="pokemon"
+                name="pokemon"
+                options={pokemons}
+              />
+            </div>
             <div className="flex flex-wrap">
               <div className="mb-3 px-1 w-1/3">
                 <label
