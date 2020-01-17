@@ -28,6 +28,7 @@ const numberValidation = Yup.number()
   .integer("No decimal value !")
   .min(0, "> 0")
 
+//TODO refacto schema, ptet a export dans chaque fichier form
 const PokedexSchema = showPokemonForm => {
   const toto = Yup.object().shape({
     pokemon: Yup.object()
@@ -58,6 +59,7 @@ const PokedexSchema = showPokemonForm => {
   return showPokemonForm === "visible" ? tata : toto
 }
 
+// TODO reegarder si on peut faire pareil que le schema
 const PokedexValues = {
   level: 0,
   iv_attack: 0,
@@ -76,6 +78,7 @@ const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
 
   useEffect(() => {
+    //TODO refacto les call axios
     axios({
       method: "GET",
       url: "http://localhost:1337/pokemons",
@@ -97,11 +100,15 @@ const Pokedex = () => {
         initialValues={PokedexValues}
         validationSchema={values => PokedexSchema(showPokemonForm, values)}
         onSubmit={(values, actions) => {
+          //TODO refacto la condition d'envoi des forms si pokemon ou non
           const references = {
             user: 1,
             quick_move: 1,
             charged_move: 1,
           }
+          showPokemonForm === "visible"
+            ? console.log("send pokemon & send pokedex")
+            : console.log("send pokedex")
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
@@ -121,6 +128,7 @@ const Pokedex = () => {
 
             {showPokemonForm === "visible" ? (
               <>
+                {/* FAire un composant  */}
                 <span
                   tabIndex={0}
                   role="button"

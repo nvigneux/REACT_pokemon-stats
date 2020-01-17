@@ -3,6 +3,7 @@ import Select from "react-select"
 import { useField, useFormikContext } from "formik"
 import { IMG_URL, IMG_FORMAT } from "../constants/constant"
 
+// TODO faire un component
 const formatOptionLabel = ({ id, name }) => {
   return (
     <div className="flex items-center">
