@@ -2,8 +2,8 @@
 import RaidBattle from "./RaidBattle"
 
 // Views Forms
-import PokemonForm from "./forms/Pokemon"
-import PokedexForm from "./forms/Pokedex"
+import PokemonForm from "./Pokemon/Pokemon"
+import PokedexForm from "./Pokedex/Pokedex"
 
 export const routes = [
   {

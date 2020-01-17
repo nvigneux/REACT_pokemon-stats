@@ -23,4 +23,5 @@ body {
 .mobile-size {
   height: 640px;
   width: 384px;
+  overflow: auto;
 }
