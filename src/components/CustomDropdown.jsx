@@ -1,9 +1,11 @@
 import React from "react"
 import Select from "react-select"
+import PropTypes from "prop-types"
 import { useField, useFormikContext } from "formik"
+
 import { IMG_URL, IMG_FORMAT } from "../constants/constant"
 
-// TODO faire un component
+// TODO move format option label compoennt in parent node refacto
 const formatOptionLabel = ({ id, name }) => {
   return (
     <div className="flex items-center">
@@ -19,7 +21,6 @@ const formatOptionLabel = ({ id, name }) => {
 
 const CustomDropdown = ({ options, label, name, ...props }) => {
   const { setFieldValue, setFieldTouched } = useFormikContext()
-  // const [field, meta] = useField(name)
   const [field] = useField(name)
 
   const handleOptionChange = selection => {
@@ -52,6 +53,13 @@ const CustomDropdown = ({ options, label, name, ...props }) => {
       />
     </>
   )
+}
+
+CustomDropdown.propTypes = {
+  options: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  // optionComponent: PropTypes.node.isRequired,
 }
 
 export default CustomDropdown
