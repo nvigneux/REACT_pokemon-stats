@@ -11,8 +11,13 @@ import {
   PokedexFormValidation,
   PokedexSelectValidation,
   PokedexForm,
+  PokedexFormInitValues,
 } from "../forms/Pokedex"
-import { PokemonFormValidation, PokemonForm } from "../forms/Pokemon"
+import {
+  PokemonFormValidation,
+  PokemonForm,
+  PokemonFormInitValues,
+} from "../forms/Pokemon"
 
 export const DisplayFormikState = props => (
   <div style={{ margin: "1rem 0" }}>
@@ -41,20 +46,6 @@ const PokedexValidationSchema = showPokemonForm => {
     : pokemonNotExistValidation
 }
 
-// TODO reegarder si on peut faire pareil que le schema
-const PokedexValues = {
-  level: 0,
-  iv_attack: 0,
-  iv_defense: 0,
-  iv_stamina: 0,
-  pokemon: null,
-  id_base_pokemon: 0,
-  name: "",
-  attack: 0,
-  defense: 0,
-  stamina: 0,
-}
-
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
@@ -79,7 +70,11 @@ const Pokedex = () => {
         Ajouter un pokémon
       </h1>
       <Formik
-        initialValues={PokedexValues}
+        initialValues={{
+          pokemon: null,
+          ...PokedexFormInitValues,
+          ...PokemonFormInitValues,
+        }}
         validationSchema={() => PokedexValidationSchema(showPokemonForm)}
         onSubmit={(values, actions) => {
           //TODO refacto la condition d'envoi des forms si pokemon ou non
