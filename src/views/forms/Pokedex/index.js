@@ -1,1 +1,2 @@
-export { default } from "./Pokedex"
+export { PokedexForm } from "./Pokedex"
+export { PokedexFormValidation } from "./validationForm"

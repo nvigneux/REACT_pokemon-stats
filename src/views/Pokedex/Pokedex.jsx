@@ -4,13 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
 import Layout from "../../components/Layout"
-import CustomDropdown from "../../components/CustomDropdown"
-import PokedexForm from "../forms/Pokedex"
-import PokemonForm from "../forms/Pokemon"
+import Link from "../../components/Link/Link"
+
+import { PokedexFormValidation, PokedexForm } from "../forms/Pokedex"
+import { PokemonFormValidation, PokemonForm } from "../forms/Pokemon"
 
 export const DisplayFormikState = props => (
   <div style={{ margin: "1rem 0" }}>
-    <h3 style={{ fontFamily: "monospace" }} />
     <pre
       style={{
         background: "#f6f8fa",
@@ -23,40 +23,18 @@ export const DisplayFormikState = props => (
   </div>
 )
 
-const numberValidation = Yup.number()
-  .required("Required")
-  .integer("No decimal value !")
-  .min(0, "> 0")
-
 //TODO refacto schema, ptet a export dans chaque fichier form
-const PokedexSchema = showPokemonForm => {
-  const toto = Yup.object().shape({
-    pokemon: Yup.object()
-      .shape({})
-      .nullable()
-      .required("Required"),
-    level: numberValidation,
-    iv_attack: numberValidation,
-    iv_defense: numberValidation,
-    iv_stamina: numberValidation,
-  })
-  const tata = Yup.object().shape({
-    pokemon: Yup.object()
-      .shape({})
-      .nullable()
-      .required("Required"),
-    level: numberValidation,
-    iv_attack: numberValidation,
-    iv_defense: numberValidation,
-    iv_stamina: numberValidation,
-    id_base_pokemon: numberValidation,
-    name: Yup.string().required("Required"),
-    attack: numberValidation,
-    defense: numberValidation,
-    stamina: numberValidation,
-  })
-
-  return showPokemonForm === "visible" ? tata : toto
+const PokedexValidationSchema = showPokemonForm => {
+  const pokemonExistValidation = PokedexFormValidation()
+  const pokemonNotExistValidation = PokedexFormValidation().concat(
+    PokemonFormValidation()
+  )
+  console.log(pokemonExistValidation)
+  console.log(pokemonNotExistValidation)
+  console.log(showPokemonForm)
+  return showPokemonForm !== "visible"
+    ? pokemonExistValidation
+    : pokemonNotExistValidation
 }
 
 // TODO reegarder si on peut faire pareil que le schema
@@ -98,7 +76,7 @@ const Pokedex = () => {
       </h1>
       <Formik
         initialValues={PokedexValues}
-        validationSchema={values => PokedexSchema(showPokemonForm, values)}
+        validationSchema={() => PokedexValidationSchema(showPokemonForm)}
         onSubmit={(values, actions) => {
           //TODO refacto la condition d'envoi des forms si pokemon ou non
           const references = {
@@ -106,9 +84,7 @@ const Pokedex = () => {
             quick_move: 1,
             charged_move: 1,
           }
-          showPokemonForm === "visible"
-            ? console.log("send pokemon & send pokedex")
-            : console.log("send pokedex")
+
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
@@ -124,34 +100,21 @@ const Pokedex = () => {
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col">
+            {/* TODO move select custom to parent  */}
             <PokedexForm pokemons={pokemons} />
-
             {showPokemonForm === "visible" ? (
               <>
-                {/* FAire un composant  */}
-                <span
-                  tabIndex={0}
-                  role="button"
-                  onKeyDown={() => console.log(showPokemonForm)}
+                <Link
+                  label="Je ne veux plus ajouter de pokemon."
                   onClick={() => setShowPokemonForm("hidden")}
-                  className="text-gray-600 active:text-gray-400 focus:text-gray-500 hover:text-gray-500 text-xs italic underline cursor-pointer mb-3 px-1"
-                >
-                  Je ne veux plus ajouter de pokemon.
-                </span>
+                />
                 <PokemonForm />
               </>
             ) : (
-              <>
-                <span
-                  tabIndex={0}
-                  role="button"
-                  onKeyDown={() => console.log(showPokemonForm)}
-                  onClick={() => setShowPokemonForm("visible")}
-                  className="text-gray-600 active:text-gray-400 focus:text-gray-500 hover:text-gray-500 text-xs italic underline cursor-pointer mb-3 px-1"
-                >
-                  Mon pokémon n'est pas dans la liste.
-                </span>
-              </>
+              <Link
+                label="Mon pokémon n'est pas dans la liste."
+                onClick={() => setShowPokemonForm("visible")}
+              />
             )}
 
             <button

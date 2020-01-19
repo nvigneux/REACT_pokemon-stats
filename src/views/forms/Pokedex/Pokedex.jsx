@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import { Formik, Form, Field, ErrorMessage } from "formik"
-import * as Yup from "yup"
-
-import Layout from "../../../components/Layout"
+import React from "react"
+import { Field, ErrorMessage } from "formik"
 import CustomDropdown from "../../../components/CustomDropdown"
 
-const PokedexForm = ({ pokemons }) => (
+export const PokedexForm = ({ pokemons }) => (
   <>
     <div className="mb-3 px-1">
       <div className="flex flex-col">
@@ -60,7 +56,7 @@ const PokedexForm = ({ pokemons }) => (
           name="iv_defense"
         />
       </div>
-      <div className="mb-6 px-1 w-1/4">
+      <div className="mb-3 px-1 w-1/4">
         <label
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="iv_stamina"
@@ -78,7 +74,7 @@ const PokedexForm = ({ pokemons }) => (
           name="iv_stamina"
         />
       </div>
-      <div className="mb-6 px-1 w-1/4">
+      <div className="mb-3 px-1 w-1/4">
         <label
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="iv_stamina"
@@ -99,5 +95,3 @@ const PokedexForm = ({ pokemons }) => (
     </div>
   </>
 )
-
-export default PokedexForm
