@@ -1,16 +1,18 @@
 import React from "react"
-import PropTypes from "prop-types"
 
-const OptionLabel = ({ id, name }) => (
-  <div className="flex items-center">
-    <img className="h-8 mr-2" src={image} alt={`${name}`} />
-    <div className="text-base text-gray-900 font-medium">{name}</div>
-  </div>
-)
+import { IMG_FORMAT, IMG_URL } from "../../constants/constant"
 
-OptionLabel.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+const OptionLabel = ({ id, name }) => {
+  return (
+    <div className="flex items-center">
+      <img
+        className="h-8 mr-2"
+        src={IMG_URL + id + IMG_FORMAT}
+        alt={`${name}`}
+      />
+      <div className="text-base text-gray-900 font-medium">{name}</div>
+    </div>
+  )
 }
 
 export default OptionLabel
