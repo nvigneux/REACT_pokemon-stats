@@ -1,24 +1,8 @@
 import React from "react"
 import { Field, ErrorMessage } from "formik"
-import CustomDropdown from "../../../components/CustomDropdown"
 
-export const PokedexForm = ({ pokemons }) => (
+export const PokedexForm = () => (
   <>
-    <div className="mb-3 px-1">
-      <div className="flex flex-col">
-        <CustomDropdown
-          label="Pokemons"
-          id="pokemon"
-          name="pokemon"
-          options={pokemons}
-        />
-        <ErrorMessage
-          className="text-red-500 text-xs italic"
-          component="span"
-          name="pokemon"
-        />
-      </div>
-    </div>
     <div className="flex flex-wrap">
       <div className="mb-3 px-1 w-1/4">
         <label

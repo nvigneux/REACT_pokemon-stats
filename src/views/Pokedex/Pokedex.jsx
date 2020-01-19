@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { Formik, Form, Field, ErrorMessage } from "formik"
-import * as Yup from "yup"
+import { Formik, Form, ErrorMessage } from "formik"
 
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
+import CustomDropdown from "../../components/CustomDropdown"
+import OptionLabel from "../../components/OptionLabel"
 
-import { PokedexFormValidation, PokedexForm } from "../forms/Pokedex"
+import {
+  PokedexFormValidation,
+  PokedexSelectValidation,
+  PokedexForm,
+} from "../forms/Pokedex"
 import { PokemonFormValidation, PokemonForm } from "../forms/Pokemon"
 
 export const DisplayFormikState = props => (
@@ -23,15 +28,14 @@ export const DisplayFormikState = props => (
   </div>
 )
 
-//TODO refacto schema, ptet a export dans chaque fichier form
 const PokedexValidationSchema = showPokemonForm => {
-  const pokemonExistValidation = PokedexFormValidation()
-  const pokemonNotExistValidation = PokedexFormValidation().concat(
-    PokemonFormValidation()
+  const pokemonExistValidation = PokedexFormValidation.concat(
+    PokedexSelectValidation
   )
-  console.log(pokemonExistValidation)
-  console.log(pokemonNotExistValidation)
-  console.log(showPokemonForm)
+  const pokemonNotExistValidation = PokedexFormValidation.concat(
+    PokemonFormValidation
+  )
+
   return showPokemonForm !== "visible"
     ? pokemonExistValidation
     : pokemonNotExistValidation
@@ -100,22 +104,38 @@ const Pokedex = () => {
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col">
-            {/* TODO move select custom to parent  */}
-            <PokedexForm pokemons={pokemons} />
-            {showPokemonForm === "visible" ? (
-              <>
+            <div className="mb-3 px-1">
+              <div className="flex flex-col">
+                <CustomDropdown
+                  label="Pokemons"
+                  id="pokemon"
+                  name="pokemon"
+                  options={pokemons}
+                  optionComponent={<OptionLabel />}
+                />
+                {showPokemonForm === "hidden" ? (
+                  <ErrorMessage
+                    className="text-red-500 text-xs italic"
+                    component="span"
+                    name="pokemon"
+                  />
+                ) : null}
+              </div>
+              {showPokemonForm === "visible" ? (
                 <Link
                   label="Je ne veux plus ajouter de pokemon."
                   onClick={() => setShowPokemonForm("hidden")}
                 />
-                <PokemonForm />
-              </>
-            ) : (
-              <Link
-                label="Mon pokémon n'est pas dans la liste."
-                onClick={() => setShowPokemonForm("visible")}
-              />
-            )}
+              ) : (
+                <Link
+                  label="Mon pokémon n'est pas dans la liste."
+                  onClick={() => setShowPokemonForm("visible")}
+                />
+              )}
+            </div>
+
+            <PokedexForm pokemons={pokemons} />
+            {showPokemonForm === "visible" ? <PokemonForm /> : null}
 
             <button
               className="self-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
