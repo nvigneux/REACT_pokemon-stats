@@ -1,9 +1,7 @@
 import React from "react"
-import axios from "axios"
-import { Formik, Form, Field, ErrorMessage } from "formik"
-import * as Yup from "yup"
+import { Field, ErrorMessage } from "formik"
 
-const PokemonForm = () => (
+export const PokemonForm = () => (
   <div className="bg-white flex flex-col">
     <div className="flex flex-wrap">
       <div className="mb-3 px-1 w-4/6">
@@ -101,5 +99,3 @@ const PokemonForm = () => (
     </div>
   </div>
 )
-
-export default PokemonForm
