@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 
+import DisplayFormikState from "../forms/DisplayFormikState"
+
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
@@ -18,20 +20,6 @@ import {
   PokemonForm,
   PokemonFormInitValues,
 } from "../forms/Pokemon"
-
-export const DisplayFormikState = props => (
-  <div style={{ margin: "1rem 0" }}>
-    <pre
-      style={{
-        background: "#f6f8fa",
-        fontSize: ".65rem",
-        padding: ".5rem",
-      }}
-    >
-      <strong>props</strong> = {JSON.stringify(props, null, 2)}
-    </pre>
-  </div>
-)
 
 const PokedexValidationSchema = showPokemonForm => {
   const pokemonExistValidation = PokedexFormValidation.concat(
