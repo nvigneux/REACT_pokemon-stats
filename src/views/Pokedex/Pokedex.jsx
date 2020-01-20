@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 
-import DisplayFormikState from "../forms/DisplayFormikState"
-
+import useApi from "../../hooks/useApi"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionPokemon from "../../components/OptionPokemon"
-import OptionAttack from "../../components/OptionType"
+import OptionType from "../../components/OptionType"
+import DisplayFormikState from "../forms/DisplayFormikState"
 
 import {
   PokedexFormValidation,
@@ -39,21 +39,27 @@ const PokedexValidationSchema = showPokemonForm => {
 }
 
 const Pokedex = () => {
-  const [pokemons, setPokemons] = useState([])
+  const [loadPokemons, pokemons, errorsPokemons, { fetchPokemons }] = useApi()
+  const [
+    loadQuickMoves,
+    quickMoves,
+    errorsQuickMoves,
+
+    { fetchQuickMoves },
+  ] = useApi()
+  const [
+    loadChargedMoves,
+    chargedMoves,
+    errorsChargedMoves,
+    { fetchChargedMoves },
+  ] = useApi()
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
 
   useEffect(() => {
-    //TODO refacto les call axios
-    axios({
-      method: "GET",
-      url: "http://localhost:1337/pokemons",
-    })
-      .then(res => {
-        setPokemons(res.data)
-      })
-      .catch(() => {
-        console.log("erreur pokemon")
-      })
+    // TODO add suspense request
+    fetchPokemons()
+    fetchQuickMoves()
+    fetchChargedMoves()
   }, [])
 
   return (
@@ -69,8 +75,6 @@ const Pokedex = () => {
         }}
         validationSchema={() => PokedexValidationSchema(showPokemonForm)}
         onSubmit={(values, actions) => {
-          //TODO make type attack multi select
-          //TODO add quick move & charged move select
           const references = {
             user: 1,
             quick_move: 1,
@@ -101,8 +105,9 @@ const Pokedex = () => {
                   name="pokemon"
                   options={pokemons}
                   optionComponent={<OptionPokemon />}
-                  placeholder="Sélectionner un pokémon"
+                  isSearchable={false}
                   isDisabled={showPokemonForm === "visible"}
+                  placeholder="Sélectionner un pokémon"
                 />
                 {showPokemonForm === "hidden" ? (
                   <ErrorMessage
@@ -121,7 +126,6 @@ const Pokedex = () => {
                 <Link
                   label="Mon pokémon n'est pas dans la liste."
                   onClick={() => {
-                    props.setFieldValue("pokemon", null)
                     setShowPokemonForm("visible")
                   }}
                 />
@@ -129,6 +133,45 @@ const Pokedex = () => {
             </div>
 
             <PokedexForm pokemons={pokemons} />
+            {/* TODO Make validation for each moves select */}
+            <div className="mb-3 px-1">
+              <div className="flex flex-col">
+                <CustomDropdown
+                  label="Attaque rapide"
+                  id="quick_move"
+                  name="quick_move"
+                  options={quickMoves}
+                  optionComponent={<OptionPokemon />}
+                  isSearchable={false}
+                  placeholder="Sélectionner l'attaque rapide"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="quick_move"
+                />
+              </div>
+            </div>
+
+            <div className="mb-3 px-1 ">
+              <div className="flex flex-col">
+                <CustomDropdown
+                  label="Attaque chargé"
+                  id="charged_move"
+                  name="charged_move"
+                  options={chargedMoves}
+                  optionComponent={<OptionPokemon />}
+                  isSearchable={false}
+                  placeholder="Sélectionner l'attaque chargé"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs italic"
+                  component="span"
+                  name="charged_move"
+                />
+              </div>
+            </div>
+
             {showPokemonForm === "visible" ? (
               <>
                 <PokemonForm />
@@ -139,7 +182,7 @@ const Pokedex = () => {
                       id="type"
                       name="type"
                       options={TYPES_ARRAY}
-                      optionComponent={<OptionAttack />}
+                      optionComponent={<OptionType />}
                       isMulti
                       isSearchable={false}
                       placeholder="Sélectionner le(s) type(s)"
