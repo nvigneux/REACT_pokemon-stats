@@ -102,6 +102,7 @@ const Pokedex = () => {
                   options={pokemons}
                   optionComponent={<OptionPokemon />}
                   placeholder="Sélectionner un pokémon"
+                  isDisabled={showPokemonForm === "visible"}
                 />
                 {showPokemonForm === "hidden" ? (
                   <ErrorMessage
@@ -119,7 +120,10 @@ const Pokedex = () => {
               ) : (
                 <Link
                   label="Mon pokémon n'est pas dans la liste."
-                  onClick={() => setShowPokemonForm("visible")}
+                  onClick={() => {
+                    props.setFieldValue("pokemon", null)
+                    setShowPokemonForm("visible")
+                  }}
                 />
               )}
             </div>
