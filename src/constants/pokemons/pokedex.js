@@ -17,7 +17,7 @@ import {
   // ROCK,
   // STEEL,
   WATER,
-} from "../constants/types"
+} from "../types"
 
 export const POKEMON_MOCK = [
   {
