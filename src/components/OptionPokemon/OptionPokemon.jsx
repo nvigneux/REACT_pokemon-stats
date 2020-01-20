@@ -2,7 +2,7 @@ import React from "react"
 
 import { IMG_FORMAT, IMG_URL } from "../../constants/constant"
 
-const OptionLabel = ({ id, name }) => {
+const OptionPokemon = ({ id, name }) => {
   return (
     <div className="flex items-center">
       <img
@@ -15,4 +15,4 @@ const OptionLabel = ({ id, name }) => {
   )
 }
 
-export default OptionLabel
+export default OptionPokemon
