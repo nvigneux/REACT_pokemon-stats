@@ -1,7 +1,23 @@
 import React, { cloneElement } from "react"
-import Select from "react-select"
+import Select, { components } from "react-select"
 import PropTypes from "prop-types"
 import { useField, useFormikContext } from "formik"
+
+const MultiValueLabel = props => {
+  return (
+    <span className="bg-gray-100">
+      <components.MultiValueLabel {...props} />
+    </span>
+  )
+}
+
+const MultiValueRemove = props => {
+  return (
+    <span className="bg-gray-100 flex text-gray-800">
+      <components.MultiValueRemove {...props} />
+    </span>
+  )
+}
 
 const CustomDropdown = ({
   options,
@@ -32,13 +48,14 @@ const CustomDropdown = ({
       <Select
         {...field}
         {...props}
+        components={{ MultiValueLabel, MultiValueRemove }}
         options={options}
         onBlur={updateBlur}
         onChange={handleOptionChange}
-        formatOptionLabel={option =>
-          cloneElement(optionComponent, { ...option })
-        }
-        getOptionValue={option => `${option}`}
+        formatOptionLabel={option => {
+          return cloneElement(optionComponent, { key: option.id, ...option })
+        }}
+        getOptionValue={option => option.id}
         isOptionSelected={option =>
           field.value ? field.value.id === option.id : false
         }
