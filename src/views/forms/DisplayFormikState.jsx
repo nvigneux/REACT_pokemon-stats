@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 const DisplayFormikState = props => (
   <div style={{ margin: "1rem 0" }}>
-    <pre
-      style={{
-        background: "#f6f8fa",
-        fontSize: ".65rem",
-        padding: ".5rem",
-      }}
-    >
+    <pre className="bg-gray-200 text-xs text-gray-600 p-4 rounded">
       <strong>props</strong> = {JSON.stringify(props, null, 2)}
     </pre>
   </div>

@@ -54,9 +54,9 @@ const Pokedex = () => {
 
   return (
     <Layout>
-      <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
+      {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
         Ajouter un pokémon
-      </h1>
+      </h1> */}
       <Formik
         initialValues={{
           pokemon: null,
