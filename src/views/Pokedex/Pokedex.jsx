@@ -65,13 +65,15 @@ const Pokedex = () => {
         }}
         validationSchema={() => PokedexValidationSchema(showPokemonForm)}
         onSubmit={(values, actions) => {
-          //TODO refacto la condition d'envoi des forms si pokemon ou non
+          //TODO make type attack multi select
+          //TODO add quick move & charged move select
           const references = {
             user: 1,
             quick_move: 1,
             charged_move: 1,
           }
-
+          
+          //TODO refacto la condition d'envoi des forms si pokemon ou non
           axios({
             method: "POST",
             url: "http://localhost:1337/pokedexes",
