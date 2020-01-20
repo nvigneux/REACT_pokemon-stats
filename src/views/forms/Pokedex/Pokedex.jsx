@@ -2,7 +2,7 @@ import React from "react"
 import { Field, ErrorMessage } from "formik"
 
 export const PokedexFormInitValues = {
-  level: 0,
+  level: 1,
   iv_attack: 0,
   iv_defense: 0,
   iv_stamina: 0,
