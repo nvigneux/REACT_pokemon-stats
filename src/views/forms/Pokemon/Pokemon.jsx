@@ -7,6 +7,7 @@ export const PokemonFormInitValues = {
   attack: 0,
   defense: 0,
   stamina: 0,
+  type: [],
 }
 
 export const PokemonForm = () => (
@@ -86,7 +87,7 @@ export const PokemonForm = () => (
           name="defense"
         />
       </div>
-      <div className="mb-6 px-1 w-1/3">
+      <div className="mb-3 px-1 w-1/3">
         <label
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="stamina"

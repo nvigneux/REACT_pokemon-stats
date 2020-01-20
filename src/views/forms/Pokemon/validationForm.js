@@ -18,4 +18,9 @@ export const PokemonFormValidation = Yup.object().shape({
     .required("Required")
     .positive("Positive number !")
     .integer("No decimal value !"),
+  type: Yup.array()
+    .required("Required")
+    .nullable("React-Select fix Soon, null")
+    .min(1, "min 1 type !")
+    .max(2, "max 2 type"),
 })

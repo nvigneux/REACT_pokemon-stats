@@ -7,7 +7,8 @@ import DisplayFormikState from "../forms/DisplayFormikState"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
-import OptionLabel from "../../components/OptionLabel"
+import OptionPokemon from "../../components/OptionPokemon"
+import OptionAttack from "../../components/OptionType"
 
 import {
   PokedexFormValidation,
@@ -20,6 +21,9 @@ import {
   PokemonForm,
   PokemonFormInitValues,
 } from "../forms/Pokemon"
+
+import { QUICK_MOVES } from "../../constants/moves"
+import { TYPES_ARRAY } from "../../constants/types"
 
 const PokedexValidationSchema = showPokemonForm => {
   const pokemonExistValidation = PokedexFormValidation.concat(
@@ -72,7 +76,7 @@ const Pokedex = () => {
             quick_move: 1,
             charged_move: 1,
           }
-          
+
           //TODO refacto la condition d'envoi des forms si pokemon ou non
           axios({
             method: "POST",
@@ -96,7 +100,8 @@ const Pokedex = () => {
                   id="pokemon"
                   name="pokemon"
                   options={pokemons}
-                  optionComponent={<OptionLabel />}
+                  optionComponent={<OptionPokemon />}
+                  placeholder="Sélectionner un pokémon"
                 />
                 {showPokemonForm === "hidden" ? (
                   <ErrorMessage
@@ -120,7 +125,30 @@ const Pokedex = () => {
             </div>
 
             <PokedexForm pokemons={pokemons} />
-            {showPokemonForm === "visible" ? <PokemonForm /> : null}
+            {showPokemonForm === "visible" ? (
+              <>
+                <PokemonForm />
+                <div className="mb-3 px-1">
+                  <div className="flex flex-col">
+                    <CustomDropdown
+                      label="Type(s)"
+                      id="type"
+                      name="type"
+                      options={TYPES_ARRAY}
+                      optionComponent={<OptionAttack />}
+                      isMulti
+                      isSearchable={false}
+                      placeholder="Sélectionner le(s) type(s)"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs italic"
+                      component="span"
+                      name="type"
+                    />
+                  </div>
+                </div>
+              </>
+            ) : null}
 
             <button
               className="self-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
