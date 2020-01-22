@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { Suspense, lazy, useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 import { orderBy } from "lodash"
@@ -26,6 +26,19 @@ import {
 import { QUICK_MOVES } from "../../constants/moves"
 import { TYPES_ARRAY } from "../../constants/types"
 
+// import PokemonSelectComponent from "../../components/PokemonSelectComponent"
+// import QuickMoveSelectComponent from "../../components/QuickMoveSelectComponent"
+// import ChargedMoveSelectComponent from "../../components/ChargedMoveSelectComponent"
+const PokemonSelectComponent = lazy(() =>
+  import("../../components/PokemonSelectComponent")
+)
+const QuickMoveSelectComponent = lazy(() =>
+  import("../../components/QuickMoveSelectComponent")
+)
+const ChargedMoveSelectComponent = lazy(() =>
+  import("../../components/ChargedMoveSelectComponent")
+)
+
 const PokedexValidationSchema = showPokemonForm => {
   const pokemonExistValidation = PokedexFormValidation.concat(
     PokedexSelectValidation
@@ -40,39 +53,39 @@ const PokedexValidationSchema = showPokemonForm => {
 }
 
 const Pokedex = () => {
-  const [loadPokemons, dataPokemons, , { fetchPokemons }] = useApi()
-  const [loadQuickMoves, dataQuickMoves, , { fetchQuickMoves }] = useApi()
-  const [loadChargedMoves, dataChargedMoves, , { fetchChargedMoves }] = useApi()
+  // const [loadPokemons, dataPokemons, , { fetchPokemons }] = useApi()
+  // const [loadQuickMoves, dataQuickMoves, , { fetchQuickMoves }] = useApi()
+  // const [loadChargedMoves, dataChargedMoves, , { fetchChargedMoves }] = useApi()
 
-  const [pokemons, setPokemons] = useState([])
-  const [quickMoves, setQuickMoves] = useState([])
-  const [chargedMoves, setChargedMoves] = useState([])
+  // const [pokemons, setPokemons] = useState([])
+  // const [quickMoves, setQuickMoves] = useState([])
+  // const [chargedMoves, setChargedMoves] = useState([])
 
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
 
   useEffect(() => {
     // TODO add suspense request
-    fetchPokemons()
-    fetchQuickMoves()
-    fetchChargedMoves()
+    // fetchPokemons()
+    // fetchQuickMoves()
+    // fetchChargedMoves()
   }, [])
 
   //TODO watch how to filter/modify the data with useApi when fetch is over
-  useEffect(() => {
-    if (dataPokemons && dataPokemons.length) {
-      const orderPokemons = orderBy(dataPokemons, ["id_base_pokemon"], ["asc"])
-      setPokemons(orderPokemons)
-    }
-  }, [dataPokemons])
+  // useEffect(() => {
+  //   if (dataPokemons && dataPokemons.length) {
+  //     const orderPokemons = orderBy(dataPokemons, ["id_base_pokemon"], ["asc"])
+  //     setPokemons(orderPokemons)
+  //   }
+  // }, [dataPokemons])
 
-  useEffect(() => {
-    if (dataQuickMoves && dataQuickMoves.length) setQuickMoves(dataQuickMoves)
-  }, [dataQuickMoves])
+  // useEffect(() => {
+  //   if (dataQuickMoves && dataQuickMoves.length) setQuickMoves(dataQuickMoves)
+  // }, [dataQuickMoves])
 
-  useEffect(() => {
-    if (dataChargedMoves && dataChargedMoves.length)
-      setChargedMoves(dataChargedMoves)
-  }, [dataChargedMoves])
+  // useEffect(() => {
+  //   if (dataChargedMoves && dataChargedMoves.length)
+  //     setChargedMoves(dataChargedMoves)
+  // }, [dataChargedMoves])
 
   return (
     <Layout>
@@ -111,25 +124,30 @@ const Pokedex = () => {
           <Form className="bg-white flex flex-col">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                {!loadPokemons && pokemons ? (
-                  <CustomDropdown
-                    label="Pokemons"
-                    id="pokemon"
-                    name="pokemon"
-                    options={pokemons}
-                    optionComponent={<OptionPokemon />}
-                    isSearchable={false}
-                    isDisabled={showPokemonForm === "visible"}
-                    placeholder="Sélectionner un pokémon"
-                  />
-                ) : null}
-                {showPokemonForm === "hidden" ? (
-                  <ErrorMessage
-                    className="text-red-500 text-xs italic"
-                    component="span"
-                    name="pokemon"
-                  />
-                ) : null}
+                {/* {!loadPokemons && pokemons ? (
+                  <>
+                    <CustomDropdown
+                      label="Pokemons"
+                      id="pokemon"
+                      name="pokemon"
+                      options={pokemons}
+                      optionComponent={<OptionPokemon />}
+                      isSearchable={false}
+                      isDisabled={showPokemonForm === "visible"}
+                      placeholder="Sélectionner un pokémon"
+                    />
+                    {showPokemonForm === "hidden" ? (
+                      <ErrorMessage
+                        className="text-red-500 text-xs italic"
+                        component="span"
+                        name="pokemon"
+                      />
+                    ) : null}
+                  </>
+                ) : null}*/}
+                <Suspense fallback="Loading PokemonSelectComponent ...">
+                  <PokemonSelectComponent />
+                </Suspense>
               </div>
               {showPokemonForm === "visible" ? (
                 <Link
@@ -146,48 +164,58 @@ const Pokedex = () => {
               )}
             </div>
 
-            <PokedexForm pokemons={pokemons} />
+            <PokedexForm />
             {/* TODO Make validation for each moves select */}
 
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                {!loadQuickMoves && quickMoves ? (
-                  <CustomDropdown
-                    label="Attaque rapide"
-                    id="quick_move"
-                    name="quick_move"
-                    options={quickMoves}
-                    optionComponent={<OptionPokemon />}
-                    isSearchable={false}
-                    placeholder="Sélectionner l'attaque rapide"
-                  />
-                ) : null}
-                <ErrorMessage
-                  className="text-red-500 text-xs italic"
-                  component="span"
-                  name="quick_move"
-                />
+                {/* {!loadQuickMoves && quickMoves ? (
+                  <>
+                    <CustomDropdown
+                      label="Attaque rapide"
+                      id="quick_move"
+                      name="quick_move"
+                      options={quickMoves}
+                      optionComponent={<OptionPokemon />}
+                      isSearchable={false}
+                      placeholder="Sélectionner l'attaque rapide"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs italic"
+                      component="span"
+                      name="quick_move"
+                    />
+                  </>
+                ) : null} */}
+                <Suspense fallback="Loading QuickMoveSelectComponent ...">
+                  <QuickMoveSelectComponent />
+                </Suspense>
               </div>
             </div>
 
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
-                {!loadChargedMoves && chargedMoves ? (
-                  <CustomDropdown
-                    label="Attaque chargé"
-                    id="charged_move"
-                    name="charged_move"
-                    options={chargedMoves}
-                    optionComponent={<OptionPokemon />}
-                    isSearchable={false}
-                    placeholder="Sélectionner l'attaque chargé"
-                  />
-                ) : null}
-                <ErrorMessage
-                  className="text-red-500 text-xs italic"
-                  component="span"
-                  name="charged_move"
-                />
+                {/* {!loadChargedMoves && chargedMoves ? (
+                  <>
+                    <CustomDropdown
+                      label="Attaque chargé"
+                      id="charged_move"
+                      name="charged_move"
+                      options={chargedMoves}
+                      optionComponent={<OptionPokemon />}
+                      isSearchable={false}
+                      placeholder="Sélectionner l'attaque chargé"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs italic"
+                      component="span"
+                      name="charged_move"
+                    />
+                  </>
+                ) : null} */}
+                <Suspense fallback="Loading ChargedMoveSelectComponent ...">
+                  <ChargedMoveSelectComponent />
+                </Suspense>
               </div>
             </div>
 
