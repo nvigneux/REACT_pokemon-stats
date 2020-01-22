@@ -43,7 +43,7 @@ const useApi = (options = { trigger: false }) => {
         case 401:
           return setError("401 - Mot de passe ou utilisateur incorrect")
         case 403:
-          setError(
+          return setError(
             "403 - Votre authentification a expirée ou vous n'êtes pas authorisé à accéder à ce contenu"
           )
         case 412:

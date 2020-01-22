@@ -59,9 +59,20 @@ const Pokedex = () => {
 
   //TODO watch how to filter/modify the data with useApi when fetch is over
   useEffect(() => {
-    const orderPokemons = orderBy(dataPokemons, ["id_base_pokemon"], ["asc"])
-    setPokemons(orderPokemons)
+    if (dataPokemons && dataPokemons.length) {
+      const orderPokemons = orderBy(dataPokemons, ["id_base_pokemon"], ["asc"])
+      setPokemons(orderPokemons)
+    }
   }, [dataPokemons])
+
+  useEffect(() => {
+    if (dataQuickMoves && dataQuickMoves.length) setQuickMoves(dataQuickMoves)
+  }, [dataQuickMoves])
+
+  useEffect(() => {
+    if (dataChargedMoves && dataChargedMoves.length)
+      setChargedMoves(dataChargedMoves)
+  }, [dataChargedMoves])
 
   return (
     <Layout>
