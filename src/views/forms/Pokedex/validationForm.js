@@ -22,6 +22,14 @@ export const PokedexFormValidation = Yup.object().shape({
     .min(1, "level min 1")
     .max(40, "level max 40")
     .integer("No decimal value !"),
+  quick_move: Yup.object()
+    .shape({})
+    .nullable()
+    .required("Required"),
+  charged_move: Yup.object()
+    .shape({})
+    .nullable()
+    .required("Required"),
 })
 
 export const PokedexSelectValidation = Yup.object().shape({

@@ -1,11 +1,14 @@
 import React from "react"
 import { Field, ErrorMessage } from "formik"
 
+// TODO maybe move in validation file, the structure data is the same
 export const PokedexFormInitValues = {
   level: 1,
   iv_attack: 0,
   iv_defense: 0,
   iv_stamina: 0,
+  quick_move: null,
+  charged_move: null,
 }
 
 export const PokedexForm = () => (
