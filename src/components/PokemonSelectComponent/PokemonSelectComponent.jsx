@@ -8,7 +8,7 @@ import useApi from "../../hooks/useApi"
 import CustomDropdown from "../CustomDropdown"
 import OptionPokemon from "../OptionPokemon"
 
-const PokemonSelectComponent = () => {
+const PokemonSelectComponent = ({ showPokemonForm }) => {
   const [, dataPokemons, , { fetchPokemons }] = useApi()
   const [pokemons, setPokemons] = useState([])
 
@@ -29,20 +29,22 @@ const PokemonSelectComponent = () => {
         options={pokemons}
         optionComponent={<OptionPokemon />}
         isSearchable={false}
-        // isDisabled={showPokemonForm === "visible"}
+        isDisabled={showPokemonForm === "visible"}
         placeholder="Sélectionner un pokémon"
       />
-      {/* {showPokemonForm === "hidden" ? ( */}
-      <ErrorMessage
-        className="text-red-500 text-xs italic"
-        component="span"
-        name="pokemon"
-      />
-      {/* ) : null} */}
+      {showPokemonForm === "hidden" ? (
+        <ErrorMessage
+          className="text-red-500 text-xs italic"
+          component="span"
+          name="pokemon"
+        />
+      ) : null}
     </>
   )
 }
 
-PokemonSelectComponent.propTypes = {}
+PokemonSelectComponent.propTypes = {
+  showPokemonForm: PropTypes.string.isRequired,
+}
 
 export default PokemonSelectComponent

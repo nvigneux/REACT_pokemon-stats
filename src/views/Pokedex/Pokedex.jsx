@@ -146,7 +146,7 @@ const Pokedex = () => {
                   </>
                 ) : null}*/}
                 <Suspense fallback="Loading PokemonSelectComponent ...">
-                  <PokemonSelectComponent />
+                  <PokemonSelectComponent showPokemonForm={showPokemonForm} />
                 </Suspense>
               </div>
               {showPokemonForm === "visible" ? (
