@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 import { orderBy } from "lodash"
+import * as yup from "yup"
 
 import useApi from "../../hooks/useApi"
 import Layout from "../../components/Layout"
@@ -53,6 +54,20 @@ const PokedexValidationSchema = showPokemonForm => {
 const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
 
+  const percentageCompletion = formValues => {
+    const totalNode = PokedexValidationSchema(showPokemonForm)._nodes.length
+
+    PokedexValidationSchema(showPokemonForm)
+      .validate(formValues, { abortEarly: false })
+      .then(valid => {
+        console.log("valid:", valid)
+      })
+      .catch(err => {
+        const percentage = (err.inner.length / totalNode) * 100
+        console.log(100 - percentage)
+      })
+  }
+
   return (
     <Layout>
       {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
@@ -72,7 +87,6 @@ const Pokedex = () => {
             quick_move: 1,
             charged_move: 1,
           }
-
           //TODO refacto la condition d'envoi des forms si pokemon ou non
           axios({
             method: "POST",
@@ -89,6 +103,7 @@ const Pokedex = () => {
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col">
+            <span onClick={() => percentageCompletion(props.values)}>Test</span>
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading PokemonSelectComponent ...">
