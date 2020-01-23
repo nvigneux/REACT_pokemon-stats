@@ -58,6 +58,12 @@ const useApi = (options = { trigger: false }) => {
     return resError
   }
 
+  /**
+   * Maybe if your data will always be the same make transformation in a then vefore setPayload
+   * If the data is differents for the same call make the transformation in the render of your component
+   * Use a state if you use the Set, you avoid re render
+   */
+
   const fetchPokemons = async () => {
     return request("GET", "/pokemons", null)
       .then(responseHandler)

@@ -8,7 +8,9 @@ import useApi from "../../hooks/useApi"
 import CustomDropdown from "../CustomDropdown"
 import OptionPokemon from "../OptionPokemon"
 
+// TODO try to make the call api before the render of component
 const QuickMoveSelectComponent = () => {
+  // TODO delete state on each ComponentSelect we don't need it
   const [, dataQuickMoves, , { fetchQuickMoves }] = useApi()
   const [quickMoves, setQuickMoves] = useState([])
 
