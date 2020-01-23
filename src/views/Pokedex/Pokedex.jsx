@@ -63,6 +63,7 @@ const Pokedex = () => {
         console.log("valid:", valid)
       })
       .catch(err => {
+        // TODO filter the inner tab by name field
         const percentage = (err.inner.length / totalNode) * 100
         console.log(100 - percentage)
       })
