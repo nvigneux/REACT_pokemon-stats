@@ -8,7 +8,7 @@ import useApi from "../../hooks/useApi"
 import CustomDropdown from "../CustomDropdown"
 import OptionPokemon from "../OptionPokemon"
 
-const PokemonSelectComponent = ({ showPokemonForm }) => {
+const PokemonSelect = ({ showPokemonForm }) => {
   const [, dataPokemons, , { fetchPokemons }] = useApi()
   const [pokemons, setPokemons] = useState([])
 
@@ -43,8 +43,8 @@ const PokemonSelectComponent = ({ showPokemonForm }) => {
   )
 }
 
-PokemonSelectComponent.propTypes = {
+PokemonSelect.propTypes = {
   showPokemonForm: PropTypes.string.isRequired,
 }
 
-export default PokemonSelectComponent
+export default PokemonSelect

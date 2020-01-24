@@ -8,26 +8,27 @@ import useApi from "../../hooks/useApi"
 import CustomDropdown from "../CustomDropdown"
 import OptionPokemon from "../OptionPokemon"
 
-const ChargedMoveSelectComponent = () => {
-  const [, dataChargedMoves, , { fetchChargedMoves }] = useApi()
-  const [chargedMoves, setChargedMoves] = useState([])
+// TODO try to make the call api before the render of component
+const QuickMoveSelect = () => {
+  // TODO delete state on each ComponentSelect we don't need it
+  const [, dataQuickMoves, , { fetchQuickMoves }] = useApi()
+  const [quickMoves, setQuickMoves] = useState([])
 
   useEffect(() => {
-    fetchChargedMoves()
+    fetchQuickMoves()
   }, [])
 
   useEffect(() => {
-    if (dataChargedMoves && dataChargedMoves.length)
-      setChargedMoves(dataChargedMoves)
-  }, [dataChargedMoves])
+    if (dataQuickMoves && dataQuickMoves.length) setQuickMoves(dataQuickMoves)
+  }, [dataQuickMoves])
 
   return (
     <>
       <CustomDropdown
         label="Attaque rapide"
-        id="charged_move"
-        name="charged_move"
-        options={chargedMoves}
+        id="quick_move"
+        name="quick_move"
+        options={quickMoves}
         optionComponent={<OptionPokemon />}
         isSearchable={false}
         placeholder="Sélectionner l'attaque rapide"
@@ -35,12 +36,12 @@ const ChargedMoveSelectComponent = () => {
       <ErrorMessage
         className="text-red-500 text-xs italic"
         component="span"
-        name="charged_move"
+        name="quick_move"
       />
     </>
   )
 }
 
-ChargedMoveSelectComponent.propTypes = {}
+QuickMoveSelect.propTypes = {}
 
-export default ChargedMoveSelectComponent
+export default QuickMoveSelect

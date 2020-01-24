@@ -25,28 +25,19 @@ import {
 import { QUICK_MOVES } from "../../constants/moves"
 import { TYPES_ARRAY } from "../../constants/types"
 
-// TODO rename BiduleSelectComponent -> BiduleSelect
-const PokemonSelectComponent = lazy(() =>
-  import("../../components/PokemonSelectComponent")
-)
-const QuickMoveSelectComponent = lazy(() =>
-  import("../../components/QuickMoveSelectComponent")
-)
-const ChargedMoveSelectComponent = lazy(() =>
-  import("../../components/ChargedMoveSelectComponent")
+const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
+const QuickMoveSelect = lazy(() => import("../../components/QuickMoveSelect"))
+const ChargedMoveSelect = lazy(() =>
+  import("../../components/ChargedMoveSelect")
 )
 
 const PokedexValidationSchema = showPokemonForm => {
-  const pokemonExistValidation = PokedexFormValidation.concat(
-    PokedexSelectValidation
-  )
-  const pokemonNotExistValidation = PokedexFormValidation.concat(
-    PokemonFormValidation
-  )
+  let pokemonValidation = PokedexFormValidation
 
-  return showPokemonForm !== "visible"
-    ? pokemonExistValidation
-    : pokemonNotExistValidation
+  if (showPokemonForm === "visible")
+    pokemonValidation = pokemonValidation.concat(PokemonFormValidation)
+
+  return pokemonValidation
 }
 
 const PokedexValueSchema = {
@@ -55,10 +46,9 @@ const PokedexValueSchema = {
   ...PokemonFormInitValues,
 }
 
-// TODO make a Loading component for fallback SelectComponent
+// TODO make a Loading component for fallback Select
 const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
-  const [formCompletion, setformCompletion] = useState(0)
 
   return (
     <Layout>
@@ -92,8 +82,8 @@ const Pokedex = () => {
           <Form className="bg-white flex flex-col">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback="Loading PokemonSelectComponent ...">
-                  <PokemonSelectComponent showPokemonForm={showPokemonForm} />
+                <Suspense fallback="Loading PokemonSelect ...">
+                  <PokemonSelect showPokemonForm={showPokemonForm} />
                 </Suspense>
               </div>
               {showPokemonForm === "visible" ? (
@@ -116,16 +106,16 @@ const Pokedex = () => {
             {/* TODO make optionMove for select */}
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback="Loading QuickMoveSelectComponent ...">
-                  <QuickMoveSelectComponent />
+                <Suspense fallback="Loading QuickMoveSelect ...">
+                  <QuickMoveSelect />
                 </Suspense>
               </div>
             </div>
 
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
-                <Suspense fallback="Loading ChargedMoveSelectComponent ...">
-                  <ChargedMoveSelectComponent />
+                <Suspense fallback="Loading ChargedMoveSelect ...">
+                  <ChargedMoveSelect />
                 </Suspense>
               </div>
             </div>
