@@ -1,8 +1,6 @@
 import React, { Suspense, lazy, useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
-import { uniqBy } from "lodash"
-import * as yup from "yup"
 
 import useApi from "../../hooks/useApi"
 import Layout from "../../components/Layout"
@@ -62,31 +60,11 @@ const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
   const [formCompletion, setformCompletion] = useState(0)
 
-  const percentageCompletion = formValues => {
-    const totalNode = PokedexValidationSchema(showPokemonForm)._nodes.length
-
-    PokedexValidationSchema(showPokemonForm)
-      .validate(formValues, { abortEarly: false })
-      .then(() => {
-        setformCompletion(100)
-      })
-      .catch(err => {
-        const validationNode = uniqBy(err.inner, "path") // case where a same field trigger many validation
-        const percentage = (validationNode.length / totalNode) * 100
-        setformCompletion(100 - percentage)
-      })
-  }
-
-  useEffect(() => {
-    percentageCompletion(PokedexValueSchema)
-  }, [])
-
   return (
     <Layout>
       {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
         Ajouter un pokémon
       </h1> */}
-      {/* TODO move pokemon init value */}
       <Formik
         initialValues={PokedexValueSchema}
         validationSchema={() => PokedexValidationSchema(showPokemonForm)}
@@ -134,10 +112,11 @@ const Pokedex = () => {
             </div>
 
             <PokedexForm />
+
+            {/* TODO make optionMove for select */}
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading QuickMoveSelectComponent ...">
-                  {/* TODO make optionMove for select */}
                   <QuickMoveSelectComponent />
                 </Suspense>
               </div>
@@ -184,17 +163,6 @@ const Pokedex = () => {
               Submit
             </button>
 
-            <div className="flex">
-              <span className="h-12 w-12 flex items-center justify-center text-white bg-blue-500 rounded-full border-blue-300 shadow-outline">
-                {`${Math.floor(formCompletion)} %`}
-              </span>
-              <button
-                className="bg-pink-500 hover:bg-pink-700 text-white px-2 py-1 ml-4 rounded self-center"
-                onClick={() => percentageCompletion(props.values)}
-              >
-                Test
-              </button>
-            </div>
             <DisplayFormikState {...props} />
           </Form>
         )}
