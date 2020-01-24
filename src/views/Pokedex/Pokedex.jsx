@@ -2,11 +2,9 @@ import React, { Suspense, lazy, useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 
-import useApi from "../../hooks/useApi"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
-import OptionPokemon from "../../components/OptionPokemon"
 import OptionType from "../../components/OptionType"
 import DisplayFormikState from "../forms/DisplayFormikState"
 
@@ -22,7 +20,6 @@ import {
   PokemonFormInitValues,
 } from "../forms/Pokemon"
 
-import { QUICK_MOVES } from "../../constants/moves"
 import { TYPES_ARRAY } from "../../constants/types"
 
 const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
@@ -36,6 +33,9 @@ const PokedexValidationSchema = showPokemonForm => {
 
   if (showPokemonForm === "visible")
     pokemonValidation = pokemonValidation.concat(PokemonFormValidation)
+
+  if (showPokemonForm === "hidden")
+    pokemonValidation = pokemonValidation.concat(PokedexSelectValidation)
 
   return pokemonValidation
 }
@@ -103,7 +103,6 @@ const Pokedex = () => {
 
             <PokedexForm />
 
-            {/* TODO make optionMove for select */}
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading QuickMoveSelect ...">
