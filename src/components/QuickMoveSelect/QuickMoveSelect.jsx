@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { orderBy } from "lodash"
 import { ErrorMessage } from "formik"
 
 import useApi from "../../hooks/useApi"
-
 import CustomDropdown from "../CustomDropdown"
-import OptionPokemon from "../OptionPokemon"
+import OptionMove from "../OptionMove"
 
 // TODO try to make the call api before the render of component
 const QuickMoveSelect = () => {
@@ -29,7 +26,7 @@ const QuickMoveSelect = () => {
         id="quick_move"
         name="quick_move"
         options={quickMoves}
-        optionComponent={<OptionPokemon />}
+        optionComponent={<OptionMove />}
         isSearchable={false}
         placeholder="Sélectionner l'attaque rapide"
       />

@@ -4,8 +4,7 @@ import { IMG_FORMAT, IMG_URL } from "../../constants/constant"
 
 const OptionPokemon = ({ id, name, id_base_pokemon }) => {
   return (
-    <div className="flex items-center">
-      <span className="mr-4 text-base text-gray-600 font-light">{`#${id_base_pokemon}`}</span>
+    <div className="flex justify-between items-center">
       <div className="flex items-center">
         <img
           className="h-8 mr-2"
@@ -14,6 +13,7 @@ const OptionPokemon = ({ id, name, id_base_pokemon }) => {
         />
         <div className="text-base text-gray-900 font-medium">{name}</div>
       </div>
+      <span className="text-base text-gray-600 font-light">{`#${id_base_pokemon}`}</span>
     </div>
   )
 }

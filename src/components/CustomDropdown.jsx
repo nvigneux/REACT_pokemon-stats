@@ -19,6 +19,13 @@ const MultiValueRemove = props => {
   )
 }
 
+const styles = {
+  singleValue: defaultStyles => ({
+    ...defaultStyles,
+    width: "92%",
+  }),
+}
+
 const CustomDropdown = ({
   options,
   optionComponent,
@@ -48,6 +55,7 @@ const CustomDropdown = ({
       <Select
         {...field}
         {...props}
+        styles={styles}
         components={{ MultiValueLabel, MultiValueRemove }}
         options={options}
         onBlur={updateBlur}

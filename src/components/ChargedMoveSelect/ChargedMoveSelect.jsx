@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { orderBy } from "lodash"
 import { ErrorMessage } from "formik"
 
 import useApi from "../../hooks/useApi"
 
 import CustomDropdown from "../CustomDropdown"
-import OptionPokemon from "../OptionPokemon"
+import OptionMove from "../OptionMove"
 
 const ChargedMoveSelect = () => {
   const [, dataChargedMoves, , { fetchChargedMoves }] = useApi()
@@ -28,7 +26,7 @@ const ChargedMoveSelect = () => {
         id="charged_move"
         name="charged_move"
         options={chargedMoves}
-        optionComponent={<OptionPokemon />}
+        optionComponent={<OptionMove />}
         isSearchable={false}
         placeholder="Sélectionner l'attaque rapide"
       />
