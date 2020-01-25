@@ -8368,6 +8368,11 @@ react-select@^3.0.8:
     react-input-autosize "^2.2.2"
     react-transition-group "^2.2.1"
 
+react-suspense-fetch@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-suspense-fetch/-/react-suspense-fetch-0.1.0.tgz#7e05e2ebdc17595e3a56d87a8d8668470c3a6444"
+  integrity sha512-Sy1UjjhwoZKrKklR6rbJNXEQEGGS7p4xCvDolq3jOLXTwhMRZXo8C5HhWanxD0uhx1acd0AbQ6MXBsXFh3S/DQ==
+
 react-transition-group@^2.2.1:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
