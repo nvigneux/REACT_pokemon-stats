@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
+import { prefetch } from "react-suspense-fetch"
 
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
@@ -28,27 +29,37 @@ const ChargedMoveSelect = lazy(() =>
   import("../../components/ChargedMoveSelect")
 )
 
-const PokedexValidationSchema = showPokemonForm => {
-  let pokemonValidation = PokedexFormValidation
-
-  if (showPokemonForm === "visible")
-    pokemonValidation = pokemonValidation.concat(PokemonFormValidation)
-
-  if (showPokemonForm === "hidden")
-    pokemonValidation = pokemonValidation.concat(PokedexSelectValidation)
-
-  return pokemonValidation
-}
-
-const PokedexValueSchema = {
-  pokemon: null,
-  ...PokedexFormInitValues,
-  ...PokemonFormInitValues,
-}
+const pokemons = prefetch(async () =>
+  (await fetch("http://localhost:1337/pokemons")).json()
+)
+const quickMoves = prefetch(async () =>
+  (await fetch("http://localhost:1337/quick-moves")).json()
+)
+const chargedMoves = prefetch(async () =>
+  (await fetch("http://localhost:1337/charged-moves")).json()
+)
 
 // TODO make a Loading component for fallback Select
 const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
+
+  const PokedexValidationSchema = showPokemonForm => {
+    let pokemonValidation = PokedexFormValidation
+
+    if (showPokemonForm === "visible")
+      pokemonValidation = pokemonValidation.concat(PokemonFormValidation)
+
+    if (showPokemonForm === "hidden")
+      pokemonValidation = pokemonValidation.concat(PokedexSelectValidation)
+
+    return pokemonValidation
+  }
+
+  const PokedexValueSchema = {
+    pokemon: null,
+    ...PokedexFormInitValues,
+    ...PokemonFormInitValues,
+  }
 
   return (
     <Layout>
@@ -83,7 +94,10 @@ const Pokedex = () => {
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading PokemonSelect ...">
-                  <PokemonSelect showPokemonForm={showPokemonForm} />
+                  <PokemonSelect
+                    pokemons={pokemons}
+                    showPokemonForm={showPokemonForm}
+                  />
                 </Suspense>
               </div>
               {showPokemonForm === "visible" ? (
@@ -106,7 +120,7 @@ const Pokedex = () => {
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading QuickMoveSelect ...">
-                  <QuickMoveSelect />
+                  <QuickMoveSelect quickMoves={quickMoves} />
                 </Suspense>
               </div>
             </div>
@@ -114,7 +128,7 @@ const Pokedex = () => {
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
                 <Suspense fallback="Loading ChargedMoveSelect ...">
-                  <ChargedMoveSelect />
+                  <ChargedMoveSelect chargedMoves={chargedMoves} />
                 </Suspense>
               </div>
             </div>
