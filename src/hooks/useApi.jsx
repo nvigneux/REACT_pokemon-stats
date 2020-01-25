@@ -64,32 +64,32 @@ const useApi = (options = { trigger: false }) => {
    * Use a state if you use the Set, you avoid re render
    */
 
-  const fetchPokemons = async () => {
-    return request("GET", "/pokemons", null)
-      .then(responseHandler)
-      .catch(errorHandler)
-  }
+  // const fetchPokemons = async () => {
+  //   return request("GET", "/pokemons", null)
+  //     .then(responseHandler)
+  //     .catch(errorHandler)
+  // }
 
-  const fetchQuickMoves = async () => {
-    return request("GET", "/quick-moves", null)
-      .then(responseHandler)
-      .catch(errorHandler)
-  }
+  // const fetchQuickMoves = async () => {
+  //   return request("GET", "/quick-moves", null)
+  //     .then(responseHandler)
+  //     .catch(errorHandler)
+  // }
 
-  const fetchChargedMoves = async () => {
-    return request("GET", "/charged-moves", null)
-      .then(responseHandler)
-      .catch(errorHandler)
-  }
+  // const fetchChargedMoves = async () => {
+  //   return request("GET", "/charged-moves", null)
+  //     .then(responseHandler)
+  //     .catch(errorHandler)
+  // }
 
   return [
     loading,
     payload,
     error,
     {
-      fetchPokemons,
-      fetchQuickMoves,
-      fetchChargedMoves,
+      // fetchPokemons,
+      // fetchQuickMoves,
+      // fetchChargedMoves,
     },
   ]
 }
