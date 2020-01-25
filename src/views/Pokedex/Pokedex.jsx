@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react"
+import React, { Suspense, lazy, useState } from "react"
 import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 import { prefetch } from "react-suspense-fetch"
@@ -24,10 +24,7 @@ import {
 import { TYPES_ARRAY } from "../../constants/types"
 
 const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
-const QuickMoveSelect = lazy(() => import("../../components/QuickMoveSelect"))
-const ChargedMoveSelect = lazy(() =>
-  import("../../components/ChargedMoveSelect")
-)
+const MoveSelect = lazy(() => import("../../components/MoveSelect"))
 
 const pokemons = prefetch(async () =>
   (await fetch("http://localhost:1337/pokemons")).json()
@@ -120,7 +117,7 @@ const Pokedex = () => {
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <Suspense fallback="Loading QuickMoveSelect ...">
-                  <QuickMoveSelect quickMoves={quickMoves} />
+                  <MoveSelect name="quick_moves" moves={quickMoves} />
                 </Suspense>
               </div>
             </div>
@@ -128,7 +125,7 @@ const Pokedex = () => {
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
                 <Suspense fallback="Loading ChargedMoveSelect ...">
-                  <ChargedMoveSelect chargedMoves={chargedMoves} />
+                  <MoveSelect name="charged_moves" moves={chargedMoves} />
                 </Suspense>
               </div>
             </div>
