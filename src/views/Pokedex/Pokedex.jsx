@@ -3,6 +3,7 @@ import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
 import { prefetch } from "react-suspense-fetch"
 
+import ErrorBoundary from "../../hooks/ErrorBoundary"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
@@ -67,35 +68,58 @@ const Pokedex = () => {
         initialValues={PokedexValueSchema}
         validationSchema={() => PokedexValidationSchema(showPokemonForm)}
         onSubmit={(values, actions) => {
-          const references = {
-            user: 1,
-            quick_move: 1,
-            charged_move: 1,
+          if (showPokemonForm === "visible") {
+            axios({
+              method: "POST",
+              url: "http://localhost:1337/pokemons",
+              data: { ...values },
+            })
+              .then(res => {
+                axios({
+                  method: "POST",
+                  url: "http://localhost:1337/pokedexes",
+                  data: { ...values, pokemon: res.data.id, user: 1 },
+                })
+                  .then(res => {
+                    console.log("res, set message confirmation")
+                  })
+                  .catch(error => {
+                    console.log(error)
+                  })
+              })
+              .catch(error => {
+                console.log(error)
+              })
           }
-          //TODO refacto la condition d'envoi des forms si pokemon ou non
-          axios({
-            method: "POST",
-            url: "http://localhost:1337/pokedexes",
-            data: { ...values, ...references, pokemon: values.pokemon.id },
-          })
-            .then(() => {
-              actions.setSubmitting(false)
+
+          if (showPokemonForm === "hidden") {
+            axios({
+              method: "POST",
+              url: "http://localhost:1337/pokedexes",
+              data: { ...values, user: 1 },
             })
-            .catch(() => {
-              actions.setSubmitting(false)
-            })
+              .then(() => {
+                console.log("res, set message confirmation")
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }
         }}
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback={<LoadingSelect />}>
-                  <PokemonSelect
-                    pokemons={pokemons}
-                    showPokemonForm={showPokemonForm}
-                  />
-                </Suspense>
+                <ErrorBoundary fallback={<LoadingSelect />}>
+                  <Suspense fallback={<LoadingSelect />}>
+                    {/* TODO style select box */}
+                    <PokemonSelect
+                      pokemons={pokemons}
+                      showPokemonForm={showPokemonForm}
+                    />
+                  </Suspense>
+                </ErrorBoundary>
               </div>
               {showPokemonForm === "visible" ? (
                 <Link
@@ -116,30 +140,35 @@ const Pokedex = () => {
 
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback={<LoadingSelect labelWidth="24" />}>
-                  <MoveSelect
-                    label="attaque rapide"
-                    name="quick_move"
-                    moves={quickMoves}
-                  />
-                </Suspense>
+                <ErrorBoundary fallback={<LoadingSelect />}>
+                  <Suspense fallback={<LoadingSelect labelWidth="24" />}>
+                    <MoveSelect
+                      label="attaque rapide"
+                      name="quick_move"
+                      moves={quickMoves}
+                    />
+                  </Suspense>
+                </ErrorBoundary>
               </div>
             </div>
 
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
-                <Suspense fallback={<LoadingSelect labelWidth="24" />}>
-                  <MoveSelect
-                    label="attaque chargé"
-                    name="charged_move"
-                    moves={chargedMoves}
-                  />
-                </Suspense>
+                <ErrorBoundary fallback={<LoadingSelect />}>
+                  <Suspense fallback={<LoadingSelect labelWidth="24" />}>
+                    <MoveSelect
+                      label="attaque chargé"
+                      name="charged_move"
+                      moves={chargedMoves}
+                    />
+                  </Suspense>
+                </ErrorBoundary>
               </div>
             </div>
 
             {showPokemonForm === "visible" ? (
               <>
+                <span className="w-full h-px mt-2 mb-3 bg-gray-200"></span>
                 <PokemonForm />
                 <div className="mb-3 px-1">
                   <div className="flex flex-col">
@@ -168,10 +197,10 @@ const Pokedex = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              Submit
+              Envoyer
             </button>
 
-            <DisplayFormikState {...props} />
+            {/* <DisplayFormikState {...props} /> */}
           </Form>
         )}
       </Formik>
