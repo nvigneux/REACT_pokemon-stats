@@ -3,12 +3,12 @@ import PropTypes from "prop-types"
 
 import { IMG_FORMAT, IMG_URL } from "../../constants/constant"
 
-const OptionPokemon = ({ id, name, id_base_pokemon }) => (
+const OptionPokemon = ({ name, id_base_pokemon }) => (
   <div className="flex justify-between items-center">
     <div className="flex items-center">
       <img
         className="h-8 mr-2"
-        src={IMG_URL + id + IMG_FORMAT}
+        src={IMG_URL + id_base_pokemon + IMG_FORMAT}
         alt={`${name}`}
       />
       <div className="text-base text-gray-900 font-medium">{name}</div>
@@ -19,7 +19,6 @@ const OptionPokemon = ({ id, name, id_base_pokemon }) => (
 
 // Problem PropTypes & Suspense & React Select
 OptionPokemon.propTypes = {
-  // id: PropTypes.number.isRequired,
   // name: PropTypes.string.isRequired,
   // id_base_pokemon: PropTypes.number.isRequired,
 }
