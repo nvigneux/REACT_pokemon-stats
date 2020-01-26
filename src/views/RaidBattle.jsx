@@ -82,7 +82,6 @@ const RaidBattle = () => {
     }
   }, [pokemons, activeBoss, activeWeather])
 
-  // TODO watch if memo can be useful
   return (
     <Layout>
       <WeatherSelect

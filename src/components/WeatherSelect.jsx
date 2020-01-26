@@ -33,4 +33,4 @@ const WeatherSelect = ({ values, activeValue, select }) => (
   </div>
 )
 
-export default WeatherSelect
+export default React.memo(WeatherSelect)
