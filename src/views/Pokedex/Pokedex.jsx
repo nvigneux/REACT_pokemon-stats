@@ -119,7 +119,7 @@ const Pokedex = () => {
                 <Suspense fallback={<LoadingSelect labelWidth="24" />}>
                   <MoveSelect
                     label="attaque rapide"
-                    name="quick_moves"
+                    name="quick_move"
                     moves={quickMoves}
                   />
                 </Suspense>
@@ -131,7 +131,7 @@ const Pokedex = () => {
                 <Suspense fallback={<LoadingSelect labelWidth="24" />}>
                   <MoveSelect
                     label="attaque chargé"
-                    name="charged_moves"
+                    name="charged_move"
                     moves={chargedMoves}
                   />
                 </Suspense>
