@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import PropTypes from "prop-types"
 import { ErrorMessage } from "formik"
 
 import CustomDropdown from "../CustomDropdown"
@@ -23,7 +24,10 @@ const MoveSelect = ({ label, name, moves }) => (
   </>
 )
 
-//TODO rework proptype
-MoveSelect.propTypes = {}
+MoveSelect.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  moves: PropTypes.any.isRequired,
+}
 
 export default MoveSelect

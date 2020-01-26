@@ -73,7 +73,7 @@ const CustomDropdown = ({
 }
 
 CustomDropdown.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.any.isRequired,
   optionComponent: PropTypes.node.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

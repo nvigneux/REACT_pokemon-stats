@@ -25,6 +25,8 @@ const ChargedMoveSelect = ({ chargedMoves }) => (
   </>
 )
 
-ChargedMoveSelect.propTypes = {}
+ChargedMoveSelect.propTypes = {
+  chargedMoves: PropTypes.any.isRequired,
+}
 
 export default ChargedMoveSelect
