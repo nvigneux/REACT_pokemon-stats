@@ -8,6 +8,7 @@ import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionType from "../../components/OptionType"
 import DisplayFormikState from "../forms/DisplayFormikState"
+import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
 
 import {
   PokedexFormValidation,
@@ -36,7 +37,6 @@ const chargedMoves = prefetch(async () =>
   (await fetch("http://localhost:1337/charged-moves")).json()
 )
 
-// TODO make a Loading component for fallback Select
 const Pokedex = () => {
   const [showPokemonForm, setShowPokemonForm] = useState("hidden")
 
@@ -90,7 +90,7 @@ const Pokedex = () => {
           <Form className="bg-white flex flex-col">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback="Loading PokemonSelect ...">
+                <Suspense fallback={<LoadingSelect />}>
                   <PokemonSelect
                     pokemons={pokemons}
                     showPokemonForm={showPokemonForm}
@@ -116,16 +116,24 @@ const Pokedex = () => {
 
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <Suspense fallback="Loading QuickMoveSelect ...">
-                  <MoveSelect name="quick_moves" moves={quickMoves} />
+                <Suspense fallback={<LoadingSelect labelWidth="24" />}>
+                  <MoveSelect
+                    label="attaque rapide"
+                    name="quick_moves"
+                    moves={quickMoves}
+                  />
                 </Suspense>
               </div>
             </div>
 
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
-                <Suspense fallback="Loading ChargedMoveSelect ...">
-                  <MoveSelect name="charged_moves" moves={chargedMoves} />
+                <Suspense fallback={<LoadingSelect labelWidth="24" />}>
+                  <MoveSelect
+                    label="attaque chargé"
+                    name="charged_moves"
+                    moves={chargedMoves}
+                  />
                 </Suspense>
               </div>
             </div>

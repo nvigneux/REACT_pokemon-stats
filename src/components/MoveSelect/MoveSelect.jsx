@@ -4,16 +4,16 @@ import { ErrorMessage } from "formik"
 import CustomDropdown from "../CustomDropdown"
 import OptionMove from "../OptionMove"
 
-const MoveSelect = ({ name, moves }) => (
+const MoveSelect = ({ label, name, moves }) => (
   <>
     <CustomDropdown
-      label="Attaque rapide"
+      label={label}
       id={name}
       name={name}
       options={moves}
       optionComponent={<OptionMove />}
       isSearchable={false}
-      placeholder="Sélectionner l'attaque rapide"
+      placeholder={`Sélectionner l'${label}`}
     />
     <ErrorMessage
       className="text-red-500 text-xs italic"
@@ -23,6 +23,7 @@ const MoveSelect = ({ name, moves }) => (
   </>
 )
 
+//TODO rework proptype
 MoveSelect.propTypes = {}
 
 export default MoveSelect

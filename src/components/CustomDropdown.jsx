@@ -47,7 +47,7 @@ const CustomDropdown = ({
   return (
     <>
       <label
-        className="block text-gray-700 text-sm font-bold mb-3"
+        className="capitalize block text-gray-700 text-sm font-bold mb-3"
         htmlFor={name}
       >
         {label}
