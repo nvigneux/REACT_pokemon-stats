@@ -9,12 +9,14 @@ import OptionPokemon from "../OptionPokemon"
 const PokemonSelect = ({ pokemons, showPokemonForm }) => (
   <>
     <CustomDropdown
-      label="Pokemons"
+      label="Pokemon"
       id="pokemon"
       name="pokemon"
-      options={pokemons}
+      options={orderBy(pokemons, ["id_base_pokemon"], ["asc"])}
       optionComponent={<OptionPokemon />}
-      isSearchable={false}
+      isSearchable
+      getOptionLabel={option => option.name}
+      getOptionValue={option => option.id_base_pokemon}
       isDisabled={showPokemonForm === "visible"}
       placeholder="Sélectionner un pokémon"
     />
