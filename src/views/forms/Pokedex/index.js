@@ -1,5 +1,6 @@
-export { PokedexForm, PokedexFormInitValues } from "./Pokedex"
+export { PokedexForm } from "./Pokedex"
 export {
   PokedexFormValidation,
   PokedexSelectValidation,
+  PokedexFormInitValues,
 } from "./validationForm"

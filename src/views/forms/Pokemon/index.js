@@ -1,2 +1,2 @@
-export { PokemonForm, PokemonFormInitValues } from "./Pokemon"
-export { PokemonFormValidation } from "./validationForm"
+export { PokemonForm } from "./Pokemon"
+export { PokemonFormValidation, PokemonFormInitValues } from "./validationForm"

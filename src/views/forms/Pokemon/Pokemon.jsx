@@ -1,15 +1,6 @@
 import React from "react"
 import { Field, ErrorMessage } from "formik"
 
-export const PokemonFormInitValues = {
-  id_base_pokemon: 0,
-  name: "",
-  attack: 0,
-  defense: 0,
-  stamina: 0,
-  type: [],
-}
-
 export const PokemonForm = () => (
   <div className="bg-white flex flex-col">
     <div className="flex flex-wrap">
