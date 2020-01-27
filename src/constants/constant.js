@@ -7,7 +7,7 @@ export const IMG_URL =
 
 export const API_URL = "http://localhost:1337"
 
-export const API_POKEMONS = "http://localhost:1337/pokemons"
-export const API_POKEDEXES = "http://localhost:1337/pokedexes"
-export const API_QUICK_MOVE = "http://localhost:1337/quick-moves"
-export const API_CHARGED_MOVE = "http://localhost:1337/charged-moves"
+export const API_POKEMONS = API_URL + "/pokemons"
+export const API_POKEDEXES = API_URL + "/pokedexes"
+export const API_QUICK_MOVE = API_URL + "/quick-moves"
+export const API_CHARGED_MOVE = API_URL + "/charged-moves"

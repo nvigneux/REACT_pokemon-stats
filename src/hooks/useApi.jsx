@@ -1,8 +1,15 @@
 import { useState } from "react"
 import axios from "axios"
+import { prefetch } from "react-suspense-fetch"
 
 // Utils & misc
-import { API_URL } from "../constants/constant"
+import {
+  API_URL,
+  API_POKEDEXES,
+  API_POKEMONS,
+  API_QUICK_MOVE,
+  API_CHARGED_MOVE,
+} from "../constants/constant"
 
 const useApi = (options = { trigger: false }) => {
   const { trigger } = options
@@ -64,34 +71,41 @@ const useApi = (options = { trigger: false }) => {
    * Use a state if you use the Set, you avoid re render
    */
 
-  // const fetchPokemons = async () => {
-  //   return request("GET", "/pokemons", null)
-  //     .then(responseHandler)
-  //     .catch(errorHandler)
-  // }
+  const postPokemon = data => {
+    return axios({
+      method: "post",
+      url: API_POKEMONS,
+      data,
+    })
+  }
 
-  // const fetchQuickMoves = async () => {
-  //   return request("GET", "/quick-moves", null)
-  //     .then(responseHandler)
-  //     .catch(errorHandler)
-  // }
-
-  // const fetchChargedMoves = async () => {
-  //   return request("GET", "/charged-moves", null)
-  //     .then(responseHandler)
-  //     .catch(errorHandler)
-  // }
+  const postPokedex = data => {
+    return axios({
+      method: "post",
+      url: API_POKEDEXES,
+      data,
+    })
+  }
 
   return [
     loading,
     payload,
     error,
     {
-      // fetchPokemons,
-      // fetchQuickMoves,
-      // fetchChargedMoves,
+      postPokemon,
+      postPokedex,
     },
   ]
 }
+
+// TODO PUT ORDER BY HERE ?
+export const prefetchPokemons = () =>
+  prefetch(async () => (await fetch(API_POKEMONS)).json())
+
+export const prefetchQuickMoves = () =>
+  prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
+
+export const prefetchChargedMoves = () =>
+  prefetch(async () => (await fetch(API_CHARGED_MOVE)).json())
 
 export default useApi

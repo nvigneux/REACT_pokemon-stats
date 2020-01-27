@@ -7,6 +7,7 @@ export const PokedexFormInitValues = {
   iv_stamina: 0,
   quick_move: null,
   charged_move: null,
+  pokemon: null,
 }
 
 export const PokedexFormValidation = Yup.object().shape({

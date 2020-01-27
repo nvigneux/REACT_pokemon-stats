@@ -1,8 +1,11 @@
 import React, { Suspense, lazy, useState } from "react"
-import axios from "axios"
 import { Formik, Form, ErrorMessage } from "formik"
-import { prefetch } from "react-suspense-fetch"
 
+import useApi, {
+  prefetchPokemons,
+  prefetchQuickMoves,
+  prefetchChargedMoves,
+} from "../../hooks/useApi"
 import ErrorBoundary from "../../hooks/ErrorBoundary"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
@@ -24,22 +27,14 @@ import {
   PokemonFormInitValues,
 } from "../forms/Pokemon"
 
-import {
-  API_POKEMONS,
-  API_POKEDEXES,
-  API_QUICK_MOVE,
-  API_CHARGED_MOVE,
-} from "../../constants/constant"
 import { TYPES_ARRAY } from "../../constants/types"
 
 const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
 const MoveSelect = lazy(() => import("../../components/MoveSelect"))
 
-const pokemons = prefetch(async () => (await fetch(API_POKEMONS)).json())
-const quickMoves = prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
-const chargedMoves = prefetch(async () =>
-  (await fetch(API_CHARGED_MOVE)).json()
-)
+const pokemons = prefetchPokemons()
+const quickMoves = prefetchQuickMoves()
+const chargedMoves = prefetchChargedMoves()
 
 const Pokedex = () => {
   const [isPokemonFormVisible, setisPokemonFormVisible] = useState(false)
@@ -57,45 +52,16 @@ const Pokedex = () => {
   }
 
   const PokedexValueSchema = {
-    pokemon: null,
     ...PokedexFormInitValues,
     ...PokemonFormInitValues,
   }
 
   const handleSubmitForm = values => {
     isPokemonFormVisible
-      ? axios({
-          method: "POST",
-          url: API_POKEMONS,
-          data: { ...values },
+      ? useApi.postPokemon({ ...values }).then(res => {
+          useApi.postPokedex({ ...values, pokemon: res.data.id, user: 1 })
         })
-          .then(res => {
-            axios({
-              method: "POST",
-              url: API_POKEDEXES,
-              data: { ...values, pokemon: res.data.id, user: 1 },
-            })
-              .then(res => {
-                console.log("res, set message confirmation")
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      : axios({
-          method: "POST",
-          url: API_POKEDEXES,
-          data: { ...values, user: 1 },
-        })
-          .then(() => {
-            console.log("res, set message confirmation")
-          })
-          .catch(error => {
-            console.log(error)
-          })
+      : useApi.postPokedex({ ...values, user: 1 })
   }
 
   return (
