@@ -6,7 +6,7 @@ import { ErrorMessage } from "formik"
 import CustomDropdown from "../CustomDropdown"
 import OptionPokemon from "../OptionPokemon"
 
-const PokemonSelect = ({ pokemons, showPokemonForm }) => (
+const PokemonSelect = ({ pokemons, isPokemonFormVisible }) => (
   <>
     <CustomDropdown
       label="Pokemon"
@@ -17,10 +17,10 @@ const PokemonSelect = ({ pokemons, showPokemonForm }) => (
       isSearchable
       getOptionLabel={option => option.name}
       getOptionValue={option => option.id_base_pokemon}
-      isDisabled={showPokemonForm === "visible"}
+      isDisabled={isPokemonFormVisible}
       placeholder="Sélectionner un pokémon"
     />
-    {showPokemonForm === "hidden" ? (
+    {!isPokemonFormVisible ? (
       <ErrorMessage
         className="text-red-500 text-xs italic"
         component="span"
@@ -31,7 +31,7 @@ const PokemonSelect = ({ pokemons, showPokemonForm }) => (
 )
 
 PokemonSelect.propTypes = {
-  showPokemonForm: PropTypes.string.isRequired,
+  isPokemonFormVisible: PropTypes.bool.isRequired,
 }
 
 export default PokemonSelect

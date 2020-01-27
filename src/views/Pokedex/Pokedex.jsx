@@ -8,8 +8,9 @@ import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionType from "../../components/OptionType"
-import DisplayFormikState from "../forms/DisplayFormikState"
 import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
+
+import DisplayFormikState from "../forms/DisplayFormikState"
 
 import {
   PokedexFormValidation,
@@ -23,31 +24,33 @@ import {
   PokemonFormInitValues,
 } from "../forms/Pokemon"
 
+import {
+  API_POKEMONS,
+  API_POKEDEXES,
+  API_QUICK_MOVE,
+  API_CHARGED_MOVE,
+} from "../../constants/constant"
 import { TYPES_ARRAY } from "../../constants/types"
 
 const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
 const MoveSelect = lazy(() => import("../../components/MoveSelect"))
 
-const pokemons = prefetch(async () =>
-  (await fetch("http://localhost:1337/pokemons")).json()
-)
-const quickMoves = prefetch(async () =>
-  (await fetch("http://localhost:1337/quick-moves")).json()
-)
+const pokemons = prefetch(async () => (await fetch(API_POKEMONS)).json())
+const quickMoves = prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
 const chargedMoves = prefetch(async () =>
-  (await fetch("http://localhost:1337/charged-moves")).json()
+  (await fetch(API_CHARGED_MOVE)).json()
 )
 
 const Pokedex = () => {
-  const [showPokemonForm, setShowPokemonForm] = useState("hidden")
+  const [isPokemonFormVisible, setisPokemonFormVisible] = useState(false)
 
-  const PokedexValidationSchema = showPokemonForm => {
+  const PokedexValidationSchema = isPokemonFormVisible => {
     let pokemonValidation = PokedexFormValidation
 
-    if (showPokemonForm === "visible")
+    if (isPokemonFormVisible)
       pokemonValidation = pokemonValidation.concat(PokemonFormValidation)
 
-    if (showPokemonForm === "hidden")
+    if (!isPokemonFormVisible)
       pokemonValidation = pokemonValidation.concat(PokedexSelectValidation)
 
     return pokemonValidation
@@ -59,6 +62,42 @@ const Pokedex = () => {
     ...PokemonFormInitValues,
   }
 
+  const handleSubmitForm = values => {
+    isPokemonFormVisible
+      ? axios({
+          method: "POST",
+          url: API_POKEMONS,
+          data: { ...values },
+        })
+          .then(res => {
+            axios({
+              method: "POST",
+              url: API_POKEDEXES,
+              data: { ...values, pokemon: res.data.id, user: 1 },
+            })
+              .then(res => {
+                console.log("res, set message confirmation")
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      : axios({
+          method: "POST",
+          url: API_POKEDEXES,
+          data: { ...values, user: 1 },
+        })
+          .then(() => {
+            console.log("res, set message confirmation")
+          })
+          .catch(error => {
+            console.log(error)
+          })
+  }
+
   return (
     <Layout>
       {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
@@ -66,46 +105,8 @@ const Pokedex = () => {
       </h1> */}
       <Formik
         initialValues={PokedexValueSchema}
-        validationSchema={() => PokedexValidationSchema(showPokemonForm)}
-        onSubmit={(values, actions) => {
-          if (showPokemonForm === "visible") {
-            axios({
-              method: "POST",
-              url: "http://localhost:1337/pokemons",
-              data: { ...values },
-            })
-              .then(res => {
-                axios({
-                  method: "POST",
-                  url: "http://localhost:1337/pokedexes",
-                  data: { ...values, pokemon: res.data.id, user: 1 },
-                })
-                  .then(res => {
-                    console.log("res, set message confirmation")
-                  })
-                  .catch(error => {
-                    console.log(error)
-                  })
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }
-
-          if (showPokemonForm === "hidden") {
-            axios({
-              method: "POST",
-              url: "http://localhost:1337/pokedexes",
-              data: { ...values, user: 1 },
-            })
-              .then(() => {
-                console.log("res, set message confirmation")
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }
-        }}
+        validationSchema={() => PokedexValidationSchema(isPokemonFormVisible)}
+        onSubmit={values => handleSubmitForm(values)}
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col">
@@ -116,21 +117,21 @@ const Pokedex = () => {
                     {/* TODO style select box */}
                     <PokemonSelect
                       pokemons={pokemons}
-                      showPokemonForm={showPokemonForm}
+                      isPokemonFormVisible={isPokemonFormVisible}
                     />
                   </Suspense>
                 </ErrorBoundary>
               </div>
-              {showPokemonForm === "visible" ? (
+              {isPokemonFormVisible ? (
                 <Link
                   label="Je ne veux plus ajouter de pokemon."
-                  onClick={() => setShowPokemonForm("hidden")}
+                  onClick={() => setisPokemonFormVisible(false)}
                 />
               ) : (
                 <Link
                   label="Mon pokémon n'est pas dans la liste."
                   onClick={() => {
-                    setShowPokemonForm("visible")
+                    setisPokemonFormVisible(true)
                   }}
                 />
               )}
@@ -166,7 +167,7 @@ const Pokedex = () => {
               </div>
             </div>
 
-            {showPokemonForm === "visible" ? (
+            {isPokemonFormVisible ? (
               <>
                 <span className="w-full h-px mt-2 mb-3 bg-gray-200"></span>
                 <PokemonForm />
