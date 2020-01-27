@@ -26,6 +26,14 @@ body {
   overflow: auto;
 }
 
+@media screen and (max-width: 639px) {
+  .mobile-size {
+    height: initial;
+    width: 100%;
+    overflow: auto;
+  }
+}
+
 /* PLACEHOLDER BACKGROUND */
 @keyframes placeHolderShimmer {
   0% {
