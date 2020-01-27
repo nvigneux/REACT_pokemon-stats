@@ -5,10 +5,10 @@ export const BossFormValidation = () =>
     pokemon: Yup.object()
       .shape({})
       .nullable()
-      .required("Required"),
+      .required("Info Requise"),
     difficulty: Yup.number()
-      .required("Required")
+      .required("Info Requise")
       .min(1, "min 1")
       .max(5, "max 5")
-      .integer("No decimal value !"),
+      .integer("Nombre entier"),
   })

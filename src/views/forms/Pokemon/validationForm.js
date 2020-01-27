@@ -11,24 +11,24 @@ export const PokemonFormInitValues = {
 
 export const PokemonFormValidation = Yup.object().shape({
   id_base_pokemon: Yup.number()
-    .required("Required")
-    .positive("Positive number !")
-    .integer("No decimal value !"),
-  name: Yup.string().required("Required"),
+    .required("Info Requise")
+    .positive("Nombre positif")
+    .integer("Nombre entier"),
+  name: Yup.string().required("Info Requise"),
   attack: Yup.number()
-    .required("Required")
-    .positive("Positive number !")
-    .integer("No decimal value !"),
+    .required("Info Requise")
+    .positive("Nombre positif")
+    .integer("Nombre entier"),
   defense: Yup.number()
-    .required("Required")
-    .positive("Positive number !")
-    .integer("No decimal value !"),
+    .required("Info Requise")
+    .positive("Nombre positif")
+    .integer("Nombre entier"),
   stamina: Yup.number()
-    .required("Required")
-    .positive("Positive number !")
-    .integer("No decimal value !"),
+    .required("Info Requise")
+    .positive("Nombre positif")
+    .integer("Nombre entier"),
   type: Yup.array()
-    .required("Required")
+    .required("Info Requise")
     .nullable("React-Select fix Soon, null")
     .min(1, "min 1 type !")
     .max(2, "max 2 type"),

@@ -12,39 +12,39 @@ export const PokedexFormInitValues = {
 
 export const PokedexFormValidation = Yup.object().shape({
   iv_attack: Yup.number()
-    .required("Required")
+    .required("Info Requise")
     .min(0, "iv min 0")
     .max(15, "iv max 15")
-    .integer("No decimal value !"),
+    .integer("Nombre entier"),
   iv_defense: Yup.number()
-    .required("Required")
+    .required("Info Requise")
     .min(0, "iv min 0")
     .max(15, "iv max 15")
-    .integer("No decimal value !"),
+    .integer("Nombre entier"),
   iv_stamina: Yup.number()
-    .required("Required")
+    .required("Info Requise")
     .min(0, "iv min 0")
     .max(15, "iv max 15")
-    .integer("No decimal value !"),
+    .integer("Nombre entier"),
   level: Yup.number()
-    .required("Required")
-    .positive("Positive number !")
+    .required("Info Requise")
+    .positive("Nombre positif")
     .min(1, "level min 1")
     .max(40, "level max 40")
-    .integer("No decimal value !"),
+    .integer("Nombre entier"),
   quick_move: Yup.object()
     .shape({})
     .nullable()
-    .required("Required"),
+    .required("Info Requise"),
   charged_move: Yup.object()
     .shape({})
     .nullable()
-    .required("Required"),
+    .required("Info Requise"),
 })
 
 export const PokedexSelectValidation = Yup.object().shape({
   pokemon: Yup.object()
     .shape({})
     .nullable()
-    .required("Required"),
+    .required("Info Requise"),
 })
