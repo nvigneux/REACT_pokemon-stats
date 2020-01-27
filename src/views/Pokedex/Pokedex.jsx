@@ -2,6 +2,8 @@ import React, { Suspense, lazy, useState } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
 
 import useApi, {
+  postPokedex,
+  postPokemon,
   prefetchPokemons,
   prefetchQuickMoves,
   prefetchChargedMoves,
@@ -37,7 +39,7 @@ const quickMoves = prefetchQuickMoves()
 const chargedMoves = prefetchChargedMoves()
 
 const Pokedex = () => {
-  const [isPokemonFormVisible, setisPokemonFormVisible] = useState(false)
+  const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
 
   const PokedexValidationSchema = isPokemonFormVisible => {
     let pokemonValidation = PokedexFormValidation
@@ -56,12 +58,16 @@ const Pokedex = () => {
     ...PokemonFormInitValues,
   }
 
+  const handlePokemonFormVisibility = () => {
+    setIsPokemonFormVisible(!isPokemonFormVisible)
+  }
+
   const handleSubmitForm = values => {
     isPokemonFormVisible
-      ? useApi.postPokemon({ ...values }).then(res => {
-          useApi.postPokedex({ ...values, pokemon: res.data.id, user: 1 })
+      ? postPokemon({ ...values }).then(res => {
+          postPokedex({ ...values, pokemon: res.data.id, user: 1 })
         })
-      : useApi.postPokedex({ ...values, user: 1 })
+      : postPokedex({ ...values, user: 1 })
   }
 
   return (
@@ -88,19 +94,15 @@ const Pokedex = () => {
                   </Suspense>
                 </ErrorBoundary>
               </div>
-              {isPokemonFormVisible ? (
-                <Link
-                  label="Je ne veux plus ajouter de pokemon."
-                  onClick={() => setisPokemonFormVisible(false)}
-                />
-              ) : (
-                <Link
-                  label="Mon pokémon n'est pas dans la liste."
-                  onClick={() => {
-                    setisPokemonFormVisible(true)
-                  }}
-                />
-              )}
+
+              <Link
+                label={
+                  isPokemonFormVisible
+                    ? "Je ne veux plus ajouter de pokemon."
+                    : "Mon pokémon n'est pas dans la liste."
+                }
+                onClick={() => handlePokemonFormVisibility()}
+              />
             </div>
 
             <PokedexForm />
