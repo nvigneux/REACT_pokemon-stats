@@ -71,34 +71,28 @@ const useApi = (options = { trigger: false }) => {
    * Use a state if you use the Set, you avoid re render
    */
 
-  const postPokemon = data => {
-    return axios({
-      method: "post",
-      url: API_POKEMONS,
-      data,
-    })
-  }
-
-  const postPokedex = data => {
-    return axios({
-      method: "post",
-      url: API_POKEDEXES,
-      data,
-    })
-  }
-
-  return [
-    loading,
-    payload,
-    error,
-    {
-      postPokemon,
-      postPokedex,
-    },
-  ]
+  return [loading, payload, error, {}]
 }
 
-// TODO PUT ORDER BY HERE ?
+// TODO MAKE SUCCESS OR ERROR MESSAGES
+
+export const postPokemon = data => {
+  return axios({
+    method: "post",
+    url: API_POKEMONS,
+    data,
+  })
+}
+
+export const postPokedex = data => {
+  return axios({
+    method: "post",
+    url: API_POKEDEXES,
+    data,
+  })
+}
+
+// TODO PUT ORDER BY ON POKEMON HERE ?
 export const prefetchPokemons = () =>
   prefetch(async () => (await fetch(API_POKEMONS)).json())
 
