@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
 
-import useApi, {
+import {
   postPokedex,
   postPokemon,
   prefetchPokemons,
@@ -86,7 +86,6 @@ const Pokedex = () => {
               <div className="flex flex-col">
                 <ErrorBoundary fallback={<LoadingSelect />}>
                   <Suspense fallback={<LoadingSelect />}>
-                    {/* TODO style select box */}
                     <PokemonSelect
                       pokemons={pokemons}
                       isPokemonFormVisible={isPokemonFormVisible}
@@ -99,7 +98,7 @@ const Pokedex = () => {
                 label={
                   isPokemonFormVisible
                     ? "Je ne veux plus ajouter de pokemon."
-                    : "Mon pokémon n'est pas dans la liste."
+                    : "Mon pokémon n'est pas dans la liste ?"
                 }
                 onClick={handlePokemonFormVisibility}
               />
