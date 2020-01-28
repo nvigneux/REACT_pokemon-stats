@@ -41,7 +41,7 @@ const chargedMoves = prefetchChargedMoves()
 const Pokedex = () => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
 
-  const PokedexValidationSchema = isPokemonFormVisible => {
+  const PokedexValidationSchema = () => {
     let pokemonValidation = PokedexFormValidation
 
     if (isPokemonFormVisible)
@@ -77,8 +77,8 @@ const Pokedex = () => {
       </h1> */}
       <Formik
         initialValues={PokedexValueSchema}
-        validationSchema={() => PokedexValidationSchema(isPokemonFormVisible)}
-        onSubmit={values => handleSubmitForm(values)}
+        validationSchema={PokedexValidationSchema}
+        onSubmit={handleSubmitForm}
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col mt-2">
@@ -101,7 +101,7 @@ const Pokedex = () => {
                     ? "Je ne veux plus ajouter de pokemon."
                     : "Mon pokémon n'est pas dans la liste."
                 }
-                onClick={() => handlePokemonFormVisibility()}
+                onClick={handlePokemonFormVisibility}
               />
             </div>
 
