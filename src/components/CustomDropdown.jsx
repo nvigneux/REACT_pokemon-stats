@@ -26,7 +26,7 @@ const styles = {
   }),
   container: defaultStyles => ({
     ...defaultStyles,
-    border: "1.75px solid #4e7477",
+    border: "2px solid #4e7477",
     borderRadius: "9999px",
   }),
   control: defaultStyles => ({
