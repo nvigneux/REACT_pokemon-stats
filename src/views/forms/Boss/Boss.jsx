@@ -21,13 +21,13 @@ export const BossForm = ({ pokemons }) => (
     </div>
     <div className="mb-3 px-1 w-1/4">
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="uppercase tracking-wider block color-blue-pokemon text-xs font-bold mb-1 pl-1"
         htmlFor="difficulty"
       >
         Difficulty
       </label>
       <Field
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="appearance-none border-1-5 border-blue-pokemon rounded-full w-full py-2 px-3 text-gray-700 leading-tight"
         type="number"
         name="difficulty"
       />

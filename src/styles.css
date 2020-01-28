@@ -5,6 +5,15 @@ body {
   background: #f7fafc;
 }
 
+.background-pokemon {
+  background: rgb(179, 239, 156);
+  background: linear-gradient(
+    145deg,
+    rgba(179, 239, 156, 1) 0%,
+    rgba(63, 182, 181, 1) 100%
+  );
+}
+
 .scroll::-webkit-scrollbar {
   height: 6px;
   background: gray;
@@ -50,7 +59,7 @@ body {
   animation-name: placeHolderShimmer;
   animation-timing-function: linear;
   background: #f7fafc;
-  background: linear-gradient(to right, #edf2f7 8%, #f7fafc 24%, #edf2f7 33%);
+  background: linear-gradient(to right, #e6eedf 8%, #dae2d3 24%, #e6eedf 33%);
   background-size: 1000px 104px;
   position: relative;
   overflow: hidden;
@@ -127,4 +136,54 @@ body {
 
 .water {
   background: #539ddf;
+}
+
+.bg-green-pokemon {
+  background: #78d79d;
+  opacity: 0.98;
+}
+
+.bg-green-pokemon:hover {
+  background: #6fc791;
+}
+
+.bg-green-pokemon:active {
+  background: #92ecb5;
+}
+
+.color-blue-pokemon {
+  color: #456366;
+}
+.border-blue-pokemon {
+  border-color: #4e7477;
+}
+
+.color-gray-pokemon {
+  color: #96a4a5;
+}
+
+.color-link-pokemon {
+  color: #9dadad;
+}
+
+.border-1-5 {
+  border-width: 1.5px;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #96a4a5;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #96a4a5;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #96a4a5;
 }

@@ -81,7 +81,7 @@ const Pokedex = () => {
         onSubmit={values => handleSubmitForm(values)}
       >
         {({ isSubmitting, errors, touched, ...props }) => (
-          <Form className="bg-white flex flex-col">
+          <Form className="bg-white flex flex-col mt-2">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <ErrorBoundary fallback={<LoadingSelect />}>
@@ -107,7 +107,7 @@ const Pokedex = () => {
 
             <PokedexForm />
 
-            <div className="mb-3 px-1">
+            <div className="my-2 px-1">
               <div className="flex flex-col">
                 <ErrorBoundary fallback={<LoadingSelect />}>
                   <Suspense fallback={<LoadingSelect labelWidth="24" />}>
@@ -162,7 +162,7 @@ const Pokedex = () => {
             ) : null}
 
             <button
-              className="self-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={isSubmitting}
             >

@@ -24,6 +24,23 @@ const styles = {
     ...defaultStyles,
     width: "92%",
   }),
+  container: defaultStyles => ({
+    ...defaultStyles,
+    border: "1.75px solid #4e7477",
+    borderRadius: "9999px",
+  }),
+  control: defaultStyles => ({
+    ...defaultStyles,
+    border: "none",
+    borderRadius: "9999px",
+  }),
+  placeholder: defaultStyles => ({
+    ...defaultStyles,
+    fontSize: "0.75rem",
+    color: "#96a4a5",
+    textTransform: "uppercase",
+  }),
+  indicatorSeparator: () => null,
 }
 
 const CustomDropdown = ({
@@ -47,7 +64,7 @@ const CustomDropdown = ({
   return (
     <>
       <label
-        className="capitalize block text-gray-700 text-sm font-bold mb-3"
+        className="uppercase tracking-wider block color-blue-pokemon text-xs font-bold mb-1"
         htmlFor={name}
       >
         {label}

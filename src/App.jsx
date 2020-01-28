@@ -14,7 +14,11 @@ function App() {
   return (
     // <AppProvider>
     <Router>
-      <Routes />
+      <div className="background-pokemon pt-4 px-2">
+        <div className="bg-white rounded-full">
+          <Routes />
+        </div>
+      </div>
     </Router>
     // </AppProvider>
   )
