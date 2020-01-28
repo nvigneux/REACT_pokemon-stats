@@ -6,6 +6,7 @@ import { prefetch } from "react-suspense-fetch"
 import {
   API_URL,
   API_POKEDEXES,
+  API_BOSSES,
   API_POKEMONS,
   API_QUICK_MOVE,
   API_CHARGED_MOVE,
@@ -88,6 +89,14 @@ export const postPokedex = data => {
   return axios({
     method: "post",
     url: API_POKEDEXES,
+    data,
+  })
+}
+
+export const postBoss = data => {
+  return axios({
+    method: "post",
+    url: API_BOSSES,
     data,
   })
 }
