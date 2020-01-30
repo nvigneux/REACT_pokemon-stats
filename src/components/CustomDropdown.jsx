@@ -64,7 +64,7 @@ const CustomDropdown = ({
   return (
     <>
       <label
-        className="uppercase tracking-wider block color-blue-pokemon text-xs font-bold mb-1"
+        className="uppercase tracking-wider block color-blue-pokemon text-xs font-bold mb-1 pl-1"
         htmlFor={name}
       >
         {label}
