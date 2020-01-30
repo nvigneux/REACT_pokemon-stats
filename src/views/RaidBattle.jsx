@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { orderBy, keyBy } from "lodash"
 
 import Layout from "../components/Layout"
+import PokemonCard from "../components/PokemonCard"
 import PokemonStatCard from "../components/PokemonStatCard"
 import WeatherSelect from "../components/WeatherSelect"
 
@@ -94,7 +95,12 @@ const RaidBattle = () => {
         <div className="flex flex-col pr-4">
           <PokemonCategory title="Pokedex">
             {pokemons.map(pokemon => {
-              return <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
+              return (
+                <>
+                  <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
+                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                </>
+              )
             })}
           </PokemonCategory>
         </div>
