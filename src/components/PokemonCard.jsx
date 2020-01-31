@@ -34,12 +34,12 @@ const PokemonCard = ({ pokemon, click, theme }) => (
           {/* // type pokemon */}
           <div className="flex row">
             <div
-              className={`fighting w-5 h-5 mr-3 rounded-full flex items-center justify-center`}
+              className={`fighting w-5 h-5 mr-3 rounded-full shadow-outline flex items-center justify-center`}
             >
               <PictoType icon="fighting" className="w-3 h-3" />
             </div>{" "}
             <div
-              className={`bug w-5 h-5 mr-3 rounded-full flex items-center justify-center`}
+              className={`bug w-5 h-5 mr-3 rounded-full shadow-outline flex items-center justify-center`}
             >
               <PictoType icon="bug" className="w-3 h-3" />
             </div>
@@ -47,12 +47,12 @@ const PokemonCard = ({ pokemon, click, theme }) => (
           {/* // type attack */}
           <div className="flex row">
             <div
-              className={`fighting w-5 h-5 mr-3 rounded-full flex items-center justify-center`}
+              className={`fighting w-5 h-5 mr-3 rounded-full shadow-outline flex items-center justify-center`}
             >
               <PictoType icon="fighting" className="w-3 h-3" />
             </div>{" "}
             <div
-              className={`bug w-5 h-5 mr-3 rounded-full flex items-center justify-center`}
+              className={`bug w-5 h-5 mr-3 rounded-full shadow-outline flex items-center justify-center`}
             >
               <PictoType icon="bug" className="w-3 h-3" />
             </div>
