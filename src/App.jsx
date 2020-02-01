@@ -1,5 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router } from "react-router-dom"
+import { ToastContainer } from "use-nv-simple-toast"
 
 // Components
 import Routes from "./Routes"
@@ -12,11 +13,11 @@ import "./styles.css"
 
 function App() {
   return (
-    // <AppProvider>
-    <Router>
-      <Routes />
-    </Router>
-    // </AppProvider>
+    <ToastContainer>
+      <Router>
+        <Routes />
+      </Router>
+    </ToastContainer>
   )
 }
 
