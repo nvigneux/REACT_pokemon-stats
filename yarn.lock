@@ -9885,10 +9885,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-nv-simple-toast@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/use-nv-simple-toast/-/use-nv-simple-toast-1.0.1.tgz#029ab6c5172e3d4589fb0e00271b650106a943ed"
-  integrity sha512-FH/fx0p/P+ntDVyGxTpTBRER9Fybn1VfZaxSNkzE301sskI5xKz8uV9Xt4TwNOkHsWCq19v0upGMyE2+HTmQVQ==
+use-nv-simple-toast@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/use-nv-simple-toast/-/use-nv-simple-toast-1.0.2.tgz#cc0e81ffbf132424b76fde68457fa0290d7ce9dc"
+  integrity sha512-ifIcMWVWjeke46j/gA16OxZgZyNKbf9gk7EinExJKvjyjPwLsaEcvNxm1HdLYgztjt3py/TUGDS7DX1R/PibWg==
 
 use@^3.1.0:
   version "3.1.1"
