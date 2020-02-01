@@ -1,13 +1,12 @@
 import React, { Suspense, lazy, useState } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
 
-import {
-  postPokedex,
-  postPokemon,
+import useApi, {
   prefetchPokemons,
   prefetchQuickMoves,
   prefetchChargedMoves,
 } from "../../hooks/useApi"
+
 import ErrorBoundary from "../../hooks/ErrorBoundary"
 import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
@@ -40,6 +39,8 @@ const chargedMoves = prefetchChargedMoves()
 
 const Pokedex = () => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
+  const [, , , { postPokemon }] = useApi()
+  const [, , , { postPokedex }] = useApi()
 
   const PokedexValidationSchema = () => {
     let pokemonValidation = PokedexFormValidation
@@ -64,9 +65,11 @@ const Pokedex = () => {
 
   const handleSubmitForm = values => {
     isPokemonFormVisible
-      ? postPokemon({ ...values }).then(res => {
-          postPokedex({ ...values, pokemon: res.data.id, user: 1 })
-        })
+      ? postPokemon({ ...values }).then(res =>
+          res.data
+            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 })
+            : res
+        )
       : postPokedex({ ...values, user: 1 })
   }
 
@@ -163,7 +166,6 @@ const Pokedex = () => {
             <button
               className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
               type="submit"
-              disabled={isSubmitting}
             >
               Envoyer
             </button>

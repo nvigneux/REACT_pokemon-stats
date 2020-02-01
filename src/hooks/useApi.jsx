@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import { prefetch } from "react-suspense-fetch"
+import { useToast } from "use-nv-simple-toast"
 
 // Utils & misc
 import {
@@ -17,6 +18,7 @@ const useApi = (options = { trigger: false }) => {
   const [loading, setLoading] = useState(trigger)
   const [payload, setPayload] = useState(null)
   const [error, setError] = useState(null)
+  const { setToast } = useToast()
 
   // CONFIG
 
@@ -36,31 +38,40 @@ const useApi = (options = { trigger: false }) => {
     })
   }
 
-  const responseHandler = res => {
+  const responseHandler = (res, message) => {
+    console.log(res);
     if (res.data) setPayload(res.data)
     setLoading(false)
+    setToast({ title: message })
     return res
   }
 
   const errorHandler = resError => {
     if (resError.response) {
       setLoading(false)
+      let errorMessage = ""
       switch (resError.response.status) {
         case 400:
-          return setError("400 - Contenu inexistant")
+          errorMessage = "400 - Contenu inexistant"
+          break
         case 401:
-          return setError("401 - Mot de passe ou utilisateur incorrect")
+          errorMessage = "401 - Mot de passe ou utilisateur incorrect"
+          break
         case 403:
-          return setError(
+          errorMessage =
             "403 - Votre authentification a expirée ou vous n'êtes pas authorisé à accéder à ce contenu"
-          )
+          break
         case 412:
-          return setError("412 - Le format attendu n'est pas correct")
+          errorMessage = "412 - Le format attendu n'est pas correct"
+          break
         case 500:
-          return setError("500 - Erreur réseau")
+          errorMessage = "500 - Erreur réseau"
+          break
         default:
-          return setError("000 - Une erreur est survenue")
+          errorMessage = "000 - Une erreur est survenue"
+          break
       }
+      setToast({ title: errorMessage })
     }
     setLoading(false)
     return resError
@@ -72,33 +83,22 @@ const useApi = (options = { trigger: false }) => {
    * Use a state if you use the Set, you avoid re render
    */
 
-  return [loading, payload, error, {}]
-}
+  const postPokemon = data =>
+    request("POST", API_POKEMONS, data)
+      .then(res => responseHandler(res, "Succes POST pokémon"))
+      .catch(errorHandler)
 
-// TODO MAKE SUCCESS OR ERROR MESSAGES
+  const postPokedex = data =>
+    request("POST", API_POKEDEXES, data)
+      .then(res => responseHandler(res, "Succes POST pokédex"))
+      .catch(errorHandler)
 
-export const postPokemon = data => {
-  return axios({
-    method: "post",
-    url: API_POKEMONS,
-    data,
-  })
-}
+  const postBoss = data =>
+    request("POST", API_BOSSES, data)
+      .then(res => responseHandler(res, "Succes POST boss"))
+      .catch(errorHandler)
 
-export const postPokedex = data => {
-  return axios({
-    method: "post",
-    url: API_POKEDEXES,
-    data,
-  })
-}
-
-export const postBoss = data => {
-  return axios({
-    method: "post",
-    url: API_BOSSES,
-    data,
-  })
+  return [loading, payload, error, { postPokemon, postPokedex, postBoss }]
 }
 
 // TODO PUT ORDER BY ON POKEMON HERE ?
