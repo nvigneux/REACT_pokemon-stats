@@ -5,12 +5,21 @@ body {
   background: #f7fafc;
 }
 
-.background-pokemon {
+.bg-pokemon {
   background: rgb(179, 239, 156);
   background: linear-gradient(
     145deg,
     rgba(179, 239, 156, 1) 0%,
     rgba(63, 182, 181, 1) 100%
+  );
+}
+
+.bg-container {
+  background: #f9fef8;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 100%
   );
 }
 
@@ -168,6 +177,10 @@ body {
 
 .border-1-5 {
   border-width: 1.5px;
+}
+
+.shadow-outline-type{
+  box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
 ::placeholder {

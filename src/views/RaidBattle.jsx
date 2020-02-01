@@ -91,16 +91,21 @@ const RaidBattle = () => {
         select={setActiveWeather}
       />
 
+      <div className="flex flex-row flex-wrap">
+        {pokemons.map(pokemon => {
+          return (
+            <div className="w-1/3 flex flex-col flex-wrap">
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            </div>
+          )
+        })}
+      </div>
+
       <div className="flex flex-row overflow-auto scroll">
         <div className="flex flex-col pr-4">
           <PokemonCategory title="Pokedex">
             {pokemons.map(pokemon => {
-              return (
-                <>
-                  <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
-                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                </>
-              )
+              return <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
             })}
           </PokemonCategory>
         </div>
