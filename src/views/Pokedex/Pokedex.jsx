@@ -63,14 +63,14 @@ const Pokedex = () => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
-  const handleSubmitForm = values => {
+  const handleSubmitForm = (values, resetForm) => {
     isPokemonFormVisible
       ? postPokemon({ ...values }).then(res =>
           res.data
-            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 })
+            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 }).then(resetForm)
             : res
         )
-      : postPokedex({ ...values, user: 1 })
+      : postPokedex({ ...values, user: 1 }).then(resetForm)
   }
 
   return (
@@ -81,7 +81,9 @@ const Pokedex = () => {
       <Formik
         initialValues={PokedexValueSchema}
         validationSchema={PokedexValidationSchema}
-        onSubmit={handleSubmitForm}
+        onSubmit={(values, { resetForm }) =>
+          handleSubmitForm(values, resetForm)
+        }
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col mt-2">
