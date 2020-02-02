@@ -19,14 +19,14 @@ import {
   WATER,
 } from "./types"
 
-export const WEATHERS = {
-  sunny: [FIRE, GROUND, GRASS],
-  clear: [FIRE, GROUND, GRASS],
-  partly_cloudy: [NORMAL, ROCK],
-  cloudy: [FAIRY, FIGHTING, POISON],
-  rain: [WATER, ELECTRIC, BUG],
-  snow: [ICE, STEEL],
-  windy: [DRAGON, FLYING, PSYCHIC],
-  foggy: [GHOST, DARK],
-  none: [],
-}
+export const WEATHERS = [
+  { label: "sunny", value: [FIRE, GROUND, GRASS] },
+  { label: "clear", value: [FIRE, GROUND, GRASS] },
+  { label: "partly_cloudy", value: [NORMAL, ROCK] },
+  { label: "cloudy", value: [FAIRY, FIGHTING, POISON] },
+  { label: "rain", value: [WATER, ELECTRIC, BUG] },
+  { label: "snow", value: [ICE, STEEL] },
+  { label: "windy", value: [DRAGON, FLYING, PSYCHIC] },
+  { label: "foggy", value: [GHOST, DARK] },
+  { label: "none", value: [] },
+]
