@@ -3,6 +3,7 @@ import React, { cloneElement } from "react"
 import Select, { components } from "react-select"
 import OptionWeather from "./OptionWeather"
 
+// TODO constant style select
 const styles = {
   singleValue: defaultStyles => ({
     ...defaultStyles,
@@ -37,23 +38,21 @@ const styles = {
 }
 
 const WeatherSelect = ({ values, activeValue, select }) => (
-  <div className="w-1/3 px-2 mb-6">
-    <div className="relative">
-      <Select
-        styles={styles}
-        options={values}
-        onChange={select}
-        defaultValue={activeValue}
-        isSearchable={false}
-        formatOptionLabel={option => {
-          return cloneElement(<OptionWeather />, { key: option.label, ...option })
-        }}
-        getOptionValue={option => option.label}
-        isOptionSelected={option =>
-          activeValue ? activeValue.label === option.label : false
-        }
-      />
-    </div>
+  <div className="relative">
+    <Select
+      styles={styles}
+      options={values}
+      onChange={select}
+      defaultValue={activeValue}
+      isSearchable={false}
+      formatOptionLabel={option => {
+        return cloneElement(<OptionWeather />, { key: option.label, ...option })
+      }}
+      getOptionValue={option => option.label}
+      isOptionSelected={option =>
+        activeValue ? activeValue.label === option.label : false
+      }
+    />
   </div>
 )
 

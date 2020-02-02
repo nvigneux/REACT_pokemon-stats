@@ -19,6 +19,7 @@ const MultiValueRemove = props => {
   )
 }
 
+// TODO constant style select
 const styles = {
   singleValue: defaultStyles => ({
     ...defaultStyles,
