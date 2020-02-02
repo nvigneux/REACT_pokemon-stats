@@ -31,7 +31,7 @@ const RaidBattle = () => {
   const [bosses, setBosses] = useState([])
 
   const [activeBoss, setActiveBoss] = useState(null)
-  const [activeWeather, setActiveWeather] = useState("sunny")
+  const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
 
   // Add stats & moves to each pokemons & bosses
   useEffect(() => {
@@ -87,15 +87,15 @@ const RaidBattle = () => {
     <Layout>
       <WeatherSelect
         values={WEATHERS}
-        default={activeWeather}
+        activeValue={activeWeather}
         select={setActiveWeather}
       />
 
       <div className="flex flex-row flex-wrap">
         {pokemons.map(pokemon => {
           return (
-            <div className="w-1/3 flex flex-col flex-wrap">
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            <div key={pokemon.id} className="w-1/3 flex flex-col flex-wrap">
+              <PokemonCard pokemon={pokemon} />
             </div>
           )
         })}

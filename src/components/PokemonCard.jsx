@@ -32,7 +32,7 @@ const PokemonCard = ({ pokemon }) => (
             className={`fighting w-4 h-4 mr-1 rounded-full shadow-outline-type flex items-center justify-center`}
           >
             <PictoType icon="fighting" className="w-2 h-2" />
-          </div>{" "}
+          </div>
           <div
             className={`bug w-4 h-4 -ml-1 rounded-full shadow-outline-type flex items-center justify-center`}
           >
