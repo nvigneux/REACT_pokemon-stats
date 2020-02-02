@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { Suspense, lazy, useState, useEffect } from "react"
 import { orderBy, keyBy } from "lodash"
+
+import { prefetchPokemons } from "../hooks/useApi"
+import ErrorBoundary from "../hooks/ErrorBoundary"
 
 import Layout from "../components/Layout"
 import PokemonCard from "../components/PokemonCard"
-import PokemonStatCard from "../components/PokemonStatCard"
 import WeatherSelect from "../components/WeatherSelect"
+import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
 import { pokemonStats } from "../utils/stats"
@@ -26,9 +29,11 @@ const PokemonCategory = ({ title, children }) => (
   </div>
 )
 
+const BossSelect = lazy(() => import("../components/BossSelect"))
+const bosses = prefetchPokemons()
+
 const RaidBattle = () => {
   const [pokemons, setPokemons] = useState([])
-  const [bosses, setBosses] = useState([])
 
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
@@ -51,7 +56,7 @@ const RaidBattle = () => {
       })
 
     setPokemons(addSupplementDataPokemon(POKEMON_MOCK))
-    setBosses(addSupplementDataPokemon(BOSS_MOCK))
+    // setBosses(addSupplementDataPokemon(BOSS_MOCK))
   }, [])
 
   useEffect(() => {
@@ -85,11 +90,23 @@ const RaidBattle = () => {
 
   return (
     <Layout>
-      <WeatherSelect
-        values={WEATHERS}
-        activeValue={activeWeather}
-        select={setActiveWeather}
-      />
+      <div className="flex flex-row items-end mb-4">
+        <div className="w-2/3">
+          <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+            <Suspense fallback={<LoadingSelect label={false} />}>
+              <BossSelect bosses={bosses} />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+
+        <div className="w-1/3">
+          <WeatherSelect
+            values={WEATHERS}
+            activeValue={activeWeather}
+            select={setActiveWeather}
+          />
+        </div>
+      </div>
 
       <div className="flex flex-row flex-wrap">
         {pokemons.map(pokemon => {
@@ -99,32 +116,6 @@ const RaidBattle = () => {
             </div>
           )
         })}
-      </div>
-
-      <div className="flex flex-row overflow-auto scroll">
-        <div className="flex flex-col pr-4">
-          <PokemonCategory title="Pokedex">
-            {pokemons.map(pokemon => {
-              return <PokemonStatCard key={pokemon.id} pokemon={pokemon} />
-            })}
-          </PokemonCategory>
-        </div>
-
-        <div className="flex flex-col">
-          <PokemonCategory title="Boss">
-            {bosses.map(boss => {
-              return (
-                <PokemonStatCard
-                  key={boss.id}
-                  pokemon={boss}
-                  click={setActiveBoss}
-                  theme="red"
-                  className="cursor-pointer"
-                />
-              )
-            })}
-          </PokemonCategory>
-        </div>
       </div>
     </Layout>
   )
