@@ -6,8 +6,10 @@ import Picto from "../Picto"
 const OptionWeather = ({ label, value }) => (
   <div className="flex justify-between">
     <div className="flex flex-col items-center w-full">
-      <div className={`w-6 h-6 mr-1 rounded-full flex items-center justify-center`}>
-        <img src={`/assets/weather/${label}.png`} alt={label} />
+      <div
+        className={`w-6 h-6 mr-1 rounded-full flex items-center justify-center`}
+      >
+        <Picto icon={label} className="w-10 h-10" />
       </div>
       <div className="flex flex-row items-center">
         {value.map((item, index) => {
