@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import PictoType from "../PictoType"
+import Picto from "../Picto"
 
 const OptionWeather = ({ label, value }) => (
   <div className="flex justify-between">
@@ -18,7 +18,7 @@ const OptionWeather = ({ label, value }) => (
                 index > 1 ? "-ml-1" : "-ml-1 mr-1"
               }`}
             >
-              <PictoType icon={item} className="w-2 h-2" />
+              <Picto icon={item} className="w-2 h-2" />
             </div>
           )
         })}

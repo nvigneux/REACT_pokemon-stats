@@ -1,14 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import PictoType from "../PictoType"
+import Picto from "../Picto"
 
 const OptionType = ({ id, name }) => (
   <div key={id} className="flex items-center">
     <div
       className={`${name} w-5 h-5 mr-3 rounded-full flex items-center justify-center`}
     >
-      <PictoType key={id} icon={name} className="w-3 h-3" />
+      <Picto key={id} icon={name} className="w-3 h-3" />
     </div>
     <div className="text-base text-gray-900 font-medium capitalize">{name}</div>
   </div>

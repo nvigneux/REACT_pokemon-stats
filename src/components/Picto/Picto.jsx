@@ -42,11 +42,11 @@ export const availablePictos = {
   water: <Water />,
 }
 
-export const PictoType = ({ icon, ...props }) =>
+export const Picto = ({ icon, ...props }) =>
   React.cloneElement(availablePictos[icon], props)
 
-PictoType.propTypes = {
+Picto.propTypes = {
   icon: PropTypes.oneOf(Object.keys(availablePictos)).isRequired,
 }
 
-export default PictoType
+export default Picto

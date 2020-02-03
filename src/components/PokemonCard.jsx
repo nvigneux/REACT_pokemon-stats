@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { IMG_URL, IMG_FORMAT } from "../constants/constant"
 import { Pokemon } from "../types/pokemon"
 
-import PictoType from "./PictoType"
+import Picto from "./Picto"
 
 const PokemonCard = ({ pokemon }) => (
   <div className="bg-gray-100 rounded p-2 m-1">
@@ -31,12 +31,12 @@ const PokemonCard = ({ pokemon }) => (
           <div
             className={`fighting w-4 h-4 mr-1 rounded-full shadow-outline-type flex items-center justify-center`}
           >
-            <PictoType icon="fighting" className="w-2 h-2" />
+            <Picto icon="fighting" className="w-2 h-2" />
           </div>
           <div
             className={`bug w-4 h-4 -ml-1 rounded-full shadow-outline-type flex items-center justify-center`}
           >
-            <PictoType icon="bug" className="w-2 h-2" />
+            <Picto icon="bug" className="w-2 h-2" />
           </div>
         </div>
       </div>
