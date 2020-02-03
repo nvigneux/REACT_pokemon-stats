@@ -1,46 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { cloneElement } from "react"
 import Select, { components } from "react-select"
+
 import OptionWeather from "./OptionWeather"
 
-// TODO constant style select
-const styles = {
-  singleValue: defaultStyles => ({
-    ...defaultStyles,
-    width: "92%",
-  }),
-  valueContainer: defaultStyles => ({
-    ...defaultStyles,
-    height: "42px",
-    padding: "2px 4px",
-  }),
-  container: defaultStyles => ({
-    ...defaultStyles,
-    border: "none",
-  }),
-  control: (defaultStyles, state) => ({
-    ...defaultStyles,
-    border: "none",
-    boxShadow: 0,
-  }),
-  placeholder: defaultStyles => ({
-    ...defaultStyles,
-    fontSize: "0.75rem",
-    color: "#96a4a5",
-    textTransform: "uppercase",
-  }),
-  indicatorSeparator: () => null,
-  dropdownIndicator: defaultStyles => ({
-    ...defaultStyles,
-    padding: "8px 0px",
-    width: "12px",
-  }),
-}
+import { selectWeather } from "../constants/stylesSelect"
 
 const WeatherSelect = ({ values, activeValue, select }) => (
   <div className="relative">
     <Select
-      styles={styles}
+      styles={selectWeather}
       options={values}
       onChange={select}
       defaultValue={activeValue}

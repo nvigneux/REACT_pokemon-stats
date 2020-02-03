@@ -3,6 +3,8 @@ import Select, { components } from "react-select"
 import PropTypes from "prop-types"
 import { useField, useFormikContext } from "formik"
 
+import { selectForm } from "../constants/stylesSelect"
+
 const MultiValueLabel = props => {
   return (
     <span className="bg-gray-100">
@@ -17,31 +19,6 @@ const MultiValueRemove = props => {
       <components.MultiValueRemove {...props} />
     </span>
   )
-}
-
-// TODO constant style select
-const styles = {
-  singleValue: defaultStyles => ({
-    ...defaultStyles,
-    width: "92%",
-  }),
-  container: defaultStyles => ({
-    ...defaultStyles,
-    border: "2px solid #4e7477",
-    borderRadius: "9999px",
-  }),
-  control: defaultStyles => ({
-    ...defaultStyles,
-    border: "none",
-    borderRadius: "9999px",
-  }),
-  placeholder: defaultStyles => ({
-    ...defaultStyles,
-    fontSize: "0.75rem",
-    color: "#96a4a5",
-    textTransform: "uppercase",
-  }),
-  indicatorSeparator: () => null,
 }
 
 const CustomDropdown = ({
@@ -73,7 +50,7 @@ const CustomDropdown = ({
       <Select
         {...field}
         {...props}
-        styles={styles}
+        styles={selectForm}
         components={{ MultiValueLabel, MultiValueRemove }}
         options={options}
         onBlur={updateBlur}
