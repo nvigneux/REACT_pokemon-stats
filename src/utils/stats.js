@@ -25,52 +25,17 @@ const calculateCombatPoint = (attack, defense, stamina) =>
 export const pokemonStats = (cpMultiplier, pokemon) => {
   const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1]
   const attack = calculateStat(
-    pokemon.baseAttack,
-    pokemon.individualAttack,
-    pokemonCpMultiplier
-  )
-  const defense = calculateStat(
-    pokemon.baseDefense,
-    pokemon.individualDefense,
-    pokemonCpMultiplier
-  )
-  const stamina = calculateStat(
-    pokemon.baseStamina,
-    pokemon.individualStamina,
-    pokemonCpMultiplier
-  )
-  const cp = calculateCombatPoint(attack, defense, stamina)
-  const iv = Math.floor(
-    ((pokemon.individualAttack +
-      pokemon.individualDefense +
-      pokemon.individualStamina) *
-      100) /
-      45
-  )
-  return { cp, iv, attack, defense, stamina }
-}
-
-/**
- * TODO Temporary version of pokemonStats
- * { Attack, Defense, Stamina, CP, IV }
- * @param {number} cpMultiplier
- * @param {Pokemon} pokemon
- */
-export const pokemonStatsTemp = (cpMultiplier, pokemon) => {
-  console.log(pokemon)
-  const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1]
-  const attack = calculateStat(
-    pokemon.attack,
+    pokemon.pokemon.attack,
     pokemon.iv_attack,
     pokemonCpMultiplier
   )
   const defense = calculateStat(
-    pokemon.defense,
+    pokemon.pokemon.defense,
     pokemon.iv_defense,
     pokemonCpMultiplier
   )
   const stamina = calculateStat(
-    pokemon.stamina,
+    pokemon.pokemon.stamina,
     pokemon.iv_stamina,
     pokemonCpMultiplier
   )

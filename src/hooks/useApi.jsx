@@ -2,6 +2,10 @@ import { useState } from "react"
 import axios from "axios"
 import { prefetch } from "react-suspense-fetch"
 import { useToast } from "use-nv-simple-toast"
+import { orderBy } from "lodash"
+
+import { pokemonStats } from "../utils/stats"
+import { CP_MULTIPLIER } from "../constants/cpMultiplier"
 
 // Utils & misc
 import {
@@ -39,7 +43,6 @@ const useApi = (options = { trigger: false }) => {
   }
 
   const responseHandler = (res, message) => {
-    console.log(res);
     if (res.data) setPayload(res.data)
     setLoading(false)
     setToast({ title: message })
@@ -101,12 +104,34 @@ const useApi = (options = { trigger: false }) => {
   return [loading, payload, error, { postPokemon, postPokedex, postBoss }]
 }
 
-// TODO PUT ORDER BY ON POKEMON HERE ?
 export const prefetchPokemons = () =>
   prefetch(async () => (await fetch(API_POKEMONS)).json())
 
 export const prefetchBosses = () =>
-  prefetch(async () => (await fetch(API_BOSSES)).json())
+  prefetch(() =>
+    fetch(API_BOSSES).then(res =>
+      res.json().then(bosses => {
+        const bossesWithStats = bosses.map(boss => {
+          const stats = pokemonStats(CP_MULTIPLIER, boss)
+          return { ...boss, pokemon: { ...boss.pokemon, stats } }
+        })
+        return orderBy(bossesWithStats, ["id_base_pokemon"], ["asc"])
+      })
+    )
+  )
+
+export const prefetchPokedexes = () =>
+  prefetch(() =>
+    fetch(API_POKEDEXES).then(res =>
+      res.json().then(pokedexes => {
+        const pokedexesWithStats = pokedexes.map(pokemon => {
+          const stats = pokemonStats(CP_MULTIPLIER, pokemon)
+          return { ...pokemon, pokemon: { ...pokemon.pokemon, stats } }
+        })
+        return orderBy(pokedexesWithStats, ["id_base_pokemon"], ["asc"])
+      })
+    )
+  )
 
 export const prefetchQuickMoves = () =>
   prefetch(async () => (await fetch(API_QUICK_MOVE)).json())

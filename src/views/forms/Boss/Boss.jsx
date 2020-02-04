@@ -1,7 +1,7 @@
 import React from "react"
 import { Field, ErrorMessage, useFormikContext } from "formik"
 
-import { pokemonStatsTemp } from "../../../utils/stats"
+import { pokemonStats } from "../../../utils/stats"
 import { CP_MULTIPLIER } from "../../../constants/cpMultiplier"
 
 export const BossForm = ({ values }) => {
@@ -19,7 +19,7 @@ export const BossForm = ({ values }) => {
           }
 
     if (pokemon && stamina) {
-      const stats = pokemonStatsTemp(CP_MULTIPLIER, {
+      const stats = pokemonStats(CP_MULTIPLIER, {
         ...pokemon,
         iv_attack: values.iv_attack,
         iv_defense: values.iv_defense,
