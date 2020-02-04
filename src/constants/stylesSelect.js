@@ -26,11 +26,15 @@ export const selectWeather = {
   singleValue: defaultStyles => ({
     ...defaultStyles,
     width: "92%",
+    height: "42px",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
   }),
   valueContainer: defaultStyles => ({
     ...defaultStyles,
     height: "42px",
-    padding: "2px 4px",
+    padding: "2px 0",
   }),
   container: defaultStyles => ({
     ...defaultStyles,
@@ -48,9 +52,17 @@ export const selectWeather = {
     textTransform: "uppercase",
   }),
   indicatorSeparator: () => null,
+  indicatorsContainer: defaultStyles => ({
+    ...defaultStyles,
+    display: "none",
+  }),
   dropdownIndicator: defaultStyles => ({
     ...defaultStyles,
     padding: "8px 0px",
     width: "12px",
+  }),
+  option: (defaultStyles, state) => ({
+    ...defaultStyles,
+    background: state.isSelected ? "#EDF2F7" : null,
   }),
 }
