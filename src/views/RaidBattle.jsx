@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState, useEffect } from "react"
-import { orderBy, keyBy } from "lodash"
+import { orderBy } from "lodash"
 
-import { prefetchPokemons } from "../hooks/useApi"
+import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
 import ErrorBoundary from "../hooks/ErrorBoundary"
 
 import Layout from "../components/Layout"
@@ -10,27 +10,17 @@ import WeatherSelect from "../components/WeatherSelect"
 import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
-import { pokemonStats } from "../utils/stats"
 import { getDmgMoves } from "../utils/dps"
 
-import { POKEMON_MOCK } from "../constants/pokemons/pokedex"
-import { BOSS_MOCK } from "../constants/pokemons/boss"
-import { QUICK_MOVES, CHARGED_MOVES } from "../constants/moves"
-import { CP_MULTIPLIER } from "../constants/cpMultiplier"
 import { WEATHERS } from "../constants/weather"
 import { POKEMON } from "../constants/constant"
 
 import "../styles.css"
 
-const PokemonCategory = ({ title, children }) => (
-  <div className="flex flex-col">
-    <h3 className="text-base font-semibold tracking-wider pl-2">{title}</h3>
-    <div className="flex flex-row flex-nowrap">{children}</div>
-  </div>
-)
+const BossSelect = lazy(() => import("../components/BossSelect")) // TODO make optionBoss
 
-const BossSelect = lazy(() => import("../components/BossSelect"))
-const bosses = prefetchPokemons()
+const bosses = prefetchBosses()
+const pokemons = prefetchPokedexes() // TODO make pokemons fetch and loop
 
 const RaidBattle = () => {
   const [pokemons, setPokemons] = useState([])
@@ -38,26 +28,6 @@ const RaidBattle = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
 
-  // Add stats & moves to each pokemons & bosses
-  useEffect(() => {
-    const quickMoveHashArray = keyBy(QUICK_MOVES, "id")
-    const chargedMoveHashArray = keyBy(CHARGED_MOVES, "id")
-
-    const addSupplementDataPokemon = sourcePokemons =>
-      sourcePokemons.map(pokemon => {
-        const moveQuick = quickMoveHashArray[pokemon.moves.quick]
-        const moveCharged = chargedMoveHashArray[pokemon.moves.charged]
-        const stats = pokemonStats(CP_MULTIPLIER, pokemon)
-        return {
-          ...pokemon,
-          stats,
-          moves: { quick: moveQuick, charged: moveCharged },
-        }
-      })
-
-    setPokemons(addSupplementDataPokemon(POKEMON_MOCK))
-    // setBosses(addSupplementDataPokemon(BOSS_MOCK))
-  }, [])
 
   useEffect(() => {
     if (activeBoss) {
@@ -91,7 +61,7 @@ const RaidBattle = () => {
   return (
     <Layout>
       <div className="flex flex-row items-end mb-4">
-        <div className="w-2/3">
+        <div className="w-full">
           <ErrorBoundary fallback={<LoadingSelect label={false} />}>
             <Suspense fallback={<LoadingSelect label={false} />}>
               <BossSelect bosses={bosses} />
@@ -99,7 +69,7 @@ const RaidBattle = () => {
           </ErrorBoundary>
         </div>
 
-        <div className="w-1/3">
+        <div className="w-20">
           <WeatherSelect
             values={WEATHERS}
             activeValue={activeWeather}
@@ -108,7 +78,7 @@ const RaidBattle = () => {
         </div>
       </div>
 
-      <div className="flex flex-row flex-wrap">
+      {/* <div className="flex flex-row flex-wrap">
         {pokemons.map(pokemon => {
           return (
             <div key={pokemon.id} className="w-1/3 flex flex-col flex-wrap">
@@ -116,7 +86,7 @@ const RaidBattle = () => {
             </div>
           )
         })}
-      </div>
+      </div> */}
     </Layout>
   )
 }
