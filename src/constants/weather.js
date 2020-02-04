@@ -20,7 +20,7 @@ import {
 } from "./types"
 
 export const WEATHERS = [
-  { label: "sunny", value: [FIRE, GROUND, GRASS] },
+  // { label: "sunny", value: [FIRE, GROUND, GRASS] }, // same as clear
   { label: "clear", value: [FIRE, GROUND, GRASS] },
   { label: "partly_cloudy", value: [NORMAL, ROCK] },
   { label: "cloudy", value: [FAIRY, FIGHTING, POISON] },
