@@ -105,6 +105,9 @@ const useApi = (options = { trigger: false }) => {
 export const prefetchPokemons = () =>
   prefetch(async () => (await fetch(API_POKEMONS)).json())
 
+export const prefetchBosses = () =>
+  prefetch(async () => (await fetch(API_BOSSES)).json())
+
 export const prefetchQuickMoves = () =>
   prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
 
