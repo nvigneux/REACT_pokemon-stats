@@ -1,13 +1,14 @@
 import React, { cloneElement } from "react"
-import PropTypes from "prop-types"
-import { orderBy } from "lodash"
-import Select, { components } from "react-select"
+import Select from "react-select"
+
+import { selectForm } from "../../constants/stylesSelect"
 
 import OptionPokemon from "../OptionPokemon"
 
 const BossSelect = ({ bosses, active }) => (
   <>
     <Select
+      styles={selectForm}
       options={bosses}
       isSearchable={false}
       formatOptionLabel={option => {
@@ -15,6 +16,7 @@ const BossSelect = ({ bosses, active }) => (
       }}
       getOptionValue={option => option.id}
       isOptionSelected={option => (active ? active.id === option.id : false)}
+      placeholder="Choisir un boss ..."
     />
   </>
 )

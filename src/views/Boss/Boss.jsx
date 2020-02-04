@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from "react"
-import { Formik, Form, ErrorMessage } from "formik"
+import { Formik, Form, ErrorMessage, resetForm } from "formik"
 
 import useApi, {
   prefetchPokemons,
@@ -63,12 +63,12 @@ const Boss = () => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
-  const handleSubmitForm = values => {
+  const handleSubmitForm = (values, resetForm) => {
     isPokemonFormVisible
       ? postPokemon({ ...values }).then(res => {
-          postBoss({ ...values, pokemon: res.data.id })
+          postBoss({ ...values, pokemon: res.data.id }).then(resetForm)
         })
-      : postBoss({ ...values })
+      : postBoss({ ...values }).then(resetForm)
   }
 
   return (
@@ -79,7 +79,9 @@ const Boss = () => {
       <Formik
         initialValues={BossValueSchema}
         validationSchema={BossValidationSchema}
-        onSubmit={handleSubmitForm}
+        onSubmit={(values, { resetForm }) =>
+          handleSubmitForm(values, resetForm)
+        }
       >
         {({ isSubmitting, errors, touched, ...props }) => (
           <Form className="bg-white flex flex-col mt-2">
