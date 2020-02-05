@@ -67,17 +67,16 @@ const Pokedex = () => {
     isPokemonFormVisible
       ? postPokemon({ ...values }).then(res =>
           res.data
-            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 }).then(resetForm)
+            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 }).then(
+                resetForm
+              )
             : res
         )
       : postPokedex({ ...values, user: 1 }).then(resetForm)
   }
 
   return (
-    <Layout>
-      {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
-        Ajouter un pokémon
-      </h1> */}
+    <>
       <Formik
         initialValues={PokedexValueSchema}
         validationSchema={PokedexValidationSchema}
@@ -176,7 +175,7 @@ const Pokedex = () => {
           </Form>
         )}
       </Formik>
-    </Layout>
+    </>
   )
 }
 

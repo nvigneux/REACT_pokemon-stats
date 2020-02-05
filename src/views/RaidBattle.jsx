@@ -59,7 +59,7 @@ const RaidBattle = () => {
   }, [pokemons, activeBoss, activeWeather])
 
   return (
-    <Layout>
+    <>
       <div className="flex flex-row items-end mb-4">
         <div className="w-full">
           <ErrorBoundary fallback={<LoadingSelect label={false} />}>
@@ -87,7 +87,7 @@ const RaidBattle = () => {
           )
         })}
       </div> */}
-    </Layout>
+    </>
   )
 }
 

@@ -39,8 +39,8 @@ const chargedMoves = prefetchChargedMoves()
 
 const Boss = () => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
-  const [, , , { postPokemon }] = useApi() 
-  const [, , , { postBoss }] = useApi() 
+  const [, , , { postPokemon }] = useApi()
+  const [, , , { postBoss }] = useApi()
 
   const BossValidationSchema = () => {
     let pokemonValidation = BossFormValidation
@@ -72,7 +72,7 @@ const Boss = () => {
   }
 
   return (
-    <Layout>
+    <>
       {/* <h1 className="py-4 px-1 mb-6 text-black text-xl border-b border-grey-lighter">
         Ajouter un pokémon
       </h1> */}
@@ -175,7 +175,7 @@ const Boss = () => {
           </Form>
         )}
       </Formik>
-    </Layout>
+    </>
   )
 }
 

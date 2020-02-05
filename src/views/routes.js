@@ -1,9 +1,9 @@
-// Views
-import RaidBattle from "./RaidBattle"
+import React from "react"
 
-// Views Forms
-import PokedexForm from "./Pokedex/Pokedex"
-import BossForm from "./Boss/Boss"
+// Views
+const RaidBattle = React.lazy(() => import("./RaidBattle"))
+const PokedexForm = React.lazy(() => import("./Pokedex/Pokedex"))
+const BossForm = React.lazy(() => import("./Boss/Boss"))
 
 export const routes = [
   {
