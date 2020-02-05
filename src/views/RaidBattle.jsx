@@ -60,7 +60,11 @@ const RaidBattle = () => {
         <div className="w-full">
           <ErrorBoundary fallback={<LoadingSelect label={false} />}>
             <Suspense fallback={<LoadingSelect label={false} />}>
-              <BossSelect bosses={bosses} />
+              <BossSelect
+                bosses={bosses}
+                activeValue={activeBoss}
+                select={setActiveBoss}
+              />
             </Suspense>
           </ErrorBoundary>
         </div>
