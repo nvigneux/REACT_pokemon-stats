@@ -3,7 +3,7 @@ import Select from "react-select"
 
 import { selectForm } from "../../constants/stylesSelect"
 
-import OptionPokemon from "../OptionPokemon"
+import OptionBoss from "../OptionBoss"
 
 const BossSelect = ({ bosses, active }) => (
   <>
@@ -12,7 +12,7 @@ const BossSelect = ({ bosses, active }) => (
       options={bosses}
       isSearchable={false}
       formatOptionLabel={option => {
-        return cloneElement(<OptionPokemon />, { key: option.id, ...option })
+        return cloneElement(<OptionBoss />, { key: option.id, ...option })
       }}
       getOptionValue={option => option.id}
       isOptionSelected={option => (active ? active.id === option.id : false)}
