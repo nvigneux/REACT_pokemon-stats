@@ -113,7 +113,7 @@ export const prefetchBosses = () =>
       res.json().then(bosses => {
         const bossesWithStats = bosses.map(boss => {
           const stats = pokemonStats(CP_MULTIPLIER, boss)
-          return { ...boss, pokemon: { ...boss.pokemon, stats } }
+          return { ...boss, stats }
         })
         return orderBy(bossesWithStats, ["id_base_pokemon"], ["asc"])
       })
@@ -126,7 +126,7 @@ export const prefetchPokedexes = () =>
       res.json().then(pokedexes => {
         const pokedexesWithStats = pokedexes.map(pokemon => {
           const stats = pokemonStats(CP_MULTIPLIER, pokemon)
-          return { ...pokemon, pokemon: { ...pokemon.pokemon, stats } }
+          return { ...pokemon, stats }
         })
         return orderBy(pokedexesWithStats, ["id_base_pokemon"], ["asc"])
       })

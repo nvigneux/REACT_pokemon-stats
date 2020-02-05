@@ -4,8 +4,6 @@ import { orderBy } from "lodash"
 import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
 import ErrorBoundary from "../hooks/ErrorBoundary"
 
-import Layout from "../components/Layout"
-import PokemonCard from "../components/PokemonCard"
 import WeatherSelect from "../components/WeatherSelect"
 import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
 
@@ -18,20 +16,18 @@ import { POKEMON } from "../constants/constant"
 import "../styles.css"
 
 const BossSelect = lazy(() => import("../components/BossSelect")) // TODO make optionBoss
+const Pokedexes = lazy(() => import("../components/Pokedexes"))
 
 const bosses = prefetchBosses()
-const pokemons = prefetchPokedexes() // TODO make pokemons fetch and loop
+const pokedexes = prefetchPokedexes()
 
 const RaidBattle = () => {
-  const [pokemons, setPokemons] = useState([])
-
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
 
-
   useEffect(() => {
     if (activeBoss) {
-      const resultBattle = pokemons.map(attacker => {
+      const resultBattle = pokedexes.map(attacker => {
         const activeAttacker = getDmgMoves(attacker, activeBoss, activeWeather)
         const activeDefender = getDmgMoves(activeBoss, attacker, activeWeather)
 
@@ -52,11 +48,11 @@ const RaidBattle = () => {
         return pokemonBattleStats
       })
       console.log(
-        `Best pokemons against ${activeBoss.name}`,
+        `Best pokedexes against ${activeBoss.name}`,
         orderBy(resultBattle, ["dps"], ["desc"])
       )
     }
-  }, [pokemons, activeBoss, activeWeather])
+  }, [activeBoss, activeWeather])
 
   return (
     <>
@@ -78,15 +74,13 @@ const RaidBattle = () => {
         </div>
       </div>
 
-      {/* <div className="flex flex-row flex-wrap">
-        {pokemons.map(pokemon => {
-          return (
-            <div key={pokemon.id} className="w-1/3 flex flex-col flex-wrap">
-              <PokemonCard pokemon={pokemon} />
-            </div>
-          )
-        })}
-      </div> */}
+      <div className="flex flex-row flex-wrap">
+        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+          <Suspense fallback={<LoadingSelect label={false} />}>
+            <Pokedexes pokedexes={pokedexes} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
     </>
   )
 }

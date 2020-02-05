@@ -20,7 +20,7 @@ export const BossForm = ({ values }) => {
 
     if (pokemon && stamina) {
       const stats = pokemonStats(CP_MULTIPLIER, {
-        ...pokemon,
+        pokemon: { ...pokemon },
         iv_attack: values.iv_attack,
         iv_defense: values.iv_defense,
         iv_stamina: parseInt(stamina, 10),
