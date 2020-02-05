@@ -1,5 +1,4 @@
 import React from "react"
-
 import PropTypes from "prop-types"
 
 import { IMG_URL, IMG_FORMAT } from "../constants/constant"

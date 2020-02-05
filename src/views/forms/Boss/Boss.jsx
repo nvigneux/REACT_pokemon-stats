@@ -8,7 +8,7 @@ export const BossForm = ({ values }) => {
   const { setFieldValue } = useFormikContext()
 
   const handleStamina = stamina => {
-    setFieldValue("iv_stamina", parseInt(stamina))
+    setFieldValue("iv_stamina", parseInt(stamina, 10))
     const pokemon =
       values.pokemon && (!values.attack || !values.defense || !values.stamina)
         ? values.pokemon
@@ -23,7 +23,7 @@ export const BossForm = ({ values }) => {
         ...pokemon,
         iv_attack: values.iv_attack,
         iv_defense: values.iv_defense,
-        iv_stamina: parseInt(stamina),
+        iv_stamina: parseInt(stamina, 10),
         level: values.level,
       })
       setFieldValue("cp", stats.cp)

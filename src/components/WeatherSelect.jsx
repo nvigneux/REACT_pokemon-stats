@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { cloneElement } from "react"
-import Select, { components } from "react-select"
+import Select from "react-select"
 
 import OptionWeather from "./OptionWeather"
 

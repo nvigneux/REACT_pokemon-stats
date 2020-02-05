@@ -6,7 +6,7 @@ const Link = ({ label, onClick }) => {
     <span
       tabIndex={0}
       role="button"
-      onKeyDown={() => console.log("key down")}
+      onKeyDown={() => {}}
       onClick={onClick}
       className="color-link-pokemon uppercase active:text-gray-400 focus:text-gray-500 hover:text-gray-500 text-xs cursor-pointer mb-3 px-1"
     >

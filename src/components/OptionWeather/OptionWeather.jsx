@@ -1,14 +1,12 @@
 import React from "react"
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
 
 import Picto from "../Picto"
 
 const OptionWeather = ({ label, value }) => (
   <div className="flex justify-between">
     <div className="flex flex-col items-center w-full">
-      <div
-        className={`w-6 h-6 mr-1 rounded-full flex items-center justify-center`}
-      >
+      <div className="w-6 h-6 mr-1 rounded-full flex items-center justify-center">
         <Picto icon={label} className="w-10 h-10" />
       </div>
       <div className="flex flex-row items-center">
@@ -30,11 +28,11 @@ const OptionWeather = ({ label, value }) => (
 )
 
 // Problem PropTypes & Suspense & React Select
-OptionWeather.propTypes = {
-  // id: PropTypes.number.isRequired,
-  // type: PropTypes.string.isRequired,
-  // name: PropTypes.string.isRequired,
-  // power: PropTypes.number.isRequired,
-}
+// OptionWeather.propTypes = {
+// id: PropTypes.number.isRequired,
+// type: PropTypes.string.isRequired,
+// name: PropTypes.string.isRequired,
+// power: PropTypes.number.isRequired,
+// }
 
 export default OptionWeather

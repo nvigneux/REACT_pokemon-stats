@@ -1,4 +1,6 @@
 import React from "react"
+// import PropTypes from "prop-types"
+
 import { ErrorMessage } from "formik"
 
 import CustomDropdown from "../CustomDropdown"
@@ -23,8 +25,9 @@ const ChargedMoveSelect = ({ chargedMoves }) => (
   </>
 )
 
-ChargedMoveSelect.propTypes = {
-  chargedMoves: PropTypes.any.isRequired,
-}
+// Todo type charged move
+// ChargedMoveSelect.propTypes = {
+//   chargedMoves: PropTypes.any.isRequired,
+// }
 
 export default ChargedMoveSelect

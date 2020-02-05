@@ -11,8 +11,7 @@ export const Picto = ({ icon, ...props }) =>
   React.cloneElement(pictos[icon], props)
 
 Picto.propTypes = {
-  icon: PropTypes.oneOf(Object.keys(pictos))
-    .isRequired,
+  icon: PropTypes.oneOf(Object.keys(pictos)).isRequired,
 }
 
 export default Picto

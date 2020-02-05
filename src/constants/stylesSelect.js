@@ -40,7 +40,7 @@ export const selectWeather = {
     ...defaultStyles,
     border: "none",
   }),
-  control: (defaultStyles, state) => ({
+  control: defaultStyles => ({
     ...defaultStyles,
     border: "none",
     boxShadow: 0,

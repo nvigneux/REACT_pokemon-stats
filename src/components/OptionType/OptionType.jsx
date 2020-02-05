@@ -1,5 +1,5 @@
 import React from "react"
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
 
 import Picto from "../Picto"
 
@@ -15,9 +15,9 @@ const OptionType = ({ id, name }) => (
 )
 
 // Problem PropTypes & Suspense & React Select
-OptionType.propTypes = {
-  // id: PropTypes.number.isRequired,
-  // name: PropTypes.string.isRequired,
-}
+// OptionType.propTypes = {
+// id: PropTypes.number.isRequired,
+// name: PropTypes.string.isRequired,
+// }
 
 export default OptionType

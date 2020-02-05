@@ -67,8 +67,9 @@ const CustomDropdown = ({
   )
 }
 
+// TODO type option
 CustomDropdown.propTypes = {
-  options: PropTypes.any.isRequired,
+  // options: PropTypes.any.isRequired,
   optionComponent: PropTypes.node.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

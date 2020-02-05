@@ -24,10 +24,11 @@ const MoveSelect = ({ label, name, moves }) => (
   </>
 )
 
+// Todo type charged move
 MoveSelect.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  moves: PropTypes.any.isRequired,
+  // moves: PropTypes.any.isRequired,
 }
 
 export default MoveSelect
