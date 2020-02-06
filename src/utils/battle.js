@@ -19,8 +19,8 @@ const battleReducer = (state, { type, move, timer }) => {
         ...state,
         defHp: state.defHp - move.dmg,
         defEnergy: state.defEnergy + move.dmg / 2,
-        attEnergy: state.attEnergy + move.energyGen,
-        attTimeNextAtk: timer - move.execTime * 1000,
+        attEnergy: state.attEnergy + move.energy_generated,
+        attTimeNextAtk: timer - move.execution_time,
       }
     }
     case CHARGED_ATK_ATTACKER: {
@@ -28,8 +28,8 @@ const battleReducer = (state, { type, move, timer }) => {
         ...state,
         defHp: state.defHp - move.dmg,
         defEnergy: state.defEnergy + move.dmg / 2,
-        attEnergy: state.attEnergy - move.energyReq,
-        attTimeNextAtk: timer - move.execTime * 1000,
+        attEnergy: state.attEnergy - move.energy_required,
+        attTimeNextAtk: timer - move.execution_time,
       }
     }
     case QUICK_ATK_DEFENDER: {
@@ -37,8 +37,8 @@ const battleReducer = (state, { type, move, timer }) => {
         ...state,
         attHp: state.attHp - move.dmg,
         attEnergy: state.attEnergy + move.dmg / 2,
-        defEnergy: state.defEnergy + move.energyGen,
-        defTimeNextAtk: timer - move.execTime * 1000 - DEF_DELAY_ATTACK,
+        defEnergy: state.defEnergy + move.energy_generated,
+        defTimeNextAtk: timer - move.execution_time - DEF_DELAY_ATTACK,
       }
     }
     case CHARGED_ATK_DEFENDER: {
@@ -46,8 +46,8 @@ const battleReducer = (state, { type, move, timer }) => {
         ...state,
         attHp: state.attHp - move.dmg,
         attEnergy: state.attEnergy + move.dmg / 2,
-        defEnergy: state.defEnergy - move.energyReq,
-        defTimeNextAtk: timer - move.execTime * 1000,
+        defEnergy: state.defEnergy - move.energy_required,
+        defTimeNextAtk: timer - move.execution_time,
       }
     }
     default: {
@@ -96,10 +96,10 @@ export const simulateBattle = (attacker, defender) => {
       timerRemaining === TIMER_BATTLE - ATT_DELAY
     ) {
       // if Attacker can launch a charged attack
-      if (attacker.moves.charged.energyReq <= stateBattle.attEnergy) {
+      if (attacker.charged_move.energy_required <= stateBattle.attEnergy) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_ATTACKER,
-          move: attacker.moves.charged,
+          move: attacker.charged_move,
           timer: timerRemaining,
         })
         logBattle.push({
@@ -111,7 +111,7 @@ export const simulateBattle = (attacker, defender) => {
       } else {
         stateBattle = battleReducer(stateBattle, {
           type: QUICK_ATK_ATTACKER,
-          move: attacker.moves.quick,
+          move: attacker.quick_move,
           timer: timerRemaining,
         })
         logBattle.push({
@@ -132,10 +132,10 @@ export const simulateBattle = (attacker, defender) => {
       timerRemaining === TIMER_BATTLE - DEF_DELAY
     ) {
       // if Defender can launch a charged attack
-      if (defender.moves.charged.energyReq <= stateBattle.defEnergy) {
+      if (defender.charged_move.energy_required <= stateBattle.defEnergy) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_DEFENDER,
-          move: defender.moves.charged,
+          move: defender.charged_move,
           timer: timerRemaining,
         })
         logBattle.push({
@@ -147,7 +147,7 @@ export const simulateBattle = (attacker, defender) => {
       } else {
         stateBattle = battleReducer(stateBattle, {
           type: QUICK_ATK_DEFENDER,
-          move: defender.moves.quick,
+          move: defender.quick_move,
           timer: timerRemaining,
         })
         logBattle.push({

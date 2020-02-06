@@ -24,6 +24,7 @@ const pokedexes = prefetchPokedexes()
 const RaidBattle = () => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
+  const [activeTeam, setActiveTeam] = useState([])
 
   useEffect(() => {
     if (activeBoss) {
@@ -39,16 +40,28 @@ const RaidBattle = () => {
           activeDefender
         )
 
-        console.group(activeAttacker.name)
-        console.log("Attacker :", activeAttacker, "Defender :", activeDefender)
-        console.log("Log battle :", battle)
-        console.log("Stats :", pokemonBattleStats)
-        console.groupEnd()
+        // console.group(activeAttacker.name)
+        // console.log("Attacker :", activeAttacker, "Defender :", activeDefender)
+        // console.log("Log battle :", battle)
+        // console.log("Stats :", pokemonBattleStats)
+        // console.groupEnd()
 
         return pokemonBattleStats
       })
+
+      // TODO make hash array of pokedexes in fetch to find easily resultPokemon
+      // const buildActiveTeam = () => {
+      //   return resultBattle.map(result => {
+      //     return pokedexes.reduce((acc, item) => {
+      //       if (item.id === result.pokemonId) acc.push(item)
+      //       return acc
+      //     }, [])[0]
+      //   })
+      // }
+
+      // setActiveTeam(buildActiveTeam())
       console.log(
-        `Best pokedexes against ${activeBoss.name}`,
+        `Best pokedexes against ${activeBoss.pokemon.name}`,
         orderBy(resultBattle, ["dps"], ["desc"])
       )
     }
@@ -79,11 +92,19 @@ const RaidBattle = () => {
       </div>
 
       <div className="flex flex-row flex-wrap">
-        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
-          <Suspense fallback={<LoadingSelect label={false} />}>
-            <Pokedexes pokedexes={pokedexes} />
-          </Suspense>
-        </ErrorBoundary>
+        <>
+          {activeTeam.length ? (
+            <>
+              {/* <Pokedexes pokedexes={pokedexes} /> */}
+              {console.log(activeTeam)}
+            </>
+          ) : null}
+          <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+            <Suspense fallback={<LoadingSelect label={false} />}>
+              <Pokedexes pokedexes={pokedexes} />
+            </Suspense>
+          </ErrorBoundary>
+        </>
       </div>
     </>
   )
