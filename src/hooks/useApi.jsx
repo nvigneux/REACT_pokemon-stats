@@ -115,7 +115,7 @@ export const prefetchBosses = () =>
           const stats = pokemonStats(CP_MULTIPLIER, boss)
           return { ...boss, stats }
         })
-        return orderBy(bossesWithStats, ["id_base_pokemon"], ["asc"])
+        return orderBy(bossesWithStats, ["stats.cp"], ["desc"])
       })
     )
   )
@@ -128,7 +128,7 @@ export const prefetchPokedexes = () =>
           const stats = pokemonStats(CP_MULTIPLIER, pokemon)
           return { ...pokemon, stats }
         })
-        return orderBy(pokedexesWithStats, ["id_base_pokemon"], ["asc"])
+        return orderBy(pokedexesWithStats, ["stats.cp"], ["desc"])
       })
     )
   )
