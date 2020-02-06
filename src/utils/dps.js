@@ -2,9 +2,12 @@ import { getWeatherBonus } from "./weather"
 import { getMoveEffectivenessType } from "./et"
 
 const getDpsMove = (move, attacker, defender, weather) => {
-  const stab = attacker.type.includes(move.type) ? 1.2 : 1
+  const stab = attacker.pokemon.type.includes(move.type) ? 1.2 : 1
   const bonusWeather = getWeatherBonus(weather, move.type)
-  const effectiveness = getMoveEffectivenessType(move.type, defender.type)
+  const effectiveness = getMoveEffectivenessType(
+    move.type,
+    defender.pokemon.type
+  )
 
   return (
     Math.floor(
@@ -35,26 +38,26 @@ const calculateRealDps = (
  */
 const getRealDps = (attacker, defender, weather) => {
   const quickMoveDps = getDpsMove(
-    attacker.moves.quick,
+    attacker.quick_move,
     attacker,
     defender,
     weather
   )
   const chargedMoveDps = getDpsMove(
-    attacker.moves.charged,
+    attacker.charged_move,
     attacker,
     defender,
     weather
   )
   const numberAttackRequired = Math.ceil(
-    attacker.moves.charged.energyReq / attacker.moves.quick.energyGen
+    attacker.charged_move.energy_required / attacker.quick_move.energy_generated
   )
   const realDps = calculateRealDps(
     quickMoveDps,
     chargedMoveDps,
     numberAttackRequired,
-    attacker.moves.quick.execTime,
-    attacker.moves.charged.execTime
+    attacker.quick_move.execution_time,
+    attacker.charged_move.execution_time
   )
 
   return {
