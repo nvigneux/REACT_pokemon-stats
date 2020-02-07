@@ -179,13 +179,18 @@ body {
   border-width: 1.5px;
 }
 
-.shadow-outline-type{
+.shadow-outline-type {
   box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
 .rounded-t-pokemon {
+  position: relative;
   border-top-left-radius: 2.5rem;
   border-top-right-radius: 2.5rem;
+}
+
+.bg-button-menu{
+  background: #6fc791;
 }
 
 ::placeholder {
