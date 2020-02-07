@@ -91,20 +91,24 @@ const RaidBattle = () => {
         </div>
       </div>
 
+      {/* {activeTeam.length ? (
+            <> */}
+      <div className="flex flex-row flex-wrap h-64 bg-gray-100 -mx-4 mt-4 p-6 rounded-t-pokemon">
+        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+          <Suspense fallback={<LoadingSelect label={false} />}>
+            <Pokedexes pokedexes={pokedexes} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+      {/* </>
+          ) : null} */}
+
       <div className="flex flex-row flex-wrap">
-        <>
-          {activeTeam.length ? (
-            <>
-              {/* <Pokedexes pokedexes={pokedexes} /> */}
-              {console.log(activeTeam)}
-            </>
-          ) : null}
-          <ErrorBoundary fallback={<LoadingSelect label={false} />}>
-            <Suspense fallback={<LoadingSelect label={false} />}>
-              <Pokedexes pokedexes={pokedexes} />
-            </Suspense>
-          </ErrorBoundary>
-        </>
+        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+          <Suspense fallback={<LoadingSelect label={false} />}>
+            <Pokedexes pokedexes={pokedexes} />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </>
   )

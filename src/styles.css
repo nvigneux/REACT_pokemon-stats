@@ -183,6 +183,11 @@ body {
   box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
+.rounded-t-pokemon {
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
+}
+
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #96a4a5;

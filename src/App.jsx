@@ -4,6 +4,9 @@ import { ToastContainer } from "use-nv-simple-toast"
 // Components
 import Routes from "./Routes"
 
+// TODO pack away component with atomic
+// TODO Rename component
+
 // Context
 // import { AppProvider } from "./AppContext"
 import Layout from "./components/Layout"
