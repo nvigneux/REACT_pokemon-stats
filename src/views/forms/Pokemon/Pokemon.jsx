@@ -2,7 +2,7 @@ import React from "react"
 import { Field, ErrorMessage } from "formik"
 
 export const PokemonForm = () => (
-  <div className="bg-white flex flex-col">
+  <div className="flex flex-col">
     <div className="flex flex-wrap">
       <div className="mb-3 px-1 w-4/6">
         <label

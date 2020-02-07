@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { prefetch } from "react-suspense-fetch"
 import { useToast } from "use-nv-simple-toast"
-import { orderBy } from "lodash"
+import { orderBy, keyBy } from "lodash"
 
 import { pokemonStats } from "../utils/stats"
 import { CP_MULTIPLIER } from "../constants/cpMultiplier"
@@ -128,7 +128,12 @@ export const prefetchPokedexes = () =>
           const stats = pokemonStats(CP_MULTIPLIER, pokemon)
           return { ...pokemon, stats }
         })
-        return orderBy(pokedexesWithStats, ["stats.cp"], ["desc"])
+        const orderPokedexesCp = orderBy(
+          pokedexesWithStats,
+          ["stats.cp"],
+          ["desc"]
+        )
+        return orderPokedexesCp
       })
     )
   )

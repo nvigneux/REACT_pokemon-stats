@@ -6,13 +6,13 @@ import ErrorBoundary from "../hooks/ErrorBoundary"
 
 import WeatherSelect from "../components/WeatherSelect"
 import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
+import PokedexCard from "../components/PokedexCard"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
 import { getDmgMoves } from "../utils/dps"
 
 import { WEATHERS } from "../constants/weather"
 import { POKEMON } from "../constants/constant"
-
 import "../styles.css"
 
 const BossSelect = lazy(() => import("../components/BossSelect")) // TODO make optionBoss
@@ -39,31 +39,23 @@ const RaidBattle = () => {
           battle,
           activeDefender
         )
-
-        // console.group(activeAttacker.name)
-        // console.log("Attacker :", activeAttacker, "Defender :", activeDefender)
-        // console.log("Log battle :", battle)
-        // console.log("Stats :", pokemonBattleStats)
-        // console.groupEnd()
-
         return pokemonBattleStats
       })
 
-      // TODO make hash array of pokedexes in fetch to find easily resultPokemon
-      // const buildActiveTeam = () => {
-      //   return resultBattle.map(result => {
-      //     return pokedexes.reduce((acc, item) => {
-      //       if (item.id === result.pokemonId) acc.push(item)
-      //       return acc
-      //     }, [])[0]
-      //   })
-      // }
+      const buildActiveTeam = () =>
+        resultBattle.map(result => {
+          return pokedexes.reduce((acc, item) => {
+            if (item.id === result.pokemonId)
+              acc.push({ ...result, pokedex: item })
+            return acc
+          }, [])[0]
+        })
 
-      // setActiveTeam(buildActiveTeam())
-      console.log(
-        `Best pokedexes against ${activeBoss.pokemon.name}`,
-        orderBy(resultBattle, ["dps"], ["desc"])
-      )
+      setActiveTeam(orderBy(buildActiveTeam(), ["dps"], ["desc"]))
+      // console.log(
+      //   `Best pokedexes against ${activeBoss.pokemon.name}`,
+      //   orderBy(buildActiveTeam, ["dps"], ["desc"])
+      // )
     }
   }, [activeBoss, activeWeather])
 
@@ -91,19 +83,20 @@ const RaidBattle = () => {
         </div>
       </div>
 
-      {/* {activeTeam.length ? (
-            <> */}
-      <div className="flex flex-row flex-wrap h-64 bg-gray-100 -mx-4 mt-4 p-6 rounded-t-pokemon">
-        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
-          <Suspense fallback={<LoadingSelect label={false} />}>
-            <Pokedexes pokedexes={pokedexes} />
-          </Suspense>
-        </ErrorBoundary>
-      </div>
-      {/* </>
-          ) : null} */}
+      {activeTeam.length ? (
+        <div className="flex flex-row flex-wrap bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
+          {activeTeam.slice(0, 6).map(pokedex => (
+            <div
+              key={pokedex.pokemonId}
+              className="w-1/3 flex flex-col flex-wrap"
+            >
+              <PokedexCard pokedex={pokedex.pokedex} result={pokedex} />
+            </div>
+          ))}
+        </div>
+      ) : null}
 
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap pt-2">
         <ErrorBoundary fallback={<LoadingSelect label={false} />}>
           <Suspense fallback={<LoadingSelect label={false} />}>
             <Pokedexes pokedexes={pokedexes} />

@@ -85,7 +85,7 @@ const Pokedex = () => {
         }
       >
         {({ isSubmitting, errors, touched, ...props }) => (
-          <Form className="bg-white flex flex-col mt-2">
+          <Form className="flex flex-col mt-2">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <ErrorBoundary fallback={<LoadingSelect />}>
