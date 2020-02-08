@@ -1,1 +1,1 @@
-export { default } from "./MenuIcon"
+export { MenuIcon, useMenuIcon } from "./MenuIcon"
