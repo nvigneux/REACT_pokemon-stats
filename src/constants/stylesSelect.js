@@ -20,6 +20,13 @@ export const selectForm = {
     textTransform: "uppercase",
   }),
   indicatorSeparator: () => null,
+  clearIndicator: defaultStyles => ({
+    ...defaultStyles,
+  }),
+  dropdownIndicator: defaultStyles => ({
+    ...defaultStyles,
+    display: "none",
+  }),
 }
 
 export const selectWeather = {

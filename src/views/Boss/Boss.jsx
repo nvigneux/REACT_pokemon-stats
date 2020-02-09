@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from "react"
-import { Formik, Form, ErrorMessage, resetForm } from "formik"
+import { Formik, Form, ErrorMessage } from "formik"
 
 import useApi, {
   prefetchPokemons,
@@ -8,13 +8,10 @@ import useApi, {
 } from "../../hooks/useApi"
 
 import ErrorBoundary from "../../hooks/ErrorBoundary"
-import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionType from "../../components/OptionType"
 import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
-
-import DisplayFormikState from "../forms/DisplayFormikState"
 
 import {
   BossFormValidation,
@@ -84,7 +81,7 @@ const Boss = () => {
         }
       >
         {({ isSubmitting, errors, touched, ...props }) => (
-          <Form className="flex flex-col mt-2">
+          <Form className="flex flex-col mt-2 mb-16">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
                 <ErrorBoundary fallback={<LoadingSelect />}>
@@ -170,8 +167,6 @@ const Boss = () => {
             >
               Envoyer
             </button>
-
-            {/* <DisplayFormikState {...props} /> */}
           </Form>
         )}
       </Formik>

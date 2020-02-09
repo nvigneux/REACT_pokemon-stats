@@ -8,13 +8,10 @@ import useApi, {
 } from "../../hooks/useApi"
 
 import ErrorBoundary from "../../hooks/ErrorBoundary"
-import Layout from "../../components/Layout"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionType from "../../components/OptionType"
 import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
-
-import DisplayFormikState from "../forms/DisplayFormikState"
 
 import {
   PokedexFormValidation,

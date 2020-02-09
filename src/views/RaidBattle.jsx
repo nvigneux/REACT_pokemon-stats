@@ -5,7 +5,8 @@ import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
 import ErrorBoundary from "../hooks/ErrorBoundary"
 
 import WeatherSelect from "../components/WeatherSelect"
-import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
+import LoadingSelect from "../components/LoadingSelect"
+import LoadingPokedexCard from "../components/LoadingPokedexCard"
 import PokedexCard from "../components/PokedexCard"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
@@ -15,7 +16,7 @@ import { WEATHERS } from "../constants/weather"
 import { POKEMON } from "../constants/constant"
 import "../styles.css"
 
-const BossSelect = lazy(() => import("../components/BossSelect")) // TODO make optionBoss
+const BossSelect = lazy(() => import("../components/BossSelect"))
 const Pokedexes = lazy(() => import("../components/Pokedexes"))
 
 const bosses = prefetchBosses()
@@ -83,7 +84,7 @@ const RaidBattle = () => {
         </div>
       </div>
 
-      {activeTeam.length ? (
+      {activeTeam.length && activeBoss ? (
         <div className="flex flex-row flex-wrap bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
           {activeTeam.slice(0, 6).map(pokedex => (
             <div
@@ -96,10 +97,9 @@ const RaidBattle = () => {
         </div>
       ) : null}
 
-{/* TODO LOADING CARD PoKEMON */}
       <div className="flex flex-row flex-wrap pt-2">
-        <ErrorBoundary fallback={<LoadingSelect label={false} />}>
-          <Suspense fallback={<LoadingSelect label={false} />}>
+        <ErrorBoundary fallback={<LoadingPokedexCard number={6} label={false} />}>
+          <Suspense fallback={<LoadingPokedexCard number={6} label={false} />}>
             <Pokedexes pokedexes={pokedexes} />
           </Suspense>
         </ErrorBoundary>
