@@ -12,13 +12,13 @@ export const useMenuIcon = () => {
 export const MenuIcon = ({ isActive }) => {
   return (
     <div
-      className={`btn-menu absolute w-8 t-1/2 cursor-pointer ${
+      className={`btn-menu absolute w-6 t-1/2 cursor-pointer ${
         isActive ? "active" : "notActive"
       }`}
     >
-      <span className="menu-bar block w-full rounded-sm h-1 bg-white transition-all duration-300 relative" />
-      <span className="menu-bar block w-full rounded-sm h-1 bg-white transition-all duration-300 relative" />
-      <span className="menu-bar block w-full rounded-sm h-1 bg-white transition-all duration-300 relative" />
+      <span className="menu-bar block w-full rounded-sm h-1-2 bg-white transition-all duration-300 relative" />
+      <span className="menu-bar block w-full rounded-sm h-1-2 bg-white transition-all duration-300 relative" />
+      <span className="menu-bar block w-full rounded-sm h-1-2 bg-white transition-all duration-300 relative" />
     </div>
   )
 }

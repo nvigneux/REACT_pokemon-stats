@@ -13,7 +13,8 @@ const Layout = ({ children }) => {
       <button
         type="button"
         onClick={setIsActive}
-        className="fixed h-16 w-16 rounded-full bg-button-menu bottom-0 right-0 mr-4 mb-2 shadow-lg"
+        style={{ height: "3.5rem", width: "3.5rem" }}
+        className="fixed rounded-full bg-button-menu bottom-0 right-0 mr-4 mb-2 shadow-lg"
       >
         <MenuIcon isActive={isActive} />
       </button>

@@ -185,8 +185,8 @@ body {
 
 .rounded-t-pokemon {
   position: relative;
-  border-top-left-radius: 2.5rem;
-  border-top-right-radius: 2.5rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
 }
 
 .bg-button-menu {
@@ -246,6 +246,9 @@ body {
 .notActive .menu-bar:nth-child(3) {
   animation: ease 0.7s bottom-2 forwards;
 }
+.h-1-2{
+  height: 0.18rem;
+}
 
 @keyframes top {
   0% {
@@ -253,22 +256,22 @@ body {
     transform: rotate(0);
   }
   50% {
-    top: 10px;
+    top: 9px;
     transform: rotate(0);
   }
   100% {
-    top: 10px;
+    top: 9px;
     transform: rotate(45deg);
   }
 }
 
 @keyframes top-2 {
   0% {
-    top: 10px;
+    top: 9px;
     transform: rotate(45deg);
   }
   50% {
-    top: 10px;
+    top: 9px;
     transform: rotate(0deg);
   }
   100% {
@@ -283,22 +286,22 @@ body {
     transform: rotate(0);
   }
   50% {
-    bottom: 10px;
+    bottom: 9px;
     transform: rotate(0);
   }
   100% {
-    bottom: 10px;
+    bottom: 9px;
     transform: rotate(135deg);
   }
 }
 
 @keyframes bottom-2 {
   0% {
-    bottom: 10px;
+    bottom: 9px;
     transform: rotate(135deg);
   }
   50% {
-    bottom: 10px;
+    bottom: 9px;
     transform: rotate(0);
   }
   100% {
