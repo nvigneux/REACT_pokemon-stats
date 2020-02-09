@@ -28,13 +28,14 @@ export const selectWeather = {
     width: "92%",
     height: "42px",
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
   }),
   valueContainer: defaultStyles => ({
     ...defaultStyles,
     height: "42px",
     padding: "2px 0",
+    justifyContent: "flex-end",
   }),
   container: defaultStyles => ({
     ...defaultStyles,

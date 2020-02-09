@@ -6,7 +6,7 @@ import Picto from "../Picto"
 const OptionWeather = ({ label, value }) => (
   <div className="flex justify-between">
     <div className="flex flex-col items-center w-full">
-      <div className="w-6 h-6 mr-1 rounded-full flex items-center justify-center">
+      <div className="w-6 h-6 rounded-full flex items-center justify-center">
         <Picto icon={label} className="w-10 h-10" />
       </div>
       <div className="flex flex-row items-center">
@@ -15,7 +15,7 @@ const OptionWeather = ({ label, value }) => (
             <div
               key={item}
               className={`${item} w-4 h-4 rounded-full shadow-outline-type flex items-center justify-center ${
-                index > 1 ? "-ml-1" : "-ml-1 mr-1"
+                index > 1 ? "" : ""
               }`}
             >
               <Picto icon={item} className="w-2 h-2" />

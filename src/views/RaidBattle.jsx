@@ -96,6 +96,7 @@ const RaidBattle = () => {
         </div>
       ) : null}
 
+{/* TODO LOADING CARD PoKEMON */}
       <div className="flex flex-row flex-wrap pt-2">
         <ErrorBoundary fallback={<LoadingSelect label={false} />}>
           <Suspense fallback={<LoadingSelect label={false} />}>

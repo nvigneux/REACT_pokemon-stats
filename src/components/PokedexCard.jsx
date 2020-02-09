@@ -22,7 +22,7 @@ const PokedexCard = ({ pokedex }) => (
       />
     </div>
     <div className="flex-auto flex flex-col items-center">
-      <div className="text-sm text-gray-700 font-medium leading-none pb-1">
+      <div className="text-sm text-gray-700 font-medium leading-none pb-2">
         {`${pokedex.pokemon.name} `}
       </div>
       <div className="w-full flex row flex-auto justify-around items-center">
@@ -39,6 +39,18 @@ const PokedexCard = ({ pokedex }) => (
               <Picto icon={type.name} className="w-2 h-2" />
             </div>
           ))}
+        </div>
+        <div className="flex row">
+          <div
+            className={`${pokedex.quick_move.type} w-4 h-4 rounded-full shadow-outline-type flex items-center justify-center mr-1`}
+          >
+            <Picto icon={pokedex.quick_move.type} className="w-2 h-2" />
+          </div>
+          <div
+            className={`${pokedex.charged_move.type} w-4 h-4 rounded-full shadow-outline-type flex items-center justify-center -ml-1`}
+          >
+            <Picto icon={pokedex.charged_move.type} className="w-2 h-2" />
+          </div>
         </div>
       </div>
     </div>
