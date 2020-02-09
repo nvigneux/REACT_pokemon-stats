@@ -19,15 +19,18 @@ const Login = ({ history }) => {
     ...LoginFormInitValues,
     ...LoginFormInitValues,
   }
-  const handleSubmitForm = ({ password }) => {
+  const handleSubmitForm = ({ password }, resetForm) => {
     postLogin({ identifier: password, password }).then(({ data }) => {
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({ user: data.user.id, token: data.jwt })
-      )
-      setTimeout(() => {
-        history.push("/")
-      }, 1000)
+      if (data) {
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({ user: data.user.id, token: data.jwt })
+        )
+        setTimeout(() => {
+          history.push("/")
+        }, 1000)
+      }
+      resetForm()
     })
   }
 
@@ -41,15 +44,17 @@ const Login = ({ history }) => {
         }
       >
         {({ isSubmitting, errors, touched, ...props }) => (
-          <Form className="flex flex-col mt-2 mb-16">
-            <LoginForm {...props} />
+          <Form className="bg-pokemon flex flex-col items-center justify-center h-full h-screen">
+            <div className="flex flex-col justify-center items-center w-full max-w-xs bg-white shadow-md rounded px-4 pt-6 pb-8 mb-4">
+              <LoginForm {...props} />
 
-            <button
-              className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Envoyer
-            </button>
+              <button
+                className="self-center tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Envoyer
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

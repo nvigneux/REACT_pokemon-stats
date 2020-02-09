@@ -104,7 +104,7 @@ const useApi = (options = { trigger: false }) => {
 
   const postLogin = data =>
     request("POST", API_LOGIN, data)
-      .then(res => responseHandler(res, "Succes POST login"))
+      .then(res => responseHandler(res, "Succes authentification"))
       .catch(errorHandler)
 
   return [
