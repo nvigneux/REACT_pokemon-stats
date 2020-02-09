@@ -11,11 +11,13 @@ const BossSelect = ({ bosses, activeValue, select }) => (
       styles={selectForm}
       options={bosses}
       onChange={select}
-      isSearchable={false}
+      isSearchable
+      isClearable
       formatOptionLabel={option => {
         return cloneElement(<OptionBoss />, { key: option.id, ...option })
       }}
-      getOptionValue={option => option.id}
+      getOptionValue={option => option.pokemon.id_base_pokemon}
+      getOptionLabel={option => option.pokemon.name}
       isOptionSelected={option =>
         activeValue ? activeValue.id === option.id : false
       }
