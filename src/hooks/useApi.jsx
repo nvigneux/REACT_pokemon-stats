@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { prefetch } from "react-suspense-fetch"
 import { useToast } from "use-nv-simple-toast"
-import { orderBy, keyBy } from "lodash"
+import { orderBy } from "lodash"
 
 import { pokemonStats } from "../utils/stats"
 import { CP_MULTIPLIER } from "../constants/cpMultiplier"
@@ -15,6 +15,7 @@ import {
   API_POKEMONS,
   API_QUICK_MOVE,
   API_CHARGED_MOVE,
+  API_LOGIN,
 } from "../constants/constant"
 
 const useApi = (options = { trigger: false }) => {
@@ -101,7 +102,17 @@ const useApi = (options = { trigger: false }) => {
       .then(res => responseHandler(res, "Succes POST boss"))
       .catch(errorHandler)
 
-  return [loading, payload, error, { postPokemon, postPokedex, postBoss }]
+  const postLogin = data =>
+    request("POST", API_LOGIN, data)
+      .then(res => responseHandler(res, "Succes POST login"))
+      .catch(errorHandler)
+
+  return [
+    loading,
+    payload,
+    error,
+    { postPokemon, postPokedex, postBoss, postLogin },
+  ]
 }
 
 export const prefetchPokemons = () =>

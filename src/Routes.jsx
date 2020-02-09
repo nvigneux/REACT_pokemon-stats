@@ -9,22 +9,16 @@ import { routes, protectedRoutes } from "./views/routes"
 // import useAppContext from "./hooks/useAppContext"
 
 const Routes = () => {
-  // const {
-  //   context: { auth },
-  // } = useAppContext()
-
+  const auth = JSON.parse(window.localStorage.getItem("auth"))
   return (
     <Switch>
       {routes.map(route => (
         <Route key={route.path} {...route} />
       ))}
-      {protectedRoutes.map(route => (
-        <Route key={route.path} {...route} />
-      ))}
-      {/* {auth && auth.access_token
+      {auth && auth.token
         ? protectedRoutes.map(route => <Route key={route.path} {...route} />)
-        : null} */}
-      <Route render={() => <Redirect to="/" />} />
+        : null}
+      <Route render={() => <Redirect to="/login" />} />
     </Switch>
   )
 }
