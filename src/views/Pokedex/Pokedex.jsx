@@ -7,12 +7,12 @@ import useApi, {
   prefetchChargedMoves,
 } from "../../hooks/useApi"
 
+import useAppContext from "../../hooks/useAppContext"
 import ErrorBoundary from "../../hooks/ErrorBoundary"
 import Link from "../../components/Link/Link"
 import CustomDropdown from "../../components/CustomDropdown"
 import OptionType from "../../components/OptionType"
 import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
-
 import {
   PokedexFormValidation,
   PokedexSelectValidation,
@@ -35,6 +35,9 @@ const quickMoves = prefetchQuickMoves()
 const chargedMoves = prefetchChargedMoves()
 
 const Pokedex = () => {
+  const {
+    context: { auth },
+  } = useAppContext()
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
   const [, , , { postPokemon }] = useApi()
   const [, , , { postPokedex }] = useApi()
@@ -64,12 +67,14 @@ const Pokedex = () => {
     isPokemonFormVisible
       ? postPokemon({ ...values }).then(res =>
           res.data
-            ? postPokedex({ ...values, pokemon: res.data.id, user: 1 }).then(
-                resetForm
-              )
+            ? postPokedex({
+                ...values,
+                pokemon: res.data.id,
+                user: auth.id,
+              }).then(resetForm)
             : res
         )
-      : postPokedex({ ...values, user: 1 }).then(resetForm)
+      : postPokedex({ ...values, user: auth.id }).then(resetForm)
   }
 
   return (

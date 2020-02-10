@@ -13,7 +13,6 @@ import { AppProvider } from "./AppContext"
 // Styles
 import "./styles.css"
 
-// TODO when auth put id in request and change role in strapi
 // TODO make crawler attack pokemon go
 // TODO change style TOAST x
 function App() {

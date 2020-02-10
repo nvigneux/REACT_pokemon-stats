@@ -146,9 +146,10 @@ export const prefetchBosses = () =>
     )
   )
 
-export const prefetchPokedexes = () =>
-  prefetch(() =>
-    fetch(API_POKEDEXES).then(res =>
+export const prefetchPokedexes = () => {
+  const context = JSON.parse(localStorage.getItem("context"))
+  return prefetch(() =>
+    fetch(`${API_POKEDEXES}?user=${context.auth.id}`).then(res =>
       res.json().then(pokedexes => {
         const pokedexesWithStats = pokedexes.map(pokemon => {
           const stats = pokemonStats(CP_MULTIPLIER, pokemon)
@@ -163,6 +164,7 @@ export const prefetchPokedexes = () =>
       })
     )
   )
+}
 
 export const prefetchQuickMoves = () =>
   prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
