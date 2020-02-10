@@ -18,7 +18,11 @@ import "./styles.css"
 function App() {
   return (
     <AppProvider>
-      <ToastContainer>
+      <ToastContainer
+        positionX="center"
+        positionY="top"
+        backgroundColor="black"
+      >
         <Router>
           <React.Suspense fallback={<div />}>
             <Routes />
