@@ -7,11 +7,12 @@ import { routes, protectedRoutes } from "./views/routes"
 import Layout from "./components/Layout"
 
 // // Context
-// import useAppContext from "./hooks/useAppContext"
+import useAppContext from "./hooks/useAppContext"
 
 const Routes = () => {
-  const auth = JSON.parse(window.localStorage.getItem("auth"))
-
+  const {
+    context: { auth },
+  } = useAppContext()
   return (
     <Switch>
       {routes.map(route => (

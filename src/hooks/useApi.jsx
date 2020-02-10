@@ -18,8 +18,16 @@ import {
   API_LOGIN,
 } from "../constants/constant"
 
+// Context
+import useAppContext from "./useAppContext"
+
 const useApi = (options = { trigger: false }) => {
   const { trigger } = options
+  const {
+    // context: { auth },
+    setAuth,
+    clearAuth,
+  } = useAppContext()
   const [loading, setLoading] = useState(trigger)
   const [payload, setPayload] = useState(null)
   const [error, setError] = useState(null)
@@ -59,9 +67,11 @@ const useApi = (options = { trigger: false }) => {
           errorMessage = "400 - Contenu inexistant"
           break
         case 401:
+          clearAuth()
           errorMessage = "401 - Mot de passe ou utilisateur incorrect"
           break
         case 403:
+          clearAuth()
           errorMessage =
             "403 - Votre authentification a expirée ou vous n'êtes pas authorisé à accéder à ce contenu"
           break
@@ -104,7 +114,12 @@ const useApi = (options = { trigger: false }) => {
 
   const postLogin = data =>
     request("POST", API_LOGIN, data)
-      .then(res => responseHandler(res, "Succes authentification"))
+      .then(res => {
+        if (res.data) setAuth(res.data)
+        setLoading(false)
+        setToast({ title: "Succes authentification" })
+        return res
+      })
       .catch(errorHandler)
 
   return [

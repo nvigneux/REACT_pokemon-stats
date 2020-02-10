@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Formik, Form } from "formik"
 
 import useApi from "../../hooks/useApi"
+import useAppContext from "../../hooks/useAppContext"
 
 import {
   LoginFormValidation,
@@ -13,26 +14,25 @@ import {
 import style from "./Login.module.css"
 
 const Login = ({ history }) => {
+  const {
+    context: { auth },
+  } = useAppContext()
   const [, , , { postLogin }] = useApi()
-
   const LoginValueSchema = {
     ...LoginFormInitValues,
     ...LoginFormInitValues,
   }
+
   const handleSubmitForm = ({ password }, resetForm) => {
-    postLogin({ identifier: password, password }).then(({ data }) => {
-      if (data) {
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({ user: data.user.id, token: data.jwt })
-        )
-        setTimeout(() => {
-          history.push("/")
-        }, 1000)
-      }
+    postLogin({ identifier: password, password }).then(res => {
+      if (res.data) history.push("/")
       resetForm()
     })
   }
+
+  // useEffect(() => {
+  //   if (auth && auth.id) history.push("/pokedex")
+  // }, [auth, history])
 
   return (
     <>

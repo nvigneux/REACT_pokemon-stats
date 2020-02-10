@@ -2,17 +2,25 @@ import React from "react"
 import PropTypes from "prop-types"
 import { NavLink } from "react-router-dom"
 
-import Popin, { usePopin } from "./Popin/Popin"
+import useAppContext from "../hooks/useAppContext"
+
+import { Popin, usePopin } from "./Popin/Popin"
 
 import { MenuIcon, useMenuIcon } from "./MenuIcon"
 
 const Layout = ({ children }) => {
+  const { clearAuth } = useAppContext()
   const [isActive, setIsActive] = useMenuIcon()
   const [isDisplayed, toggle] = usePopin()
 
   const handleNavigation = () => {
     setIsActive()
     toggle()
+  }
+
+  const handleLogout = () => {
+    handleNavigation()
+    clearAuth()
   }
 
   return (
@@ -29,6 +37,15 @@ const Layout = ({ children }) => {
         </button>
         <Popin isDisplayed={isDisplayed} onClose={handleNavigation}>
           <>
+            <NavLink
+              activeClassName="active-menu"
+              onClick={handleLogout}
+              to="/login"
+              exact
+              className="color-menu-pokemon text-base uppercase px-1 mr-2 mb-6 hover:text-green-100"
+            >
+              Déconnexion
+            </NavLink>
             <NavLink
               activeClassName="active-menu"
               onClick={handleNavigation}

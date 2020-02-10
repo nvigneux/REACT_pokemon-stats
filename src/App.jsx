@@ -8,24 +8,25 @@ import Routes from "./Routes"
 // TODO Rename component
 
 // Context
-// import { AppProvider } from "./AppContext"
+import { AppProvider } from "./AppContext"
+
 // Styles
 import "./styles.css"
 
-// TODO make logout
-// TODO app context for auth
-// TODO change style TOAST x
 // TODO when auth put id in request and change role in strapi
 // TODO make crawler attack pokemon go
+// TODO change style TOAST x
 function App() {
   return (
-    <ToastContainer>
-      <Router>
-        <React.Suspense fallback={<div />}>
-          <Routes />
-        </React.Suspense>
-      </Router>
-    </ToastContainer>
+    <AppProvider>
+      <ToastContainer>
+        <Router>
+          <React.Suspense fallback={<div />}>
+            <Routes />
+          </React.Suspense>
+        </Router>
+      </ToastContainer>
+    </AppProvider>
   )
 }
 
