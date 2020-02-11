@@ -166,6 +166,7 @@ export const prefetchPokedexes = () => {
   )
 }
 
+//TODO order by name
 export const prefetchQuickMoves = () =>
   prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
 
