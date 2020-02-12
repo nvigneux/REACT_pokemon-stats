@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Formik, Form } from "formik"
 
 import useApi from "../../hooks/useApi"
@@ -7,10 +7,7 @@ import {
   LoginFormValidation,
   LoginForm,
   LoginFormInitValues,
-} from "../forms/Login"
-
-// Utils & misc
-import style from "./Login.module.css"
+} from "../../forms/Login"
 
 const Login = ({ history }) => {
   const [, , , { postLogin }] = useApi()

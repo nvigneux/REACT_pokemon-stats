@@ -1,8 +1,8 @@
 import React from "react"
 import { Field, ErrorMessage, useFormikContext } from "formik"
 
-import { pokemonStats } from "../../../utils/stats"
-import { CP_MULTIPLIER } from "../../../constants/cpMultiplier"
+import { pokemonStats } from "../../utils/stats"
+import { CP_MULTIPLIER } from "../../constants/cpMultiplier"
 
 export const BossForm = ({ values }) => {
   const { setFieldValue } = useFormikContext()

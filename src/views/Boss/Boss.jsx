@@ -18,12 +18,12 @@ import {
   BossSelectValidation,
   BossForm,
   BossFormInitValues,
-} from "../forms/Boss"
+} from "../../forms/Boss"
 import {
   PokemonFormValidation,
   PokemonForm,
   PokemonFormInitValues,
-} from "../forms/Pokemon"
+} from "../../forms/Pokemon"
 
 import { TYPES_ARRAY } from "../../constants/types"
 

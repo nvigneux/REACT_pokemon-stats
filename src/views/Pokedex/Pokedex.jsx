@@ -18,12 +18,12 @@ import {
   PokedexSelectValidation,
   PokedexForm,
   PokedexFormInitValues,
-} from "../forms/Pokedex"
+} from "../../forms/Pokedex"
 import {
   PokemonFormValidation,
   PokemonForm,
   PokemonFormInitValues,
-} from "../forms/Pokemon"
+} from "../../forms/Pokemon"
 
 import { TYPES_ARRAY } from "../../constants/types"
 
