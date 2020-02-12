@@ -2,13 +2,13 @@ import React, { Suspense } from "react"
 
 // Views
 const Login = React.lazy(() => import("./Login"))
-const RaidBattle = React.lazy(() => import("./RaidBattle"))
+const RaidBattleMain = React.lazy(() => import("./RaidBattleMain"))
 const PokedexForm = React.lazy(() => import("./Pokedex"))
 const BossForm = React.lazy(() => import("./Boss"))
 
 function WaitingComponent(Component) {
   return props => (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<div>RaidBattleMain</div>}>
       <Component {...props} />
     </Suspense>
   )
@@ -25,7 +25,7 @@ export const routes = [
 export const protectedRoutes = [
   {
     path: "/",
-    component: WaitingComponent(RaidBattle),
+    component: WaitingComponent(RaidBattleMain),
     exact: true,
   },
   {

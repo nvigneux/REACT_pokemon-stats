@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState, useEffect } from "react"
 import { orderBy } from "lodash"
 
-import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
+// import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
 import ErrorBoundary from "../hooks/ErrorBoundary"
 
 import WeatherSelect from "../components/molecules/WeatherSelect/WeatherSelect"
@@ -17,12 +17,9 @@ import { POKEMON } from "../constants/constant"
 import "../styles.css"
 
 const BossSelect = lazy(() => import("../components/molecules/BossSelect"))
-const Pokedexes = lazy(() => import("../components/organisms/Pokedexes/Pokedexes"))
+const Pokedexes = lazy(() => import("../components/organisms/Pokedexes"))
 
-const bosses = prefetchBosses()
-const pokedexes = prefetchPokedexes()
-
-const RaidBattle = () => {
+const RaidBattle = ({ pokedexes, bosses }) => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
   const [activeTeam, setActiveTeam] = useState([])
@@ -98,7 +95,9 @@ const RaidBattle = () => {
       ) : null}
 
       <div className="flex flex-row flex-wrap pt-2">
-        <ErrorBoundary fallback={<LoadingPokedexCard number={6} label={false} />}>
+        <ErrorBoundary
+          fallback={<LoadingPokedexCard number={6} label={false} />}
+        >
           <Suspense fallback={<LoadingPokedexCard number={6} label={false} />}>
             <Pokedexes pokedexes={pokedexes} />
           </Suspense>
