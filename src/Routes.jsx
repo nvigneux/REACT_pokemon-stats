@@ -3,7 +3,7 @@ import React from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 
 // Routes
-import { routes, protectedRoutes } from "./views/routes.js"
+import { routes, protectedRoutes } from "./views/routes"
 import Layout from "./components/templates/Layout"
 
 // // Context
@@ -29,4 +29,5 @@ const Routes = () => {
     </Switch>
   )
 }
+
 export default Routes
