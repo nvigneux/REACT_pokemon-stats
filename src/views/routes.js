@@ -1,11 +1,12 @@
 import React, { Suspense } from "react"
 
 // Views
-const Login = React.lazy(() => import("./Login"))
+import Login from "./Login"
 const RaidBattleMain = React.lazy(() => import("./RaidBattleMain"))
 const PokedexForm = React.lazy(() => import("./Pokedex"))
 const BossForm = React.lazy(() => import("./Boss"))
 
+// TODO make template for each page loading in fallback
 function WaitingComponent(Component) {
   return props => (
     <Suspense fallback={<div>RaidBattleMain</div>}>

@@ -1,12 +1,7 @@
-import React, { Suspense, lazy, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { orderBy } from "lodash"
 
-// import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
-import ErrorBoundary from "../hooks/ErrorBoundary"
-
 import WeatherSelect from "../components/molecules/WeatherSelect/WeatherSelect"
-import LoadingSelect from "../components/atoms/LoadingSelect"
-import LoadingPokedexCard from "../components/atoms/LoadingPokedexCard"
 import PokedexCard from "../components/molecules/PokedexCard/PokedexCard"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
@@ -16,8 +11,8 @@ import { WEATHERS } from "../constants/weather"
 import { POKEMON } from "../constants/constant"
 import "../styles.css"
 
-const BossSelect = lazy(() => import("../components/molecules/BossSelect"))
-const Pokedexes = lazy(() => import("../components/organisms/Pokedexes"))
+import BossSelect from "../components/molecules/BossSelect"
+import Pokedexes from "../components/organisms/Pokedexes"
 
 const RaidBattle = ({ pokedexes, bosses }) => {
   const [activeBoss, setActiveBoss] = useState(null)
@@ -61,15 +56,11 @@ const RaidBattle = ({ pokedexes, bosses }) => {
     <>
       <div className="flex flex-row items-end mb-4">
         <div className="w-full">
-          <ErrorBoundary fallback={<LoadingSelect label={false} />}>
-            <Suspense fallback={<LoadingSelect label={false} />}>
-              <BossSelect
-                bosses={bosses}
-                activeValue={activeBoss}
-                select={setActiveBoss}
-              />
-            </Suspense>
-          </ErrorBoundary>
+          <BossSelect
+            bosses={bosses}
+            activeValue={activeBoss}
+            select={setActiveBoss}
+          />
         </div>
 
         <div className="w-20">
@@ -95,13 +86,7 @@ const RaidBattle = ({ pokedexes, bosses }) => {
       ) : null}
 
       <div className="flex flex-row flex-wrap pt-2">
-        <ErrorBoundary
-          fallback={<LoadingPokedexCard number={6} label={false} />}
-        >
-          <Suspense fallback={<LoadingPokedexCard number={6} label={false} />}>
-            <Pokedexes pokedexes={pokedexes} />
-          </Suspense>
-        </ErrorBoundary>
+        <Pokedexes pokedexes={pokedexes} />
       </div>
     </>
   )

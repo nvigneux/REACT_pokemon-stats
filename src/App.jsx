@@ -12,7 +12,7 @@ import { AppProvider } from "./AppContext"
 
 // Styles
 import "./styles.css"
-
+// TODO make a ComponentMAin for each view like raidbattle to make correct suspense prefetch
 function App() {
   return (
     <AppProvider>
