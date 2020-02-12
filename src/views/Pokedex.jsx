@@ -172,8 +172,6 @@ const Pokedex = () => {
             >
               Envoyer
             </button>
-
-            {/* <DisplayFormikState {...props} /> */}
           </Form>
         )}
       </Formik>
