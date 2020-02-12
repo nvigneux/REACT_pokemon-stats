@@ -4,10 +4,10 @@ import { orderBy } from "lodash"
 import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
 import ErrorBoundary from "../hooks/ErrorBoundary"
 
-import WeatherSelect from "../components/WeatherSelect"
-import LoadingSelect from "../components/LoadingSelect"
-import LoadingPokedexCard from "../components/LoadingPokedexCard"
-import PokedexCard from "../components/PokedexCard"
+import WeatherSelect from "../components/molecules/WeatherSelect/WeatherSelect"
+import LoadingSelect from "../components/atoms/LoadingSelect"
+import LoadingPokedexCard from "../components/atoms/LoadingPokedexCard"
+import PokedexCard from "../components/molecules/PokedexCard/PokedexCard"
 
 import { simulateBattle, simulateBattleStats } from "../utils/battle"
 import { getDmgMoves } from "../utils/dps"
@@ -16,8 +16,8 @@ import { WEATHERS } from "../constants/weather"
 import { POKEMON } from "../constants/constant"
 import "../styles.css"
 
-const BossSelect = lazy(() => import("../components/BossSelect"))
-const Pokedexes = lazy(() => import("../components/Pokedexes"))
+const BossSelect = lazy(() => import("../components/molecules/BossSelect"))
+const Pokedexes = lazy(() => import("../components/organisms/Pokedexes/Pokedexes"))
 
 const bosses = prefetchBosses()
 const pokedexes = prefetchPokedexes()

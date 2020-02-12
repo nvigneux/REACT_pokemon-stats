@@ -9,10 +9,10 @@ import useApi, {
 
 import useAppContext from "../hooks/useAppContext"
 import ErrorBoundary from "../hooks/ErrorBoundary"
-import Link from "../components/Link/Link"
-import CustomDropdown from "../components/CustomDropdown"
-import OptionType from "../components/OptionType"
-import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
+import Link from "../components/atoms/Link/Link"
+import CustomSelect from "../components/atoms/CustomSelect/CustomSelect"
+import OptionType from "../components/molecules/OptionType"
+import LoadingSelect from "../components/atoms/LoadingSelect/LoadingSelect"
 import {
   PokedexFormValidation,
   PokedexSelectValidation,
@@ -27,8 +27,8 @@ import {
 
 import { TYPES_ARRAY } from "../constants/types"
 
-const PokemonSelect = lazy(() => import("../components/PokemonSelect"))
-const MoveSelect = lazy(() => import("../components/MoveSelect"))
+const PokemonSelect = lazy(() => import("../components/organisms/PokemonSelect"))
+const MoveSelect = lazy(() => import("../components/molecules/MoveSelect"))
 
 const pokemons = prefetchPokemons()
 const quickMoves = prefetchQuickMoves()
@@ -146,7 +146,7 @@ const Pokedex = () => {
                 <PokemonForm />
                 <div className="mb-3 px-1">
                   <div className="flex flex-col">
-                    <CustomDropdown
+                    <CustomSelect
                       label="Type(s)"
                       id="type"
                       name="type"

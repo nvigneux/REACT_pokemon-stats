@@ -3,8 +3,8 @@ import React from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 
 // Routes
-import { routes, protectedRoutes } from "./views/routes"
-import Layout from "./components/Layout"
+import { routes, protectedRoutes } from "./views/routes.js"
+import Layout from "./components/templates/Layout"
 
 // // Context
 import useAppContext from "./hooks/useAppContext"
