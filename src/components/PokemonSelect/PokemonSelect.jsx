@@ -30,7 +30,6 @@ const PokemonSelect = ({ label, pokemons, isPokemonFormVisible }) => (
   </>
 )
 
-// TODO refacto proptypes
 PokemonSelect.propTypes = {
   isPokemonFormVisible: PropTypes.bool.isRequired,
   label: PropTypes.string,

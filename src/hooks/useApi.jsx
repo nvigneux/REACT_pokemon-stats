@@ -166,11 +166,22 @@ export const prefetchPokedexes = () => {
   )
 }
 
-//TODO order by name
 export const prefetchQuickMoves = () =>
-  prefetch(async () => (await fetch(API_QUICK_MOVE)).json())
+  prefetch(() =>
+    fetch(`${API_QUICK_MOVE}`).then(res =>
+      res.json().then(moves => {
+        return orderBy(moves, ["name"], ["asc"])
+      })
+    )
+  )
 
 export const prefetchChargedMoves = () =>
-  prefetch(async () => (await fetch(API_CHARGED_MOVE)).json())
+  prefetch(() =>
+    fetch(`${API_CHARGED_MOVE}`).then(res =>
+      res.json().then(moves => {
+        return orderBy(moves, ["name"], ["asc"])
+      })
+    )
+  )
 
 export default useApi
