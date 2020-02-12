@@ -1,13 +1,13 @@
 import React from "react"
 import { Formik, Form } from "formik"
 
-import useApi from "../../hooks/useApi"
+import useApi from "../hooks/useApi"
 
 import {
   LoginFormValidation,
   LoginForm,
   LoginFormInitValues,
-} from "../../forms/Login"
+} from "../forms/Login"
 
 const Login = ({ history }) => {
   const [, , , { postLogin }] = useApi()

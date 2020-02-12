@@ -3,8 +3,8 @@ import React from "react"
 // Views
 const Login = React.lazy(() => import("./Login"))
 const RaidBattle = React.lazy(() => import("./RaidBattle"))
-const PokedexForm = React.lazy(() => import("./Pokedex/Pokedex"))
-const BossForm = React.lazy(() => import("./Boss/Boss"))
+const PokedexForm = React.lazy(() => import("./Pokedex"))
+const BossForm = React.lazy(() => import("./Boss"))
 
 export const routes = [
   {

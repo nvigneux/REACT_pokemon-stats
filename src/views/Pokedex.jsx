@@ -5,30 +5,30 @@ import useApi, {
   prefetchPokemons,
   prefetchQuickMoves,
   prefetchChargedMoves,
-} from "../../hooks/useApi"
+} from "../hooks/useApi"
 
-import useAppContext from "../../hooks/useAppContext"
-import ErrorBoundary from "../../hooks/ErrorBoundary"
-import Link from "../../components/Link/Link"
-import CustomDropdown from "../../components/CustomDropdown"
-import OptionType from "../../components/OptionType"
-import LoadingSelect from "../../components/LoadingSelect/LoadingSelect"
+import useAppContext from "../hooks/useAppContext"
+import ErrorBoundary from "../hooks/ErrorBoundary"
+import Link from "../components/Link/Link"
+import CustomDropdown from "../components/CustomDropdown"
+import OptionType from "../components/OptionType"
+import LoadingSelect from "../components/LoadingSelect/LoadingSelect"
 import {
   PokedexFormValidation,
   PokedexSelectValidation,
   PokedexForm,
   PokedexFormInitValues,
-} from "../../forms/Pokedex"
+} from "../forms/Pokedex"
 import {
   PokemonFormValidation,
   PokemonForm,
   PokemonFormInitValues,
-} from "../../forms/Pokemon"
+} from "../forms/Pokemon"
 
-import { TYPES_ARRAY } from "../../constants/types"
+import { TYPES_ARRAY } from "../constants/types"
 
-const PokemonSelect = lazy(() => import("../../components/PokemonSelect"))
-const MoveSelect = lazy(() => import("../../components/MoveSelect"))
+const PokemonSelect = lazy(() => import("../components/PokemonSelect"))
+const MoveSelect = lazy(() => import("../components/MoveSelect"))
 
 const pokemons = prefetchPokemons()
 const quickMoves = prefetchQuickMoves()
