@@ -4,15 +4,12 @@ import { ToastContainer } from "use-nv-simple-toast"
 // Components
 import Routes from "./Routes"
 
-// TODO pack away component with atomic
-// TODO Rename component
-
 // Context
 import { AppProvider } from "./AppContext"
 
 // Styles
 import "./styles.css"
-// TODO make a ComponentMAin for each view like raidbattle to make correct suspense prefetch
+
 function App() {
   return (
     <AppProvider>
