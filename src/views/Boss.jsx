@@ -1,17 +1,11 @@
-import React, { Suspense, lazy, useState } from "react"
+import React, { useState } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
 
-import useApi, {
-  prefetchPokemons,
-  prefetchQuickMoves,
-  prefetchChargedMoves,
-} from "../hooks/useApi"
+import useApi from "../hooks/useApi"
 
-import ErrorBoundary from "../hooks/ErrorBoundary"
 import Link from "../components/atoms/Link/Link"
 import CustomSelect from "../components/atoms/CustomSelect/CustomSelect"
 import OptionType from "../components/molecules/OptionType"
-import LoadingSelect from "../components/atoms/LoadingSelect/LoadingSelect"
 
 import {
   BossFormValidation,
@@ -27,14 +21,10 @@ import {
 
 import { TYPES_ARRAY } from "../constants/types"
 
-const PokemonSelect = lazy(() => import("../components/organisms/PokemonSelect"))
-const MoveSelect = lazy(() => import("../components/molecules/MoveSelect"))
+import PokemonSelect from "../components/organisms/PokemonSelect"
+import MoveSelect from "../components/molecules/MoveSelect"
 
-const pokemons = prefetchPokemons()
-const quickMoves = prefetchQuickMoves()
-const chargedMoves = prefetchChargedMoves()
-
-const Boss = () => {
+const Boss = ({ pokemons, quickMoves, chargedMoves }) => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
   const [, , , { postPokemon }] = useApi()
   const [, , , { postBoss }] = useApi()
@@ -60,13 +50,12 @@ const Boss = () => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
-  const handleSubmitForm = (values, resetForm) => {
+  const handleSubmitForm = (values, resetForm) =>
     isPokemonFormVisible
       ? postPokemon({ ...values }).then(res => {
           postBoss({ ...values, pokemon: res.data.id }).then(resetForm)
         })
       : postBoss({ ...values }).then(resetForm)
-  }
 
   return (
     <>
@@ -80,19 +69,15 @@ const Boss = () => {
           handleSubmitForm(values, resetForm)
         }
       >
-        {({ isSubmitting, errors, touched, ...props }) => (
+        {({ ...props }) => (
           <Form className="flex flex-col mt-2 mb-16">
             <div className="mb-3 px-1">
               <div className="flex flex-col">
-                <ErrorBoundary fallback={<LoadingSelect />}>
-                  <Suspense fallback={<LoadingSelect />}>
-                    <PokemonSelect
-                      label="Boss"
-                      pokemons={pokemons}
-                      isPokemonFormVisible={isPokemonFormVisible}
-                    />
-                  </Suspense>
-                </ErrorBoundary>
+                <PokemonSelect
+                  label="Boss"
+                  pokemons={pokemons}
+                  isPokemonFormVisible={isPokemonFormVisible}
+                />
               </div>
 
               <Link
@@ -109,35 +94,26 @@ const Boss = () => {
 
             <div className="my-2 px-1">
               <div className="flex flex-col">
-                <ErrorBoundary fallback={<LoadingSelect />}>
-                  <Suspense fallback={<LoadingSelect labelWidth="24" />}>
-                    <MoveSelect
-                      label="attaque rapide"
-                      name="quick_move"
-                      moves={quickMoves}
-                    />
-                  </Suspense>
-                </ErrorBoundary>
+                <MoveSelect
+                  label="attaque rapide"
+                  name="quick_move"
+                  moves={quickMoves}
+                />
               </div>
             </div>
 
             <div className="mb-3 px-1 ">
               <div className="flex flex-col">
-                <ErrorBoundary fallback={<LoadingSelect />}>
-                  <Suspense fallback={<LoadingSelect labelWidth="24" />}>
-                    <MoveSelect
-                      label="attaque chargé"
-                      name="charged_move"
-                      moves={chargedMoves}
-                    />
-                  </Suspense>
-                </ErrorBoundary>
+                <MoveSelect
+                  label="attaque chargé"
+                  name="charged_move"
+                  moves={chargedMoves}
+                />
               </div>
             </div>
 
             {isPokemonFormVisible ? (
               <>
-                <span className="w-full h-px mt-2 mb-3 bg-gray-200"></span>
                 <PokemonForm />
                 <div className="mb-3 px-1">
                   <div className="flex flex-col">

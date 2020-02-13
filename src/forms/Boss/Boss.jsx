@@ -8,6 +8,7 @@ export const BossForm = ({ values }) => {
   const { setFieldValue } = useFormikContext()
 
   const handleStamina = stamina => {
+    // USe context formik dor values
     setFieldValue("iv_stamina", parseInt(stamina, 10))
     const pokemon =
       values.pokemon && (!values.attack || !values.defense || !values.stamina)
