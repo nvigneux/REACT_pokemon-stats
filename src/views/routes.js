@@ -3,8 +3,8 @@ import React, { Suspense } from "react"
 // Views
 import Login from "./Login"
 const RaidBattleMain = React.lazy(() => import("./RaidBattleMain"))
-const PokedexForm = React.lazy(() => import("./Pokedex"))
-const BossForm = React.lazy(() => import("./Boss"))
+const PokedexFormMain = React.lazy(() => import("./PokedexMain"))
+const BossFormMain = React.lazy(() => import("./BossMain"))
 
 // TODO make template for each page loading in fallback
 function WaitingComponent(Component) {
@@ -31,12 +31,12 @@ export const protectedRoutes = [
   },
   {
     path: "/pokedex",
-    component: WaitingComponent(PokedexForm),
+    component: WaitingComponent(PokedexFormMain),
     exact: true,
   },
   {
     path: "/boss",
-    component: WaitingComponent(BossForm),
+    component: WaitingComponent(BossFormMain),
     exact: true,
   },
 ]
