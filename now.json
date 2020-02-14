@@ -2,7 +2,7 @@
   "name": "pokemon-raid-battle",
   "build": {
     "env": {
-      "API_URL": "https://strapi-pogo-raid-battle.herokuapp.com"
+      "REACT_APP_API_URL": "https://strapi-pogo-raid-battle.herokuapp.com"
     }
   }
 }
