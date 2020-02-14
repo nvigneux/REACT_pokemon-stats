@@ -9,9 +9,8 @@ import {
   LoginFormInitValues,
 } from "../forms/Login"
 
-// ADD LOADER WHEN SUBMIT & BLOCK BUTTON
 const Login = ({ history }) => {
-  const [, , , { postLogin }] = useApi()
+  const [load, , , { postLogin }] = useApi()
   const LoginValueSchema = {
     ...LoginFormInitValues,
     ...LoginFormInitValues,
@@ -39,7 +38,9 @@ const Login = ({ history }) => {
               <LoginForm {...props} />
 
               <button
-                className="self-center tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
+                className={`self-center tracking-wide uppercase text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline ${
+                  load ? "linear-background" : "bg-green-pokemon"
+                }`}
                 type="submit"
               >
                 Envoyer
