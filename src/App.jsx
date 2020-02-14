@@ -7,10 +7,6 @@ import Routes from "./Routes"
 // Context
 import { AppProvider } from "./AppContext"
 
-// Styles
-import "./styles.css"
-// TODO favicon
-// TODO manifest
 function App() {
   return (
     <AppProvider>
