@@ -13,6 +13,7 @@ const OptionBoss = ({
         className="h-8 mr-2"
         src={IMG_URL + idBasePokemon + IMG_FORMAT}
         alt={`${name}`}
+        loading="lazy"
       />
       <div className="text-base text-gray-900 font-medium">{name}</div>
     </div>

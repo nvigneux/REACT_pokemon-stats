@@ -28,6 +28,7 @@ const PokemonStatCard = ({ pokemon, click, theme }) => (
         className="center justify-center w-16"
         src={IMG_URL + pokemon.id + IMG_FORMAT}
         alt={pokemon.name}
+        loading="lazy"
       />
     </div>
     <div className="flex-auto">
