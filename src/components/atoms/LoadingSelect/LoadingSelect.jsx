@@ -6,10 +6,10 @@ const LoadingSelect = ({ label, labelWidth }) => {
     <>
       {label ? (
         <span
-          className={`linear-background h-4 w-${labelWidth} block text-sm font-bold mb-3 bg-gray-500 self-start px-4 rounded-full`}
+          className={`linear-background h-4 w-${labelWidth} block text-sm font-bold mb-2 ml-1 bg-gray-500 self-start px-4 rounded-full`}
         />
       ) : null}
-      <div className="linear-background h-10 w-full bg-gray-500 rounded" />
+      <div className="linear-background h-10 w-full bg-gray-500 rounded-full" />
     </>
   )
 }

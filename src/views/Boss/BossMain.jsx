@@ -4,20 +4,20 @@ import {
   prefetchPokemons,
   prefetchQuickMoves,
   prefetchChargedMoves,
-} from "../hooks/useApi"
+} from "../../hooks/useApi"
 
 const pokemons = prefetchPokemons()
 const quickMoves = prefetchQuickMoves()
 const chargedMoves = prefetchChargedMoves()
 
-const Pokedex = lazy(() => import("./Pokedex"))
+const Boss = lazy(() => import("./Boss"))
 
-const PokedexMain = () => (
-  <Pokedex
+const BossMain = () => (
+  <Boss
     pokemons={pokemons}
     quickMoves={quickMoves}
     chargedMoves={chargedMoves}
   />
 )
 
-export default PokedexMain
+export default BossMain

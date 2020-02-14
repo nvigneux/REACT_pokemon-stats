@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react"
 import { orderBy } from "lodash"
 
-import WeatherSelect from "../components/molecules/WeatherSelect/WeatherSelect"
-import PokedexCard from "../components/molecules/PokedexCard/PokedexCard"
+import ErrorBoundary from "../../hooks/ErrorBoundary"
+import WeatherSelect from "../../components/molecules/WeatherSelect/WeatherSelect"
+import PokedexCard from "../../components/molecules/PokedexCard/PokedexCard"
+import BossSelect from "../../components/molecules/BossSelect"
+import Pokedexes from "../../components/organisms/Pokedexes"
+import LoadingSelect from "../../components/atoms/LoadingSelect"
+import LoadingPokedexCard from "../../components/atoms/LoadingPokedexCard"
 
-import { simulateBattle, simulateBattleStats } from "../utils/battle"
-import { getDmgMoves } from "../utils/dps"
+import { simulateBattle, simulateBattleStats } from "../../utils/battle"
+import { getDmgMoves } from "../../utils/dps"
 
-import { WEATHERS } from "../constants/weather"
-import { POKEMON } from "../constants/constant"
-import "../styles.css"
-
-import BossSelect from "../components/molecules/BossSelect"
-import Pokedexes from "../components/organisms/Pokedexes"
+import { WEATHERS } from "../../constants/weather"
+import { POKEMON } from "../../constants/constant"
+import "../../styles.css"
 
 const RaidBattle = ({ pokedexes, bosses }) => {
   const [activeBoss, setActiveBoss] = useState(null)
@@ -56,11 +58,13 @@ const RaidBattle = ({ pokedexes, bosses }) => {
     <>
       <div className="flex flex-row items-end mb-4">
         <div className="w-full">
-          <BossSelect
-            bosses={bosses}
-            activeValue={activeBoss}
-            select={setActiveBoss}
-          />
+          <ErrorBoundary fallback={<LoadingSelect label={false} />}>
+            <BossSelect
+              bosses={bosses}
+              activeValue={activeBoss}
+              select={setActiveBoss}
+            />
+          </ErrorBoundary>
         </div>
 
         <div className="w-20">
@@ -86,7 +90,9 @@ const RaidBattle = ({ pokedexes, bosses }) => {
       ) : null}
 
       <div className="flex flex-row flex-wrap pt-2">
-        <Pokedexes pokedexes={pokedexes} />
+        <ErrorBoundary fallback={<LoadingPokedexCard />}>
+          <Pokedexes pokedexes={pokedexes} />
+        </ErrorBoundary>
       </div>
     </>
   )

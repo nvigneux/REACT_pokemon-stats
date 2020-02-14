@@ -1,6 +1,6 @@
 import React, { lazy } from "react"
 
-import { prefetchPokedexes, prefetchBosses } from "../hooks/useApi"
+import { prefetchPokedexes, prefetchBosses } from "../../hooks/useApi"
 
 const bosses = prefetchBosses()
 const pokedexes = prefetchPokedexes()
