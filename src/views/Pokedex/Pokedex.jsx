@@ -138,8 +138,9 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
                       options={TYPES_ARRAY}
                       optionComponent={<OptionType />}
                       isMulti
-                      isSearchable={false}
+                      isSearchable
                       placeholder="Sélectionner le(s) type(s)"
+                      getOptionLabel={option => option.name}
                     />
                     <ErrorMessage
                       className="text-red-500 text-xs italic"

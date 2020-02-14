@@ -13,8 +13,9 @@ const MoveSelect = ({ label, name, moves }) => (
       name={name}
       options={moves}
       optionComponent={<OptionMove />}
-      isSearchable={false}
+      isSearchable
       placeholder={`Sélectionner l'${label}`}
+      getOptionLabel={option => option.name}
     />
     <ErrorMessage
       className="text-red-500 text-xs italic"
