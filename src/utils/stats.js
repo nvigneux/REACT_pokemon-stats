@@ -23,7 +23,7 @@ const calculateCombatPoint = (attack, defense, stamina) =>
  * @param {Pokemon} pokemon
  */
 export const pokemonStats = (cpMultiplier, pokemon) => {
-  const pokemonCpMultiplier = cpMultiplier[pokemon.level - 1]
+  const pokemonCpMultiplier = cpMultiplier[pokemon.level]
   const attack = calculateStat(
     pokemon.pokemon.attack,
     pokemon.iv_attack,

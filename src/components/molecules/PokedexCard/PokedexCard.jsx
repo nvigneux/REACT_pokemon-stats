@@ -26,6 +26,7 @@ const PokedexCard = ({ pokedex, result }) => (
           className={`center justify-center ${result ? "w-12" : "w-16"}`}
           src={IMG_URL + pokedex.pokemon.id_base_pokemon + IMG_FORMAT}
           alt={pokedex.pokemon.name}
+          loading="lazy"
         />
       </div>
       <div className="flex-auto flex flex-col items-center">
