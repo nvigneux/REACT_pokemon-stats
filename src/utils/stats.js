@@ -5,7 +5,7 @@
  * @param {number} cpMultiplier
  */
 const calculateStat = (base, individual, cpMultiplier) =>
-  Math.floor((base + individual) * cpMultiplier)
+  (base + individual) * cpMultiplier
 
 /**
  * Formula to calculate combat point by the pokemon's bases stats
