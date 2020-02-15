@@ -60,7 +60,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
     let level = null
     Object.keys(cps).map(item => {
       const stats = pokemonStats(cps, { ...pokedex, level: item })
-      if (stats.cp === pokedex.cp) {
+      if (pokedex.cp >= stats.cp - 2 && pokedex.cp <= stats.cp + 2) {
         level = item
       }
     })

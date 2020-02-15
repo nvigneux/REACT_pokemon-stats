@@ -32,7 +32,7 @@ LoadingPokedexCard.propTypes = {
 }
 
 LoadingPokedexCard.defaultProps = {
-  number: 6,
+  number: 9,
 }
 
 export default LoadingPokedexCard
