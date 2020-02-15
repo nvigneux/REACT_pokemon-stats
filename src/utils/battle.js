@@ -12,6 +12,7 @@ const ATT_DELAY = 700
 const DEF_DELAY = 1600
 const DEF_DELAY_ATTACK = 2000
 
+// MAKE BATTLE ONLY QUICK ATTACK & COMPARE THE BEST
 const battleReducer = (state, { type, move, timer }) => {
   switch (type) {
     case QUICK_ATK_ATTACKER: {

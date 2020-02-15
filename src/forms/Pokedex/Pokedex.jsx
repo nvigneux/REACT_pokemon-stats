@@ -1,6 +1,6 @@
 import React from "react"
 import { Field, ErrorMessage } from "formik"
-
+// TODO MAKE CALCUL TO FIND LEVEL
 export const PokedexForm = () => (
   <>
     <div className="mb-3 px-1 w-1/3">

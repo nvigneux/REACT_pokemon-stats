@@ -21,7 +21,7 @@ export const BossFormValidation = Yup.object().shape({
     .integer("Nombre entier")
     .typeError("Doit etre un nombre !")
     .nullable(),
-  level: Yup.number().integer("Nombre entier"),
+  level: Yup.number(),
   difficulty: Yup.number()
     .required("Info Requise")
     .positive("Nombre positif")

@@ -30,8 +30,7 @@ export const PokedexFormValidation = Yup.object().shape({
     .required("Info Requise")
     .positive("Nombre positif")
     .min(1, "level min 1")
-    .max(40, "level max 40")
-    .integer("Nombre entier"),
+    .max(40, "level max 40"),
   quick_move: Yup.object()
     .shape({})
     .nullable()
