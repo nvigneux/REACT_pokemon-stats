@@ -15,7 +15,9 @@ const OptionBoss = ({
         alt={`${name}`}
         loading="lazy"
       />
-      <div className="text-base text-gray-900 font-medium">{name}</div>
+      <div className="text-base text-gray-900 font-medium capitalize">
+        {name}
+      </div>
     </div>
     <div className="flex flex-row items-baseline justify-center leading-none">
       <span className="text-xs text-gray-500 font-medium pr-1">CP</span>

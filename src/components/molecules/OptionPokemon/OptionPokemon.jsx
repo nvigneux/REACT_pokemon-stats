@@ -11,7 +11,9 @@ const OptionPokemon = ({ name, id_base_pokemon: idBasePokemon }) => (
         src={IMG_URL + idBasePokemon + IMG_FORMAT}
         alt={`${name}`}
       />
-      <div className="text-base text-gray-900 font-medium">{name}</div>
+      <div className="text-base text-gray-900 font-medium capitalize">
+        {name}
+      </div>
     </div>
     <span className="text-base text-gray-600 font-light">{`#${idBasePokemon}`}</span>
   </div>
