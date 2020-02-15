@@ -100,32 +100,6 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
               />
             </div>
 
-            <PokedexForm />
-
-            <div className="my-2 px-1">
-              <div className="flex flex-col">
-                <ErrorBoundary fallback={<LoadingSelect />}>
-                  <MoveSelect
-                    label="attaque rapide"
-                    name="quick_move"
-                    moves={quickMoves}
-                  />
-                </ErrorBoundary>
-              </div>
-            </div>
-
-            <div className="mb-3 px-1 ">
-              <div className="flex flex-col">
-                <ErrorBoundary fallback={<LoadingSelect />}>
-                  <MoveSelect
-                    label="attaque chargé"
-                    name="charged_move"
-                    moves={chargedMoves}
-                  />
-                </ErrorBoundary>
-              </div>
-            </div>
-
             {isPokemonFormVisible ? (
               <>
                 <PokemonForm />
@@ -151,6 +125,32 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
                 </div>
               </>
             ) : null}
+
+            <div className="mb-2 px-1">
+              <div className="flex flex-col">
+                <ErrorBoundary fallback={<LoadingSelect />}>
+                  <MoveSelect
+                    label="attaque rapide"
+                    name="quick_move"
+                    moves={quickMoves}
+                  />
+                </ErrorBoundary>
+              </div>
+            </div>
+
+            <div className="mb-3 px-1 ">
+              <div className="flex flex-col">
+                <ErrorBoundary fallback={<LoadingSelect />}>
+                  <MoveSelect
+                    label="attaque chargé"
+                    name="charged_move"
+                    moves={chargedMoves}
+                  />
+                </ErrorBoundary>
+              </div>
+            </div>
+
+            <PokedexForm />
 
             <button
               className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"

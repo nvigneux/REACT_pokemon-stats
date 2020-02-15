@@ -12,6 +12,18 @@ const Pokedex = () => {
           </div>
         </div>
 
+        <div className="mb-2 px-1">
+          <div className="flex flex-col">
+            <LoadingSelect />
+          </div>
+        </div>
+
+        <div className="mb-3 px-1 ">
+          <div className="flex flex-col">
+            <LoadingSelect />
+          </div>
+        </div>
+
         <div className="mb-3 px-1 w-1/3 mb-1">
           <LoadingSelect />
         </div>
@@ -23,18 +35,6 @@ const Pokedex = () => {
             <LoadingSelect />
           </div>
           <div className="mb-3 px-1 w-1/3">
-            <LoadingSelect />
-          </div>
-        </div>
-
-        <div className="my-2 px-1">
-          <div className="flex flex-col">
-            <LoadingSelect />
-          </div>
-        </div>
-
-        <div className="mb-3 px-1 ">
-          <div className="flex flex-col">
             <LoadingSelect />
           </div>
         </div>
