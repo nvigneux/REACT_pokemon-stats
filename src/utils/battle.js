@@ -62,8 +62,9 @@ const battleReducer = (state, { type, move, timer }) => {
  * Atta
  * @param {Pokemon} attacker
  * @param {Pokemon} defender
+ * @param {Boolean} onlyQuick
  */
-export const simulateBattle = (attacker, defender) => {
+export const simulateBattle = (attacker, defender, onlyQuick = false) => {
   const logBattle = []
 
   let stateBattle = {
@@ -97,7 +98,10 @@ export const simulateBattle = (attacker, defender) => {
       timerRemaining === TIMER_BATTLE - ATT_DELAY
     ) {
       // if Attacker can launch a charged attack
-      if (attacker.charged_move.energy_required <= stateBattle.attEnergy) {
+      if (
+        attacker.charged_move.energy_required <= stateBattle.attEnergy &&
+        !onlyQuick
+      ) {
         stateBattle = battleReducer(stateBattle, {
           type: CHARGED_ATK_ATTACKER,
           move: attacker.charged_move,
