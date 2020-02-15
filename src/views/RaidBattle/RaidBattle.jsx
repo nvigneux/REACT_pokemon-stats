@@ -20,6 +20,7 @@ const RaidBattle = ({ pokedexes, bosses }) => {
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
   const [activeTeam, setActiveTeam] = useState([])
+  const [seeMore, setSeeMore] = useState(false)
 
   useEffect(() => {
     if (activeBoss) {
@@ -34,7 +35,16 @@ const RaidBattle = ({ pokedexes, bosses }) => {
           battle,
           activeDefender
         )
-        return pokemonBattleStats
+        const battleQuick = simulateBattle(activeAttacker, activeDefender, true)
+        const pokemonBattleStatsQuick = simulateBattleStats(
+          POKEMON,
+          activeAttacker.id,
+          battleQuick,
+          activeDefender
+        )
+        return pokemonBattleStats.dps > pokemonBattleStatsQuick.dps
+          ? pokemonBattleStats
+          : { ...pokemonBattleStatsQuick, quick: true }
       })
 
       const buildActiveTeam = () =>
@@ -46,7 +56,7 @@ const RaidBattle = ({ pokedexes, bosses }) => {
           }, [])[0]
         })
 
-      setActiveTeam(orderBy(buildActiveTeam(), ["dps"], ["desc"]))
+      setActiveTeam(orderBy(buildActiveTeam(), ["totalDmg"], ["desc"]))
       // console.log(
       //   `Best pokedexes against ${activeBoss.pokemon.name}`,
       //   orderBy(buildActiveTeam, ["dps"], ["desc"])
@@ -77,16 +87,25 @@ const RaidBattle = ({ pokedexes, bosses }) => {
       </div>
 
       {activeTeam.length && activeBoss ? (
-        <div className="flex flex-row flex-wrap bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
-          {activeTeam.slice(0, 6).map(pokedex => (
-            <div
-              key={pokedex.pokemonId}
-              className="w-1/3 flex flex-col flex-wrap"
+        <>
+          <div className="flex flex-row flex-wrap bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
+            {activeTeam.slice(0, seeMore ? 18 : 6).map(pokedex => (
+              <div
+                key={pokedex.pokemonId}
+                className="w-1/3 flex flex-col flex-wrap"
+              >
+                <PokedexCard pokedex={pokedex.pokedex} result={pokedex} />
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => setSeeMore(!seeMore)}
+              className="w-full flex flex-wrap justify-center text-sm text-gray-600 hover:text-gray-800"
             >
-              <PokedexCard pokedex={pokedex.pokedex} result={pokedex} />
-            </div>
-          ))}
-        </div>
+              {seeMore ? "Voir moins" : "Voir plus"}
+            </button>
+          </div>
+        </>
       ) : null}
 
       <div className="flex flex-row flex-wrap pt-2">

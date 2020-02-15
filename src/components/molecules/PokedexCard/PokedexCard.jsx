@@ -30,7 +30,11 @@ const PokedexCard = ({ pokedex, result }) => (
         />
       </div>
       <div className="flex-auto flex flex-col items-center">
-        <div className="text-sm text-gray-700 font-medium leading-none pb-1 capitalize">
+        <div
+          className={`text-gray-700 font-medium leading-none pb-1 capitalize ${
+            result ? "text-xs " : "text-sm "
+          }`}
+        >
           {`${pokedex.pokemon.name} `}
         </div>
         <div className="w-full flex row flex-auto justify-around items-center">
@@ -65,7 +69,10 @@ const PokedexCard = ({ pokedex, result }) => (
     </div>
     {result ? (
       <div className="flex flex-row text-xs bg-button-menu text-green-100 justify-between px-2 py-1 mb-2 mx-2 rounded-b">
-        <span>{Math.round((result.dps + Number.EPSILON) * 100) / 100}</span>
+        <span>
+          {Math.round((result.totalDmg + Number.EPSILON) * 100) / 100}
+          {result.quick ? "*" : null}
+        </span>
         <span>{`${result.lifeTime}s`}</span>
       </div>
     ) : null}
