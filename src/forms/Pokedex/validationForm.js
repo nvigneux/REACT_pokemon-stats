@@ -1,7 +1,7 @@
 import * as Yup from "yup"
 
 export const PokedexFormInitValues = {
-  level: 1,
+  cp: 0,
   iv_attack: 0,
   iv_defense: 0,
   iv_stamina: 0,
@@ -26,11 +26,10 @@ export const PokedexFormValidation = Yup.object().shape({
     .min(0, "iv min 0")
     .max(15, "iv max 15")
     .integer("Nombre entier"),
-  level: Yup.number()
+  cp: Yup.number()
     .required("Info Requise")
     .positive("Nombre positif")
-    .min(1, "level min 1")
-    .max(40, "level max 40"),
+    .min(1, "cp min 1"),
   quick_move: Yup.object()
     .shape({})
     .nullable()

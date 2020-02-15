@@ -6,19 +6,19 @@ export const PokedexForm = () => (
     <div className="mb-3 px-1 w-1/3">
       <label
         className="uppercase tracking-wider block color-blue-pokemon text-xs font-bold mb-1 pl-1"
-        htmlFor="iv_stamina"
+        htmlFor="cp"
       >
-        Level
+        CP
       </label>
       <Field
         className="appearance-none border-1-5 border-blue-pokemon rounded-full w-full py-2 px-3 text-gray-700 leading-tight"
         type="number"
-        name="level"
+        name="cp"
       />
       <ErrorMessage
         className="text-red-500 text-xs italic"
         component="span"
-        name="level"
+        name="cp"
       />
     </div>
     <div className="flex flex-wrap">

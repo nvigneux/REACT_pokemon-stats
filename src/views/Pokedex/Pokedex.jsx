@@ -1,14 +1,17 @@
 import React, { useState } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
+import { useToast } from "use-nv-simple-toast"
 
 import useApi from "../../hooks/useApi"
-
 import ErrorBoundary from "../../hooks/ErrorBoundary"
 import useAppContext from "../../hooks/useAppContext"
 import Link from "../../components/atoms/Link/Link"
 import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect"
 import OptionType from "../../components/molecules/OptionType"
 import LoadingSelect from "../../components/atoms/LoadingSelect"
+
+import { pokemonStats } from "../../utils/stats"
+import { CP_MULTIPLIER } from "../../constants/cpMultiplier"
 
 import {
   PokedexFormValidation,
@@ -34,6 +37,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
   const [, , , { postPokemon }] = useApi()
   const [, , , { postPokedex }] = useApi()
+  const { setToast } = useToast()
 
   const PokedexValidationSchema = () => {
     let pokemonValidation = PokedexFormValidation
@@ -52,22 +56,45 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
     ...PokemonFormInitValues,
   }
 
+  const findLevelPokemon = (cps, pokedex) => {
+    let level = null
+    Object.keys(cps).map(item => {
+      const stats = pokemonStats(cps, { ...pokedex, level: item })
+      if (stats.cp === pokedex.cp) {
+        level = item
+      }
+    })
+    return level
+  }
+
   const handlePokemonFormVisibility = () => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
-  const handleSubmitForm = (values, resetForm) =>
-    isPokemonFormVisible
-      ? postPokemon({ ...values }).then(res =>
+  const handleSubmitForm = (values, resetForm) => {
+    const level = findLevelPokemon(CP_MULTIPLIER, values)
+    if (level) {
+      const data = {
+        ...values,
+        level: parseFloat(level),
+        user: auth.id,
+      }
+      if (isPokemonFormVisible) {
+        postPokemon({ ...values }).then(res =>
           res.data
             ? postPokedex({
-                ...values,
+                ...data,
                 pokemon: res.data.id,
-                user: auth.id,
               }).then(resetForm)
             : res
         )
-      : postPokedex({ ...values, user: auth.id }).then(resetForm)
+      } else {
+        postPokedex(data).then(resetForm)
+      }
+    } else {
+      setToast({ title: "CP ou IVs incorrect !" })
+    }
+  }
 
   return (
     <>
