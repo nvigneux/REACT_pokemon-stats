@@ -149,7 +149,7 @@ export const prefetchBosses = () =>
 export const prefetchPokedexes = () => {
   const context = JSON.parse(localStorage.getItem("context"))
   return prefetch(() =>
-    fetch(`${API_POKEDEXES}?user=${context.auth.id}`).then(res =>
+    fetch(`${API_POKEDEXES}?user=${context.auth.id}&_limit=999`).then(res =>
       res.json().then(pokedexes => {
         const pokedexesWithStats = pokedexes.map(pokemon => {
           const stats = pokemonStats(CP_MULTIPLIER, pokemon)
