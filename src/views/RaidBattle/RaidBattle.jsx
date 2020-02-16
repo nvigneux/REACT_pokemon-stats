@@ -13,7 +13,7 @@ import { simulateBattle, simulateBattleStats } from "../../utils/battle"
 import { getDmgMoves } from "../../utils/dps"
 
 import { WEATHERS } from "../../constants/weather"
-import { POKEMON } from "../../constants/constant"
+import { POKEMON, ORDER_FIELD } from "../../constants/constant"
 import "../../styles.css"
 
 const RaidBattle = ({ pokedexes, bosses }) => {
@@ -21,6 +21,12 @@ const RaidBattle = ({ pokedexes, bosses }) => {
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
   const [activeTeam, setActiveTeam] = useState([])
   const [seeMore, setSeeMore] = useState(false)
+  const [orderActiveTeam, setOrderActiveTeam] = useState("totalDmg")
+
+  const handleOrderActiveTeam = value => {
+    setOrderActiveTeam(value)
+    setActiveTeam(orderBy(activeTeam, [value], ["desc"]))
+  }
 
   useEffect(() => {
     if (activeBoss) {
@@ -56,7 +62,7 @@ const RaidBattle = ({ pokedexes, bosses }) => {
           }, [])[0]
         })
 
-      setActiveTeam(orderBy(buildActiveTeam(), ["totalDmg"], ["desc"]))
+      setActiveTeam(orderBy(buildActiveTeam(), [orderActiveTeam], ["desc"]))
       // console.log(
       //   `Best pokedexes against ${activeBoss.pokemon.name}`,
       //   orderBy(buildActiveTeam, ["dps"], ["desc"])
@@ -88,15 +94,33 @@ const RaidBattle = ({ pokedexes, bosses }) => {
 
       {activeTeam.length && activeBoss ? (
         <>
-          <div className="flex flex-row flex-wrap bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
-            {activeTeam.slice(0, seeMore ? 18 : 6).map(pokedex => (
-              <div
-                key={pokedex.pokemonId}
-                className="w-1/3 flex flex-col flex-wrap"
-              >
-                <PokedexCard pokedex={pokedex.pokedex} result={pokedex} />
-              </div>
-            ))}
+          <div className="bg-gray-200 -mx-4 mt-2 p-4 rounded-t-pokemon">
+            <div className="flex flex-row flex-wrap justify-end pb-2 pr-2">
+              {ORDER_FIELD.map(item => (
+                <button
+                  type="button"
+                  className={`text-xs px-2 py-1 rounded-lg ${
+                    orderActiveTeam === item.value
+                      ? "bg-button-menu text-gray-100"
+                      : "text-green-700"
+                  }`}
+                  onClick={() => handleOrderActiveTeam(item.value)}
+                  key={item.value}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-row flex-wrap">
+              {activeTeam.slice(0, seeMore ? 18 : 6).map(pokedex => (
+                <div
+                  key={pokedex.pokemonId}
+                  className="w-1/3 flex flex-col flex-wrap"
+                >
+                  <PokedexCard pokedex={pokedex.pokedex} result={pokedex} />
+                </div>
+              ))}
+            </div>
             <button
               type="button"
               onClick={() => setSeeMore(!seeMore)}

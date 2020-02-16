@@ -13,3 +13,8 @@ export const API_BOSSES = `${API_URL}/bosses`
 export const API_QUICK_MOVE = `${API_URL}/quick-moves?_limit=1000000`
 export const API_CHARGED_MOVE = `${API_URL}/charged-moves?_limit=1000000`
 export const API_LOGIN = `${API_URL}/auth/local`
+
+export const ORDER_FIELD = [
+  { value: "totalDmg", label: "DMG" },
+  { value: "dps", label: "DPS" },
+]
