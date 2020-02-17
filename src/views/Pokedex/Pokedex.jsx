@@ -102,7 +102,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
         postPokedex(data).then(resetForm)
       }
       if (id) {
-        updatePokedex((values.id, data)).then(resetForm)
+        updatePokedex(id, data)
       }
     } else {
       setToast({ title: "CP ou IVs incorrect !" })

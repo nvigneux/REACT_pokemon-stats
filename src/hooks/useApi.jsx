@@ -117,7 +117,7 @@ const useApi = (options = { trigger: false }) => {
     request("POST", API_POKEDEXES, data)
       .then(res => responseHandler(res, "Succes POST pokédex"))
       .catch(errorHandler)
-  const updatePokedex = ({ id, data }) =>
+  const updatePokedex = (id, data) =>
     request("PUT", `${API_POKEDEXES}/${id}`, data)
       .then(res => responseHandler(res, "Succes PUT pokédex"))
       .catch(errorHandler)
