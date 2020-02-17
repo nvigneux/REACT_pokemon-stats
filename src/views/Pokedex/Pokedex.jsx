@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
+import { useParams } from "react-router-dom"
 import { useToast } from "use-nv-simple-toast"
 
 import useApi from "../../hooks/useApi"
@@ -37,7 +38,14 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
   const [, , , { postPokemon }] = useApi()
   const [, , , { postPokedex }] = useApi()
+  const [loading, pokedexData, error, { getPokedex }] = useApi()
   const { setToast } = useToast()
+
+  // IF EDIT POKEDEX
+  const { id } = useParams()
+  useEffect(() => {
+    if (id) getPokedex(id)
+  }, [id])
 
   const PokedexValidationSchema = () => {
     let pokemonValidation = PokedexFormValidation
@@ -99,7 +107,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
   return (
     <>
       <Formik
-        initialValues={PokedexValueSchema}
+        initialValues={id && pokedexData ? pokedexData : PokedexValueSchema}
         validationSchema={PokedexValidationSchema}
         onSubmit={(values, { resetForm }) =>
           handleSubmitForm(values, resetForm)

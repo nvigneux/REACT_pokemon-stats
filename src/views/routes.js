@@ -38,6 +38,11 @@ export const protectedRoutes = [
     exact: true,
   },
   {
+    path: "/pokedex/edit/:id",
+    component: WaitingComponent(PokedexFormMain, PokedexFormLoader),
+    exact: true,
+  },
+  {
     path: "/boss",
     component: WaitingComponent(BossFormMain, BossFormLoader),
     exact: true,

@@ -54,7 +54,9 @@ const useApi = (options = { trigger: false }) => {
   const responseHandler = (res, message) => {
     if (res.data) setPayload(res.data)
     setLoading(false)
-    setToast({ title: message })
+    if (message) {
+      setToast({ title: message })
+    }
     return res
   }
 
@@ -102,6 +104,8 @@ const useApi = (options = { trigger: false }) => {
       .then(res => responseHandler(res, "Succes POST pokémon"))
       .catch(errorHandler)
 
+  const getPokedex = id =>
+    request("GET", `${API_POKEDEXES}/${id}`).then(res => responseHandler(res))
   const postPokedex = data =>
     request("POST", API_POKEDEXES, data)
       .then(res => responseHandler(res, "Succes POST pokédex"))
@@ -126,7 +130,7 @@ const useApi = (options = { trigger: false }) => {
     loading,
     payload,
     error,
-    { postPokemon, postPokedex, postBoss, postLogin },
+    { postPokemon, getPokedex, postPokedex, postBoss, postLogin },
   ]
 }
 
