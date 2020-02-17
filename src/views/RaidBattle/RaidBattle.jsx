@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { orderBy } from "lodash"
+import { useHistory } from "react-router-dom"
 
 import ErrorBoundary from "../../hooks/ErrorBoundary"
 import WeatherSelect from "../../components/molecules/WeatherSelect/WeatherSelect"
@@ -17,6 +18,7 @@ import { POKEMON, ORDER_FIELD } from "../../constants/constant"
 import "../../styles.css"
 
 const RaidBattle = ({ pokedexes, bosses }) => {
+  const history = useHistory()
   const [activeBoss, setActiveBoss] = useState(null)
   const [activeWeather, setActiveWeather] = useState(WEATHERS[0])
   const [activeTeam, setActiveTeam] = useState([])
@@ -26,6 +28,10 @@ const RaidBattle = ({ pokedexes, bosses }) => {
   const handleOrderActiveTeam = value => {
     setOrderActiveTeam(value)
     setActiveTeam(orderBy(activeTeam, [value], ["desc"]))
+  }
+
+  const handleEditPokedex = id => {
+    history.push(`/pokedex/edit/${id}`)
   }
 
   useEffect(() => {
@@ -134,7 +140,7 @@ const RaidBattle = ({ pokedexes, bosses }) => {
 
       <div className="flex flex-row flex-wrap pt-2">
         <ErrorBoundary fallback={<LoadingPokedexCard />}>
-          <Pokedexes pokedexes={pokedexes} />
+          <Pokedexes pokedexes={pokedexes} click={handleEditPokedex} />
         </ErrorBoundary>
       </div>
     </>

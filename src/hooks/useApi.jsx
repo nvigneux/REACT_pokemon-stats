@@ -104,11 +104,22 @@ const useApi = (options = { trigger: false }) => {
       .then(res => responseHandler(res, "Succes POST pokémon"))
       .catch(errorHandler)
 
+  // POKEDEX
   const getPokedex = id =>
-    request("GET", `${API_POKEDEXES}/${id}`).then(res => responseHandler(res))
+    request("GET", `${API_POKEDEXES}/${id}`).then(res => {
+      if (res.data) {
+        const stat = pokemonStats(CP_MULTIPLIER, res.data)
+        setPayload({ ...res.data, cp: stat.cp })
+      }
+      setLoading(false)
+    })
   const postPokedex = data =>
     request("POST", API_POKEDEXES, data)
       .then(res => responseHandler(res, "Succes POST pokédex"))
+      .catch(errorHandler)
+  const updatePokedex = ({ id, data }) =>
+    request("PUT", `${API_POKEDEXES}/${id}`, data)
+      .then(res => responseHandler(res, "Succes PUT pokédex"))
       .catch(errorHandler)
 
   const postBoss = data =>
@@ -130,7 +141,14 @@ const useApi = (options = { trigger: false }) => {
     loading,
     payload,
     error,
-    { postPokemon, getPokedex, postPokedex, postBoss, postLogin },
+    {
+      postPokemon,
+      getPokedex,
+      postPokedex,
+      updatePokedex,
+      postBoss,
+      postLogin,
+    },
   ]
 }
 

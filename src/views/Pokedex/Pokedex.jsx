@@ -38,7 +38,8 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
   const [isPokemonFormVisible, setIsPokemonFormVisible] = useState(false)
   const [, , , { postPokemon }] = useApi()
   const [, , , { postPokedex }] = useApi()
-  const [loading, pokedexData, error, { getPokedex }] = useApi()
+  const [, , , { updatePokedex }] = useApi()
+  const [, pokedexData, , { getPokedex }] = useApi()
   const { setToast } = useToast()
 
   // IF EDIT POKEDEX
@@ -87,7 +88,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
         level: parseFloat(level),
         user: auth.id,
       }
-      if (isPokemonFormVisible) {
+      if (isPokemonFormVisible && !id) {
         postPokemon({ ...values }).then(res =>
           res.data
             ? postPokedex({
@@ -96,8 +97,12 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
               }).then(resetForm)
             : res
         )
-      } else {
+      }
+      if (!isPokemonFormVisible && !id) {
         postPokedex(data).then(resetForm)
+      }
+      if (id) {
+        updatePokedex((values.id, data)).then(resetForm)
       }
     } else {
       setToast({ title: "CP ou IVs incorrect !" })
@@ -109,6 +114,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
       <Formik
         initialValues={id && pokedexData ? pokedexData : PokedexValueSchema}
         validationSchema={PokedexValidationSchema}
+        enableReinitialize
         onSubmit={(values, { resetForm }) =>
           handleSubmitForm(values, resetForm)
         }
@@ -124,15 +130,16 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
                   />
                 </ErrorBoundary>
               </div>
-
-              <Link
-                label={
-                  isPokemonFormVisible
-                    ? "Je ne veux plus ajouter de pokemon."
-                    : "Mon pokémon n'est pas dans la liste ?"
-                }
-                onClick={handlePokemonFormVisibility}
-              />
+              {!id ? (
+                <Link
+                  label={
+                    isPokemonFormVisible
+                      ? "Je ne veux plus ajouter de pokemon."
+                      : "Mon pokémon n'est pas dans la liste ?"
+                  }
+                  onClick={handlePokemonFormVisibility}
+                />
+              ) : null}
             </div>
 
             {isPokemonFormVisible ? (
