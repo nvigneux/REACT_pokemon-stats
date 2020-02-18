@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { useToast } from "use-nv-simple-toast"
 
 import useApi from "../../hooks/useApi"
@@ -8,8 +8,11 @@ import ErrorBoundary from "../../hooks/ErrorBoundary"
 import useAppContext from "../../hooks/useAppContext"
 import Link from "../../components/atoms/Link/Link"
 import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect"
-import OptionType from "../../components/molecules/OptionType"
 import LoadingSelect from "../../components/atoms/LoadingSelect"
+import Picto from "../../components/atoms/Picto"
+import OptionType from "../../components/molecules/OptionType"
+import MoveSelect from "../../components/molecules/MoveSelect"
+import PokemonSelect from "../../components/organisms/PokemonSelect"
 
 import { pokemonStats } from "../../utils/stats"
 import { CP_MULTIPLIER } from "../../constants/cpMultiplier"
@@ -28,10 +31,8 @@ import {
 
 import { TYPES_ARRAY } from "../../constants/types"
 
-import PokemonSelect from "../../components/organisms/PokemonSelect"
-import MoveSelect from "../../components/molecules/MoveSelect"
-
 const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
+  const history = useHistory()
   const {
     context: { auth },
   } = useAppContext()
@@ -39,13 +40,14 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
   const [, , , { postPokemon }] = useApi()
   const [, , , { postPokedex }] = useApi()
   const [, , , { updatePokedex }] = useApi()
+  const [, , , { removePokedex }] = useApi()
   const [, pokedexData, , { getPokedex }] = useApi()
   const { setToast } = useToast()
 
   // IF EDIT POKEDEX
   const { id } = useParams()
   useEffect(() => {
-    if (id) getPokedex(id)
+    if (id) getPokedex(id).catch(() => history.push(`/pokedex`))
   }, [id])
 
   const PokedexValidationSchema = () => {
@@ -80,11 +82,26 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
-  // TODO fix error post if pokemon doesn't exist
-  // pokemon is null and we can't calcul the level
-  // pokemon data is at the root of object 
+  const handleRemovePokedex = () => {
+    removePokedex(id).then(res => {
+      if (res.data) history.push(`/pokedex`)
+    })
+  }
+
   const handleSubmitForm = (values, resetForm) => {
-    const level = findLevelPokemon(CP_MULTIPLIER, values)
+    const level = findLevelPokemon(
+      CP_MULTIPLIER,
+      values.pokemon
+        ? { ...values }
+        : {
+            ...values,
+            pokemon: {
+              attack: values.attack,
+              defense: values.defense,
+              stamina: values.stamina,
+            },
+          }
+    )
     if (level) {
       const data = {
         ...values,
@@ -197,12 +214,31 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
 
             <PokedexForm />
 
-            <button
-              className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Envoyer
-            </button>
+            <div className="flex flex-row flex-wrap justify-between">
+              {id ? (
+                <button
+                  className="self-end tracking-wide uppercase bg-red-600 text-white text-sm font-bold p-3 rounded-full focus:outline-none focus:shadow-outline"
+                  type="button"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Voulez vous vraiment supprimer ce pokemon ?"
+                      )
+                    ) {
+                      handleRemovePokedex()
+                    }
+                  }}
+                >
+                  <Picto icon="trash" className="icon-trash" />
+                </button>
+              ) : null}
+              <button
+                className="self-end tracking-wide uppercase bg-green-pokemon text-white text-sm font-bold mt-4 py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Envoyer
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

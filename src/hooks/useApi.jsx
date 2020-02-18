@@ -121,6 +121,10 @@ const useApi = (options = { trigger: false }) => {
     request("PUT", `${API_POKEDEXES}/${id}`, data)
       .then(res => responseHandler(res, "Succes PUT pokédex"))
       .catch(errorHandler)
+  const removePokedex = id =>
+    request("DELETE", `${API_POKEDEXES}/${id}`)
+      .then(res => responseHandler(res, "Succes DELETE pokédex"))
+      .catch(errorHandler)
 
   const postBoss = data =>
     request("POST", API_BOSSES, data)
@@ -146,6 +150,7 @@ const useApi = (options = { trigger: false }) => {
       getPokedex,
       postPokedex,
       updatePokedex,
+      removePokedex,
       postBoss,
       postLogin,
     },
