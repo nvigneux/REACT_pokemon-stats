@@ -263,6 +263,12 @@ body {
   height: 8.6rem;
 }
 
+.icon-trash {
+  fill: #fff;
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
 @keyframes top {
   0% {
     top: 0;
