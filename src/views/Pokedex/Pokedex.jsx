@@ -80,6 +80,9 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
     setIsPokemonFormVisible(!isPokemonFormVisible)
   }
 
+  // TODO fix error post if pokemon doesn't exist
+  // pokemon is null and we can't calcul the level
+  // pokemon data is at the root of object 
   const handleSubmitForm = (values, resetForm) => {
     const level = findLevelPokemon(CP_MULTIPLIER, values)
     if (level) {
