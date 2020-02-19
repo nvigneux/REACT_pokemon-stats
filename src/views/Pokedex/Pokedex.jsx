@@ -216,7 +216,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
 
             <div
               className={`flex flex-row flex-wrap justify-between ${
-                id ? "justify-between" : "flex-end"
+                id ? "justify-between" : "justify-end"
               }`}
             >
               {id ? (
@@ -226,7 +226,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
                   onClick={() => {
                     if (
                       window.confirm(
-                        "Voulez vous vraiment supprimer ce pokemon ?"
+                        `Voulez vous vraiment supprimer ${pokedexData.pokemon.name} ${pokedexData.cp} ?`
                       )
                     ) {
                       handleRemovePokedex()
