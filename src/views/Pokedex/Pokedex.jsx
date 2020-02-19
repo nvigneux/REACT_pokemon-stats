@@ -215,7 +215,7 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
             <PokedexForm />
 
             <div
-              className={`flex flex-row flex-wrap justify-between ${
+              className={`flex flex-row flex-wrap ${
                 id ? "justify-between" : "justify-end"
               }`}
             >
