@@ -214,10 +214,14 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
 
             <PokedexForm />
 
-            <div className="flex flex-row flex-wrap justify-between">
+            <div
+              className={`flex flex-row flex-wrap justify-between ${
+                id ? "justify-between" : "flex-end"
+              }`}
+            >
               {id ? (
                 <button
-                  className="self-end tracking-wide uppercase bg-red-600 text-white text-sm font-bold p-3 rounded-full focus:outline-none focus:shadow-outline"
+                  className="self-end tracking-wide uppercase bg-red-600 text-white text-sm font-bold p-2 rounded-full focus:outline-none focus:shadow-outline"
                   type="button"
                   onClick={() => {
                     if (
