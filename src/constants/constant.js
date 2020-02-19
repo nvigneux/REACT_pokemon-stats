@@ -1,9 +1,9 @@
 export const POKEMON = "pokemon"
 export const BOSS = "boss"
 
-export const IMG_FORMAT = "_00.png"
+export const IMG_FORMAT = ".png"
 export const IMG_URL =
-  "https://raw.githubusercontent.com/ZeChrales/PogoAssets/master/pokemon_icons/pokemon_icon_"
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
 
 export const API_URL = process.env.REACT_APP_API_URL
 
