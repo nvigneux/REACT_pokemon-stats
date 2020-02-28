@@ -7,6 +7,7 @@ export const PokemonFormInitValues = {
   defense: 0,
   stamina: 0,
   type: [],
+  alola: false,
 }
 
 export const PokemonFormValidation = Yup.object().shape({
@@ -32,4 +33,5 @@ export const PokemonFormValidation = Yup.object().shape({
     .nullable("React-Select fix Soon, null")
     .min(1, "min 1 type !")
     .max(2, "max 2 type"),
+  alola: Yup.boolean(),
 })

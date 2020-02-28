@@ -109,7 +109,13 @@ const Pokedex = ({ pokemons, quickMoves, chargedMoves }) => {
         user: auth.id,
       }
       if (isPokemonFormVisible && !id) {
-        postPokemon({ ...values }).then(res =>
+        const pokemonValues = !values.alola
+          ? { ...values }
+          : {
+              ...values,
+              id_base_pokemon: `${values.id_base_pokemon}-alola`,
+            }
+        postPokemon({ ...pokemonValues }).then(res =>
           res.data
             ? postPokedex({
                 ...data,
