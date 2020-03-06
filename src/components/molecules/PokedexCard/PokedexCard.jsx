@@ -1,7 +1,7 @@
 import React from "react"
 // import PropTypes from "prop-types"
 
-import { IMG_URL, IMG_FORMAT } from "../../../constants/constant"
+import { IMG_URL, IMG_FORMAT, MIN_IV_STAR } from "../../../constants/constant"
 import { Pokedex } from "../../../types/pokedex"
 
 import Picto from "../../atoms/Picto"
@@ -14,9 +14,11 @@ const PokedexCard = ({ pokedex, result }) => (
       <div className="flex-auto flex flex-row items-baseline justify-center leading-none">
         <span className="text-xs text-gray-500 font-medium pr-1">CP</span>
         <span
-          className={`${
-            result ? "text-normal" : "text-lg"
-          } text-gray-700 font-medium`}
+          className={`${result ? "text-normal" : "text-lg"} font-medium ${
+            pokedex.stats.iv >= MIN_IV_STAR
+              ? "text-yellow-600"
+              : "text-gray-700"
+          }`}
         >
           {pokedex.stats.cp}
         </span>

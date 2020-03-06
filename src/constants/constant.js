@@ -18,3 +18,5 @@ export const ORDER_FIELD = [
   { value: "totalDmg", label: "DMG" },
   { value: "dps", label: "DPS" },
 ]
+
+export const MIN_IV_STAR = 84
